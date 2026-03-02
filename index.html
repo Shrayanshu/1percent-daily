@@ -147,6 +147,10 @@
             animation: fadeIn 0.6s ease-out forwards;
             opacity: 0;
         }
+
+        .is-placeholder {
+            color: #6B7280 !important;
+        }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -467,7 +471,7 @@
             class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
             <!-- Progress Header -->
             <div class="px-5 pt-10 pb-2 relative">
-                <button onclick="App.showOnboardingStep1()"
+                <button onclick="App.handleAddHabitBack()"
                     class="text-text hover:text-accent transition-colors absolute left-5 top-11">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -489,14 +493,19 @@
             <form id="new-habit-form" class="px-5 space-y-5">
                 <div>
                     <label class="block text-[13px] text-text mb-1.5 font-medium">Habit Name</label>
+                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Name the action, not the outcome. "Exercise" works. "Get
+                        fit" doesn't.</p>
                     <input type="text" id="nh-name"
                         class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
                         placeholder="">
                     <p id="nh-name-error" class="text-red-500 text-xs mt-1 hidden">Habit Name is required</p>
+                    <div id="nh-name-coach" class="text-sm text-[#FBBF24] mt-1"></div>
                 </div>
 
                 <div>
                     <label class="block text-[13px] text-text mb-1.5 font-medium">Identity Area</label>
+                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Habits stick when they match who you're becoming, not
+                        just what you want to do.</p>
                     <div class="relative">
                         <select id="nh-identity"
                             class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text text-sm appearance-none focus:outline-none focus:border-accent">
@@ -520,16 +529,22 @@
 
                 <div>
                     <label class="block text-[13px] text-text mb-1.5 font-medium">Tiny Version</label>
-                    <input type="text" id="nh-tiny"
+                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 This is what you do on your worst day. 1-2 minutes max.
+                        Never skip twice.</p>
+                    <textarea id="nh-tiny" rows="2" style="resize: none;"
                         class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                        placeholder="">
+                        placeholder=""></textarea>
+                    <div id="nh-tiny-coach" class="text-sm text-[#FBBF24] mt-1"></div>
                 </div>
 
                 <div>
                     <label class="block text-[13px] text-text mb-1.5 font-medium">Anchor or Cue</label>
-                    <input type="text" id="nh-anchor"
+                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Where you do it matters as much as when. Same location =
+                        stronger cue. Research shows this doubles follow-through.</p>
+                    <textarea id="nh-anchor" rows="2" style="resize: none;"
                         class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                        placeholder="">
+                        placeholder=""></textarea>
+                    <div id="nh-anchor-coach" class="text-sm text-[#FBBF24] mt-1"></div>
                 </div>
 
                 <div>
@@ -584,9 +599,12 @@
                 </div>
 
                 <div>
+                    <label class="block text-[13px] text-text mb-1.5 font-medium">Weekly Reward</label>
+                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 You earn this when you hit your weekly target. Make it
+                        something you actually want.</p>
                     <input type="text" id="nh-reward"
                         class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                        placeholder="Weekly Reward">
+                        placeholder="">
                 </div>
 
                 <!-- Buttons -->
@@ -620,12 +638,20 @@
                     class="inline-block border border-[#333] text-[#9CA3AF] rounded-full px-4 py-1 text-xs font-medium tracking-wide">Category</span>
             </div>
 
+            <!-- Tiny Version Reminder Card (above Done/Skip) -->
+            <div id="checkin-tiny-card" class="px-5 mb-5 hidden">
+                <div class="bg-card border-l-4 border-[#FBBF24] rounded-md px-4 py-3">
+                    <p id="checkin-tiny-version" class="text-sm text-[#9CA3AF]">💡 Your tiny version: Even 1 minute
+                        counts</p>
+                </div>
+            </div>
+
             <!-- Action Buttons -->
             <div class="px-5 flex space-x-3 mb-8">
                 <!-- Done Card -->
                 <div id="btn-checkin-done"
                     class="flex-1 bg-card rounded-card border border-[#333] h-[120px] p-4 flex flex-col justify-between cursor-pointer transition-colors">
-                    <span class="font-bold text-text text-lg">Done</span>
+                    <span id="checkin-done-label" class="font-bold text-text text-lg">Done</span>
                     <div class="flex items-center space-x-2">
                         <div id="checkin-done-checkbox"
                             class="w-5 h-5 border-2 border-[#333] rounded flex items-center justify-center transition-colors">
@@ -652,13 +678,10 @@
                 <label class="block text-[13px] text-text mb-2 font-medium">Log today's number (optional)</label>
                 <input type="text" id="checkin-log-value"
                     class="w-full bg-card border border-[#333] rounded-md px-4 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                    placeholder="kg / reps / minutes">
+                    placeholder="">
+                <div id="checkin-log-coach" class="text-sm text-[#FBBF24] mt-1"></div>
             </div>
 
-            <!-- Tiny Version Reminder -->
-            <div class="px-5">
-                <p id="checkin-tiny-version" class="text-[12px] text-[#9CA3AF]">Tiny version: Even 1 minute counts</p>
-            </div>
         </div>
 
         <!-- Screen 6: Habit Celebration -->
@@ -792,9 +815,18 @@
                     </svg>
                 </button>
                 <!-- Title -->
-                <h1 class="text-3xl font-bold text-text mb-2 text-center tracking-tight mt-2 pl-10">Tomorrow's Plan</h1>
-                <p class="text-[#9CA3AF] text-center mb-6">Your habits are pre-loaded. <span
+                <h1 id="plan-title" class="text-3xl font-bold text-text mb-2 text-center tracking-tight mt-2 pl-10">
+                    Tomorrow's Plan</h1>
+                <p id="plan-subtitle" class="text-[#9CA3AF] text-center mb-4">Your habits are pre-loaded. <span
                         class="font-bold text-[#F5F5F5]">Confirm or adjust.</span></p>
+
+                <!-- Today/Tomorrow Tab Toggle (UAT-03) -->
+                <div class="flex bg-card rounded-lg p-1 mb-6">
+                    <button id="plan-tab-today" onclick="App.openPlanScreen('today')"
+                        class="flex-1 py-2 text-sm font-medium rounded-md text-muted transition-colors">Today</button>
+                    <button id="plan-tab-tomorrow" onclick="App.openPlanScreen('tomorrow')"
+                        class="flex-1 py-2 text-sm font-medium rounded-md bg-accent text-background transition-colors">Tomorrow</button>
+                </div>
 
                 <!-- Divider -->
                 <div class="w-full h-px bg-[#333] mb-6"></div>
@@ -818,7 +850,8 @@
                     class="w-full py-3.5 bg-accent text-[#0D0D0D] font-bold text-base rounded-btn hover:opacity-90 transition-opacity tracking-wide">Confirm
                     Plan</button>
                 <button type="button" id="btn-plan-adjust"
-                    class="w-full py-3.5 border border-[#333] text-[#9CA3AF] font-bold text-base rounded-btn hover:bg-[#1A1A1A] transition-colors tracking-wide">Adjust</button>
+                    class="w-full py-3.5 border border-[#333] text-[#9CA3AF] font-bold text-base rounded-btn hover:bg-[#1A1A1A] transition-colors tracking-wide">Edit
+                    Plan</button>
             </div>
         </div>
 
@@ -1237,6 +1270,32 @@
             dailyPlans: []
         };
 
+        // Typewriter animation utilities (value-based approach)
+        function startTypewriter(el, text) {
+            stopTypewriter(el);
+            el.value = '';
+            el.classList.add('is-placeholder');
+            el._isPlaceholder = true;
+            el.placeholder = '';
+            let i = 0;
+            el._typingInterval = setInterval(() => {
+                if (i < text.length) {
+                    el.value = text.substring(0, i + 1);
+                    i++;
+                } else {
+                    clearInterval(el._typingInterval);
+                    el._typingInterval = null;
+                }
+            }, 40);
+        }
+
+        function stopTypewriter(el) {
+            if (el._typingInterval) {
+                clearInterval(el._typingInterval);
+                el._typingInterval = null;
+            }
+        }
+
         // Icons for Time Blocks
         const TIME_BLOCK_ICONS = {
             'Morning': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>',
@@ -1326,9 +1385,13 @@
             },
 
             showOnboardingStep2() {
+                // Default callerOrigin if not set by caller
+                if (!this.callerOrigin) this.callerOrigin = 'onboarding';
+
                 document.getElementById('screen-onboarding-1').classList.add('hidden');
                 document.getElementById('screen-onboarding').classList.remove('hidden');
                 document.getElementById('main-content').classList.add('hidden');
+                document.getElementById('screen-plan').classList.add('hidden');
                 document.querySelector('header').classList.add('hidden');
                 document.querySelector('nav').classList.add('hidden');
 
@@ -1343,6 +1406,31 @@
                     opt.textContent = area;
                     selectElement.appendChild(opt);
                 });
+            },
+
+            handleAddHabitBack() {
+                const origin = this.callerOrigin;
+                this.callerOrigin = null;
+
+                if (origin === 'settings') {
+                    document.getElementById('screen-onboarding').classList.add('hidden');
+                    document.getElementById('screen-settings').classList.remove('hidden');
+                    document.querySelector('nav').classList.remove('hidden');
+                    this.renderSettingsHabits();
+                    this.renderSettingsRewards();
+                } else if (origin === 'dashboard') {
+                    document.getElementById('screen-onboarding').classList.add('hidden');
+                    document.getElementById('main-content').classList.remove('hidden');
+                    document.querySelector('header').classList.remove('hidden');
+                    document.querySelector('nav').classList.remove('hidden');
+                    this.renderDashboard();
+                } else if (origin === 'plan') {
+                    document.getElementById('screen-onboarding').classList.add('hidden');
+                    this.openPlanScreen('tomorrow');
+                } else {
+                    // 'onboarding' — default: go back to Step 1
+                    this.showOnboardingStep1();
+                }
             },
 
             hideOnboarding() {
@@ -1516,15 +1604,160 @@
                     document.getElementById('nh-target-custom-input').focus();
                 });
 
+                // Layer 3: Live Format Validators (coach tone)
+                document.getElementById('nh-name').addEventListener('input', (e) => {
+                    if (e.target._isPlaceholder) return;
+                    const val = e.target.value.trim();
+                    const coachDiv = document.getElementById('nh-name-coach');
+                    const wordCount = val ? val.split(/\s+/).length : 0;
+                    if (wordCount > 3) {
+                        coachDiv.textContent = '\ud83d\udcac Try shortening this to a clear action \u2192 "Exercise" or "Run 10 mins"';
+                    } else {
+                        coachDiv.textContent = '';
+                    }
+                });
+
+                document.getElementById('nh-tiny').addEventListener('input', (e) => {
+                    if (e.target._isPlaceholder) return;
+                    const val = e.target.value.trim();
+                    const coachDiv = document.getElementById('nh-tiny-coach');
+                    const wordCount = val ? val.split(/\s+/).length : 0;
+                    const durationKeywords = /(\d{2,})\s*(minutes?|hours?|session|workout)/i;
+                    const hasBigDuration = durationKeywords.test(val) && parseInt((val.match(/(\d+)/) || [])[1]) > 10;
+                    if (wordCount > 7 || hasBigDuration) {
+                        coachDiv.textContent = '\ud83d\udcac Sounds like your full version. Tiny = what you\'d do on your worst day \u2192 try "5 squats" or "1 page"';
+                    } else {
+                        coachDiv.textContent = '';
+                    }
+                });
+
+                document.getElementById('nh-anchor').addEventListener('input', (e) => {
+                    if (e.target._isPlaceholder) return;
+                    const val = e.target.value.trim();
+                    const coachDiv = document.getElementById('nh-anchor-coach');
+                    const lower = val.toLowerCase();
+                    if (val.length > 5 && !lower.startsWith('after')) {
+                        coachDiv.textContent = '\ud83d\udcac Try this format \u2192 "After I [existing routine], I will [tiny habit]"';
+                    } else {
+                        const words = val ? val.split(/\s+/) : [];
+                        const locationWords = ['in', 'at', 'on', 'near', 'outside', 'inside', 'gym', 'home', 'office', 'room', 'hall', 'kitchen', 'bathroom', 'park', 'terrace'];
+                        const hasLocation = locationWords.some(w => lower.includes(w));
+                        if (words.length > 8 && !hasLocation) {
+                            coachDiv.textContent = '\ud83d\udcac Try adding where \u2192 "After I brush my teeth, I will do 5 squats in my bedroom"';
+                        } else {
+                            coachDiv.textContent = '';
+                        }
+                    }
+                });
+
                 // Action buttons
                 document.getElementById('nh-save-btn').addEventListener('click', () => this.saveNewHabit(false));
                 document.getElementById('nh-add-another-btn').addEventListener('click', () => this.saveNewHabit(true));
+
+                // Typewriter animation on 4 fields (value-based approach)
+                const typewriterFields = [
+                    { id: 'nh-name', text: 'Exercise (clear action, not "get fit")' },
+                    { id: 'nh-tiny', text: '5 push-ups (smallest version on your worst day)' },
+                    { id: 'nh-anchor', text: 'After I brush my teeth, I will do 5 push-ups in my bedroom.' },
+                    { id: 'nh-reward', text: 'Watch 1 episode of my show' }
+                ];
+
+                typewriterFields.forEach(({ id, text }) => {
+                    const el = document.getElementById(id);
+                    el._originalPlaceholder = text;
+                    el._isPlaceholder = false;
+
+                    el.addEventListener('focus', () => {
+                        if (el.value === '' || el._isPlaceholder) {
+                            startTypewriter(el, text);
+                        }
+                    });
+
+                    el.addEventListener('keydown', () => {
+                        if (el._isPlaceholder) {
+                            stopTypewriter(el);
+                            el.value = '';
+                            el.classList.remove('is-placeholder');
+                            el._isPlaceholder = false;
+                        }
+                    });
+
+                    el.addEventListener('blur', () => {
+                        stopTypewriter(el);
+                        if (el.value === '' || el._isPlaceholder) {
+                            el.value = '';
+                            el.classList.remove('is-placeholder');
+                            el._isPlaceholder = false;
+                            el.placeholder = '';
+                        }
+                    });
+                });
+
             },
 
             setupAppEvents() {
                 document.getElementById('btn-back-checkin').addEventListener('click', () => this.closeHabitCheckIn());
-                document.getElementById('btn-checkin-done').addEventListener('click', () => this.handleCheckInAction('complete'));
+                document.getElementById('btn-checkin-done').addEventListener('click', () => {
+                    const logInput = document.getElementById('checkin-log-value');
+                    const logVal = logInput.value.trim();
+                    const isPlaceholder = logInput._isPlaceholder;
+                    const effectivelyEmpty = !logVal || isPlaceholder;
+
+                    if (effectivelyEmpty && !this._doneNudgeShown) {
+                        // First tap without log — show nudge
+                        this._doneNudgeShown = true;
+                        document.getElementById('checkin-log-coach').textContent = '\ud83d\udcac How long or how much did you do it? Tracking helps you see your growth.';
+                        const doneLabel = document.getElementById('checkin-done-label');
+                        doneLabel.textContent = 'Skip logging \u2192 Done';
+                        doneLabel.classList.remove('text-text');
+                        doneLabel.classList.add('text-[#9CA3AF]');
+                        return;
+                    }
+                    this.handleCheckInAction('complete');
+                });
                 document.getElementById('btn-checkin-skip').addEventListener('click', () => this.handleCheckInAction('skipped'));
+
+                // Typewriter animation on check-in log field
+                const logEl = document.getElementById('checkin-log-value');
+                const logPlaceholderText = 'e.g. 10 mins, 3 pages, 5 reps';
+                logEl._originalPlaceholder = logPlaceholderText;
+                logEl._isPlaceholder = false;
+
+                logEl.addEventListener('focus', () => {
+                    if (logEl.value === '' || logEl._isPlaceholder) {
+                        startTypewriter(logEl, logPlaceholderText);
+                    }
+                });
+
+                logEl.addEventListener('keydown', () => {
+                    if (logEl._isPlaceholder) {
+                        stopTypewriter(logEl);
+                        logEl.value = '';
+                        logEl.classList.remove('is-placeholder');
+                        logEl._isPlaceholder = false;
+                    }
+                });
+
+                logEl.addEventListener('input', () => {
+                    // Reset done button if user fills log after nudge
+                    if (this._doneNudgeShown && logEl.value.trim() && !logEl._isPlaceholder) {
+                        document.getElementById('checkin-log-coach').textContent = '';
+                        const doneLabel = document.getElementById('checkin-done-label');
+                        doneLabel.textContent = 'Done';
+                        doneLabel.classList.remove('text-[#9CA3AF]');
+                        doneLabel.classList.add('text-text');
+                    }
+                });
+
+                logEl.addEventListener('blur', () => {
+                    stopTypewriter(logEl);
+                    if (logEl.value === '' || logEl._isPlaceholder) {
+                        logEl.value = '';
+                        logEl.classList.remove('is-placeholder');
+                        logEl._isPlaceholder = false;
+                        logEl.placeholder = '';
+                    }
+                });
 
                 document.getElementById('btn-celeb-back').addEventListener('click', () => this.closeHabitCelebration());
                 document.getElementById('btn-celeb-reward').addEventListener('click', () => {
@@ -1632,7 +1865,8 @@
                 });
                 document.getElementById('btn-settings-add-habit').addEventListener('click', () => {
                     document.getElementById('screen-settings').classList.add('hidden');
-                    this.showOnboardingStep2(); // Screen 3 Add form
+                    this.callerOrigin = 'settings';
+                    this.showOnboardingStep2();
                 });
                 document.getElementById('settings-username-input').addEventListener('blur', (e) => {
                     const newName = e.target.value.trim();
@@ -1681,15 +1915,26 @@
             saveNewHabit(addAnother) {
                 const nameInput = document.getElementById('nh-name');
                 const name = nameInput.value.trim();
+                const nameError = document.getElementById('nh-name-error');
 
                 if (!name) {
                     nameInput.classList.add('border-red-500');
-                    document.getElementById('nh-name-error').classList.remove('hidden');
+                    nameError.textContent = 'Habit Name is required';
+                    nameError.classList.remove('hidden');
+                    return;
+                }
+
+                // Bug 2 fix: Check for duplicate habit name (case-insensitive)
+                const duplicate = this.data.habits.find(h => h.isActive && h.name.toLowerCase() === name.toLowerCase());
+                if (duplicate) {
+                    nameInput.classList.add('border-red-500');
+                    nameError.textContent = 'A habit with this name already exists. Please use a different name.';
+                    nameError.classList.remove('hidden');
                     return;
                 }
 
                 nameInput.classList.remove('border-red-500');
-                document.getElementById('nh-name-error').classList.add('hidden');
+                nameError.classList.add('hidden');
 
                 const category = document.getElementById('nh-identity').value || (this.data.user.identityAreas[0] || 'General');
                 const timeNode = document.querySelector('.time-btn.bg-accent');
@@ -1762,8 +2007,28 @@
                     document.getElementById('nh-name').focus();
                 } else {
                     this.data.user.isFirstOpen = false;
-                    this.hideOnboarding();
-                    this.renderDashboard();
+                    const origin = this.callerOrigin;
+                    this.callerOrigin = null;
+
+                    if (this._returnToPlanAfterSave) {
+                        this._returnToPlanAfterSave = false;
+                        this.hideOnboarding();
+                        this.openPlanTomorrow();
+                    } else if (origin === 'plan') {
+                        document.getElementById('screen-onboarding').classList.add('hidden');
+                        document.getElementById('screen-onboarding-1').classList.add('hidden');
+                        this.openPlanScreen('tomorrow');
+                    } else if (origin === 'settings') {
+                        document.getElementById('screen-onboarding').classList.add('hidden');
+                        document.getElementById('screen-settings').classList.remove('hidden');
+                        document.querySelector('nav').classList.remove('hidden');
+                        this.renderSettingsHabits();
+                        this.renderSettingsRewards();
+                    } else {
+                        // 'dashboard' or 'onboarding' — return to dashboard
+                        this.hideOnboarding();
+                        this.renderDashboard();
+                    }
                     window.scrollTo(0, 0);
                 }
             },
@@ -1819,20 +2084,42 @@
                 return this.data.completions.some(c => c.habitId === habitId && c.completedDate === todayStr && (c.status === 'complete' || !c.status));
             },
 
+            isHabitSkippedToday(habitId) {
+                const todayStr = this.getTodayString();
+                return this.data.completions.some(c => c.habitId === habitId && c.completedDate === todayStr && c.status === 'skipped');
+            },
+
             toggleHabitCompletion(habitId) {
                 // Not used directly from card anymore, using openHabitCheckIn
             },
 
             openHabitCheckIn(habitId) {
                 this.currentCheckInHabitId = habitId;
+                this._doneNudgeShown = false;
                 const habit = this.data.habits.find(h => h.id === habitId);
                 if (!habit) return;
+
+                // Track if opening from plan screen so we can return there
+                const planScreen = document.getElementById('screen-plan');
+                if (!planScreen.classList.contains('hidden')) {
+                    this._checkInOrigin = 'plan';
+                    planScreen.classList.add('hidden');
+                } else {
+                    this._checkInOrigin = 'dashboard';
+                }
 
                 document.getElementById('checkin-habit-name').textContent = habit.name;
                 document.getElementById('checkin-habit-category').textContent = habit.category;
 
-                const tiny = habit.tinyVersion ? habit.tinyVersion : 'Even 1 minute counts';
-                document.getElementById('checkin-tiny-version').textContent = `Tiny version: ${tiny}`;
+                // Tiny version reminder card
+                const tinyCard = document.getElementById('checkin-tiny-card');
+                const tinyText = document.getElementById('checkin-tiny-version');
+                if (habit.tinyVersion && habit.tinyVersion.trim()) {
+                    tinyText.textContent = `\ud83d\udca1 Your tiny version: ${habit.tinyVersion}`;
+                    tinyCard.classList.remove('hidden');
+                } else {
+                    tinyCard.classList.add('hidden');
+                }
 
                 // Reset UI states
                 const doneCard = document.getElementById('btn-checkin-done');
@@ -1840,8 +2127,16 @@
                 const doneCheckbox = document.getElementById('checkin-done-checkbox');
                 const doneCheckmark = doneCheckbox.querySelector('svg');
                 const logInput = document.getElementById('checkin-log-value');
+                const doneLabel = document.getElementById('checkin-done-label');
 
                 logInput.value = '';
+                logInput.classList.remove('is-placeholder');
+                logInput._isPlaceholder = false;
+                logInput.placeholder = '';
+                document.getElementById('checkin-log-coach').textContent = '';
+                doneLabel.textContent = 'Done';
+                doneLabel.classList.remove('text-[#9CA3AF]');
+                doneLabel.classList.add('text-text');
 
                 doneCard.classList.remove('border-accent');
                 doneCard.classList.add('border-[#333]');
@@ -1880,10 +2175,18 @@
             closeHabitCheckIn() {
                 this.currentCheckInHabitId = null;
                 document.getElementById('screen-checkin').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                document.querySelector('header').classList.remove('hidden');
-                document.querySelector('nav').classList.remove('hidden');
-                this.renderDashboard();
+
+                // Return to plan screen if that's where we came from
+                if (this._checkInOrigin === 'plan') {
+                    this._checkInOrigin = null;
+                    this.openPlanScreen(this.planMode || 'today');
+                } else {
+                    this._checkInOrigin = null;
+                    document.getElementById('main-content').classList.remove('hidden');
+                    document.querySelector('header').classList.remove('hidden');
+                    document.querySelector('nav').classList.remove('hidden');
+                    this.renderDashboard();
+                }
             },
 
             openHabitCelebration(habitId, loggedValue) {
@@ -1967,19 +2270,26 @@
                 document.getElementById('celeb-circle').classList.add('scale-0');
 
                 document.getElementById('screen-celebration').classList.add('hidden');
-                document.getElementById('main-content').classList.remove('hidden');
-                document.querySelector('header').classList.remove('hidden');
-                document.querySelector('nav').classList.remove('hidden');
                 this.currentCheckInHabitId = null;
 
-                // If all habits done, transition to summary automatically immediately?
-                const todayStr = this.getTodayString();
-                const activeHabits = this.data.habits.filter(h => h.isActive);
-                const completedToday = activeHabits.filter(h => this.isHabitCompletedToday(h.id)).length;
-                if (activeHabits.length > 0 && completedToday === activeHabits.length) {
-                    this.openTodaySummary();
+                // Return to plan screen if that's where we came from
+                if (this._checkInOrigin === 'plan') {
+                    this._checkInOrigin = null;
+                    this.openPlanScreen(this.planMode || 'today');
                 } else {
-                    this.renderDashboard();
+                    this._checkInOrigin = null;
+                    document.getElementById('main-content').classList.remove('hidden');
+                    document.querySelector('header').classList.remove('hidden');
+                    document.querySelector('nav').classList.remove('hidden');
+
+                    // If all habits done, transition to summary automatically
+                    const activeHabits = this.data.habits.filter(h => h.isActive);
+                    const completedToday = activeHabits.filter(h => this.isHabitCompletedToday(h.id)).length;
+                    if (activeHabits.length > 0 && completedToday === activeHabits.length) {
+                        this.openTodaySummary();
+                    } else {
+                        this.renderDashboard();
+                    }
                 }
             },
 
@@ -2153,96 +2463,211 @@
             },
 
             openPlanTomorrow() {
-                const tomorrow = this.getTomorrowString();
-                const tomorrowDay = this.getTomorrowDayOfWeek();
-                this.plannedHabitIds = new Set();
+                this.openPlanScreen('tomorrow');
+            },
+
+            openPlanScreen(mode) {
+                mode = mode || 'tomorrow';
+                this.planMode = mode;
                 this.isPlanAdjustMode = false;
+                this._planConfirmedView = false;
 
-                document.getElementById('btn-plan-adjust').textContent = "Adjust";
-                document.getElementById('btn-plan-adjust').classList.remove('text-text', 'text-accent');
-                document.getElementById('btn-plan-adjust').classList.add('text-[#9CA3AF]');
-                document.getElementById('btn-plan-adjust').classList.remove('border-accent');
-                document.getElementById('btn-plan-adjust').classList.add('border-[#333]');
-
-                const activeHabits = this.data.habits.filter(h => h.isActive);
-                const eligibleHabits = activeHabits.filter(h => {
-                    // if frequency is empty array, assume everyday, otherwise check if tomorrow is in frequency
-                    if (!h.frequency || h.frequency.length === 0) return true;
-                    return h.frequency.includes(tomorrowDay);
-                });
-
+                const titleEl = document.getElementById('plan-title');
+                const subtitleEl = document.getElementById('plan-subtitle');
+                const todayTab = document.getElementById('plan-tab-today');
+                const tomorrowTab = document.getElementById('plan-tab-tomorrow');
+                const confirmBtn = document.getElementById('btn-plan-confirm');
+                const adjustBtn = document.getElementById('btn-plan-adjust');
                 const listContainer = document.getElementById('plan-habits-list');
+
+                // Reset edit button
+                adjustBtn.textContent = 'Edit Plan';
+                adjustBtn.classList.remove('text-text', 'text-accent');
+                adjustBtn.classList.add('text-[#9CA3AF]');
+                adjustBtn.classList.remove('border-accent');
+                adjustBtn.classList.add('border-[#333]');
+
                 listContainer.innerHTML = '';
 
-                if (eligibleHabits.length === 0) {
+                // Update tab toggle
+                if (mode === 'today') {
+                    todayTab.classList.add('bg-accent', 'text-background');
+                    todayTab.classList.remove('text-muted');
+                    tomorrowTab.classList.remove('bg-accent', 'text-background');
+                    tomorrowTab.classList.add('text-muted');
+                    titleEl.textContent = "Today's Plan";
+                    subtitleEl.innerHTML = 'Your scheduled habits for today.';
+                } else {
+                    tomorrowTab.classList.add('bg-accent', 'text-background');
+                    tomorrowTab.classList.remove('text-muted');
+                    todayTab.classList.remove('bg-accent', 'text-background');
+                    todayTab.classList.add('text-muted');
+                    titleEl.textContent = "Tomorrow's Plan";
+                    subtitleEl.innerHTML = 'Your habits are pre-loaded. <span class="font-bold text-[#F5F5F5]">Confirm or adjust.</span>';
+                }
+
+                if (mode === 'today') {
+                    // === TODAY MODE (UAT-03) ===
+                    confirmBtn.classList.add('hidden');
+                    adjustBtn.classList.add('hidden');
+
+                    const todayStr = this.getTodayString();
+                    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                    const todayDay = days[this.currentDate.getDay()];
+                    const activeHabits = this.data.habits.filter(h => h.isActive);
+                    const eligibleHabits = activeHabits.filter(h => {
+                        if (!h.frequency || h.frequency.length === 0) return true;
+                        return h.frequency.includes(todayDay);
+                    });
+
+                    if (eligibleHabits.length === 0) {
+                        listContainer.innerHTML = '<div class="text-center py-10"><p class="text-[#9CA3AF]">No habits scheduled for today.</p></div>';
+                    } else {
+                        const timeBlocks = ['Morning', 'Afternoon', 'Evening'];
+                        timeBlocks.forEach(time => {
+                            const blockHabits = eligibleHabits.filter(h => h.timeOfDay === time);
+                            if (blockHabits.length === 0) return;
+                            const blockEl = document.createElement('div');
+                            const header = document.createElement('div');
+                            header.className = 'flex items-center mb-4';
+                            header.innerHTML = `<span class="text-[#9CA3AF] text-sm uppercase mr-3 tracking-wide">${time}</span><div class="flex-1 h-px bg-[#333]"></div>`;
+                            blockEl.appendChild(header);
+                            const list = document.createElement('div');
+                            list.className = 'space-y-0';
+                            blockHabits.forEach((habit, index) => {
+                                const isCompleted = this.isHabitCompletedToday(habit.id);
+                                const isSkipped = this.data.completions.some(c => c.habitId === habit.id && c.completedDate === todayStr && c.status === 'skipped');
+                                const row = document.createElement('div');
+                                row.className = 'flex items-center justify-between py-3 cursor-pointer hover:bg-card rounded px-1 transition-colors';
+                                row.onclick = () => this.openHabitCheckIn(habit.id);
+                                let statusIcon, statusLabel, nameClass;
+                                if (isCompleted) {
+                                    statusIcon = '<div class="w-6 h-6 rounded flex-shrink-0 border-2 bg-accent border-accent text-background flex items-center justify-center"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>';
+                                    statusLabel = '<span class="text-accent text-xs font-medium">Done</span>';
+                                    nameClass = 'text-muted line-through';
+                                } else if (isSkipped) {
+                                    statusIcon = '<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-amber-400 text-amber-400 flex items-center justify-center"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg></div>';
+                                    statusLabel = '<span class="text-amber-400 text-xs font-medium">Skipped</span>';
+                                    nameClass = 'text-muted';
+                                } else {
+                                    statusIcon = '<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-[#555] flex items-center justify-center"></div>';
+                                    statusLabel = '<span class="text-muted text-xs">Pending</span>';
+                                    nameClass = 'text-text';
+                                }
+                                row.innerHTML = `<div class="flex items-center space-x-4 flex-1">${statusIcon}<span class="${nameClass} text-[15px]">${habit.name}</span></div>${statusLabel}`;
+                                list.appendChild(row);
+                                if (index < blockHabits.length - 1) {
+                                    const divider = document.createElement('div');
+                                    divider.className = 'w-full h-px bg-[#333]';
+                                    list.appendChild(divider);
+                                }
+                            });
+                            blockEl.appendChild(list);
+                            listContainer.appendChild(blockEl);
+                        });
+                    }
+                } else if (this.data.tomorrowPlanConfirmedDate === this.getTodayString()) {
+                    // === TOMORROW CONFIRMED STATE (UAT-10) ===
+                    confirmBtn.classList.add('hidden');
+                    adjustBtn.classList.remove('hidden');
+                    subtitleEl.innerHTML = '';
+                    this._planConfirmedView = true;
+
                     listContainer.innerHTML = `
-                        <div class="text-center py-10">
-                            <p class="text-[#9CA3AF] mb-4">No habits scheduled for tomorrow.</p>
-                            <button onclick="App.showOnboardingStep2()" class="text-accent underline">Add one?</button>
+                        <div class="text-center py-6">
+                            <div class="w-16 h-16 rounded-full border-2 border-accent flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <h2 class="text-text font-bold text-lg mb-2">Tomorrow's plan is set \u2713</h2>
+                            <p class="text-muted text-sm">You're all set for tomorrow.</p>
                         </div>
                     `;
-                } else {
-                    const timeBlocks = ['Morning', 'Afternoon', 'Evening'];
 
-                    timeBlocks.forEach(time => {
-                        const blockHabits = eligibleHabits.filter(h => h.timeOfDay === time);
-                        if (blockHabits.length === 0) return;
-
-                        const blockEl = document.createElement('div');
-
-                        // Section Header
-                        const header = document.createElement('div');
-                        header.className = 'flex items-center mb-4';
-                        header.innerHTML = `
-                            <span class="text-[#9CA3AF] text-sm uppercase mr-3 tracking-wide">${time}</span>
-                            <div class="flex-1 h-px bg-[#333]"></div>
-                        `;
-                        blockEl.appendChild(header);
-
-                        // Habits list
-                        const list = document.createElement('div');
-                        list.className = 'space-y-0';
-
-                        blockHabits.forEach((habit, index) => {
-                            this.plannedHabitIds.add(habit.id); // Default all selected
-
+                    const tomorrow = this.getTomorrowString();
+                    const confirmedPlan = this.data.dailyPlans.find(p => p.date === tomorrow);
+                    if (confirmedPlan && confirmedPlan.plannedHabitIds.length > 0) {
+                        const habitListEl = document.createElement('div');
+                        habitListEl.className = 'mt-2 bg-card rounded-card border border-[#333] p-4';
+                        confirmedPlan.plannedHabitIds.forEach((hId, idx) => {
+                            const habit = this.data.habits.find(h => h.id === hId);
+                            if (!habit) return;
                             const row = document.createElement('div');
-                            row.className = 'flex items-center justify-between py-3 group plan-habit-row';
-                            row.dataset.habitId = habit.id;
+                            row.className = 'flex items-center space-x-3 py-2' + (idx < confirmedPlan.plannedHabitIds.length - 1 ? ' border-b border-[#333]' : '');
+                            row.innerHTML = `<svg class="w-4 h-4 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg><span class="text-text text-sm">${habit.name}</span>`;
+                            habitListEl.appendChild(row);
+                        });
+                        listContainer.appendChild(habitListEl);
+                    }
+                } else {
+                    // === TOMORROW EDIT MODE (existing behavior) ===
+                    confirmBtn.classList.remove('hidden');
+                    adjustBtn.classList.remove('hidden');
+                    this.plannedHabitIds = new Set();
 
-                            row.innerHTML = `
-                                <div class="flex items-center space-x-4 flex-1 cursor-pointer" onclick="App.togglePlanHabit('${habit.id}', this)">
-                                    <div class="w-6 h-6 rounded flex-shrink-0 border-2 border-accent bg-accent text-background flex items-center justify-center transition-colors plan-checkbox">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                                    </div>
+                    const tomorrowDay = this.getTomorrowDayOfWeek();
+                    const activeHabits = this.data.habits.filter(h => h.isActive);
+                    const eligibleHabits = activeHabits.filter(h => {
+                        if (!h.frequency || h.frequency.length === 0) return true;
+                        return h.frequency.includes(tomorrowDay);
+                    });
+
+                    if (eligibleHabits.length === 0) {
+                        listContainer.innerHTML = `
+                            <div id="plan-empty-state" class="text-center py-10">
+                                <p class="text-[#9CA3AF] mb-4">No habits scheduled for tomorrow.</p>
+                                <button onclick="App.callerOrigin = 'plan'; App.showOnboardingStep2()" class="text-accent underline">Add one?</button>
+                            </div>
+                        `;
+                    } else {
+                        const timeBlocks = ['Morning', 'Afternoon', 'Evening'];
+                        timeBlocks.forEach(time => {
+                            const blockHabits = eligibleHabits.filter(h => h.timeOfDay === time);
+                            if (blockHabits.length === 0) return;
+                            const blockEl = document.createElement('div');
+                            const header = document.createElement('div');
+                            header.className = 'flex items-center mb-4';
+                            header.innerHTML = `<span class="text-[#9CA3AF] text-sm uppercase mr-3 tracking-wide">${time}</span><div class="flex-1 h-px bg-[#333]"></div>`;
+                            blockEl.appendChild(header);
+                            const list = document.createElement('div');
+                            list.className = 'space-y-0';
+                            blockHabits.forEach((habit, index) => {
+                                this.plannedHabitIds.add(habit.id);
+                                const row = document.createElement('div');
+                                row.className = 'flex items-center justify-between py-3 group plan-habit-row';
+                                row.dataset.habitId = habit.id;
+                                row.innerHTML = `
+                                    <div class="flex items-center space-x-4 flex-1 cursor-pointer" onclick="App.togglePlanHabit('${habit.id}', this)">
+                                        <div class="w-6 h-6 rounded flex-shrink-0 border-2 border-accent bg-accent text-background flex items-center justify-center transition-colors plan-checkbox">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
                                     <span class="text-text text-[15px]">${habit.name}</span>
                                 </div>
-                                <button type="button" class="text-accent text-sm pointer-events-none opacity-50 adjust-btn" onclick="App.showComingSoonToast()">adjust</button>
-                            `;
-                            list.appendChild(row);
-
-                            if (index < blockHabits.length - 1) {
-                                const divider = document.createElement('div');
-                                divider.className = 'w-full h-px bg-[#333] plan-divider';
-                                list.appendChild(divider);
-                            }
+                                `;
+                                list.appendChild(row);
+                                if (index < blockHabits.length - 1) {
+                                    const divider = document.createElement('div');
+                                    divider.className = 'w-full h-px bg-[#333] plan-divider';
+                                    list.appendChild(divider);
+                                }
+                            });
+                            blockEl.appendChild(list);
+                            listContainer.appendChild(blockEl);
                         });
-
-                        blockEl.appendChild(list);
-                        listContainer.appendChild(blockEl);
-                    });
+                    }
                 }
 
-                // Show screen
-                if (!document.getElementById('screen-summary').classList.contains('hidden')) {
-                    document.getElementById('screen-summary').classList.add('hidden');
-                } else {
-                    document.getElementById('main-content').classList.add('hidden');
-                    document.querySelector('header').classList.add('hidden');
-                    document.querySelector('nav').classList.add('hidden');
+                // Show screen (only transition if not already visible)
+                const planScreen = document.getElementById('screen-plan');
+                if (planScreen.classList.contains('hidden')) {
+                    if (!document.getElementById('screen-summary').classList.contains('hidden')) {
+                        document.getElementById('screen-summary').classList.add('hidden');
+                    } else {
+                        document.getElementById('main-content').classList.add('hidden');
+                        document.querySelector('header').classList.add('hidden');
+                        document.querySelector('nav').classList.add('hidden');
+                    }
+                    planScreen.classList.remove('hidden');
                 }
-
-                document.getElementById('screen-plan').classList.remove('hidden');
             },
 
             closePlanTomorrow() {
@@ -2363,7 +2788,7 @@
                 }
 
                 // Summary calculations
-                document.getElementById('review-total-text').textContent = `Total this week: ${totalWeekCompletions} of ${totalWeekTargets} habits`;
+                document.getElementById('review-total-text').textContent = `Total this week: ${totalWeekCompletions} of ${totalWeekTargets} check-ins`;
 
                 const percentage = totalWeekTargets === 0 ? 0 : (totalWeekCompletions / totalWeekTargets) * 100;
                 let motive = "Every day is a fresh start. 💪";
@@ -2933,6 +3358,15 @@
             },
 
             togglePlanAdjustMode() {
+                // UAT-10: If in confirmed view, clear confirmed state and re-enter edit mode
+                if (this._planConfirmedView) {
+                    this._planConfirmedView = false;
+                    this.data.tomorrowPlanConfirmedDate = null;
+                    this.saveData();
+                    this.openPlanScreen('tomorrow');
+                    return;
+                }
+
                 this.isPlanAdjustMode = !this.isPlanAdjustMode;
                 const adjustBtn = document.getElementById('btn-plan-adjust');
                 const listContainer = document.getElementById('plan-habits-list');
@@ -2949,7 +3383,6 @@
                     listContainer.querySelectorAll('.plan-habit-row').forEach(row => {
                         const habitId = row.dataset.habitId;
                         if (!habitId) return;
-                        // Add remove button if not already present
                         if (!row.querySelector('.plan-remove-btn')) {
                             const removeBtn = document.createElement('button');
                             removeBtn.type = 'button';
@@ -2963,11 +3396,11 @@
                     // Hide the old adjust-btn text buttons
                     listContainer.querySelectorAll('.adjust-btn').forEach(b => b.classList.add('hidden'));
 
-                    // Add "+ Add Habit" button at the bottom if not present
+                    // Add "+ Add Habit" and "+ Create New Habit" buttons at the bottom
                     if (!document.getElementById('plan-add-habit-area')) {
                         const addArea = document.createElement('div');
                         addArea.id = 'plan-add-habit-area';
-                        addArea.className = 'mt-6';
+                        addArea.className = 'mt-6 space-y-3';
 
                         const addBtn = document.createElement('button');
                         addBtn.type = 'button';
@@ -2983,11 +3416,22 @@
                         pickerList.className = 'hidden mt-3 bg-card rounded-card border border-[#333] overflow-hidden';
                         addArea.appendChild(pickerList);
 
+                        // UAT-07: "+ Create New Habit" button
+                        const createBtn = document.createElement('button');
+                        createBtn.type = 'button';
+                        createBtn.className = 'w-full py-3 border border-dashed border-accent rounded-card text-accent font-bold text-sm hover:bg-[#0d2922] transition-colors';
+                        createBtn.textContent = '+ Create New Habit';
+                        createBtn.onclick = () => {
+                            this.callerOrigin = 'plan';
+                            this.showOnboardingStep2();
+                        };
+                        addArea.appendChild(createBtn);
+
                         listContainer.appendChild(addArea);
                     }
                 } else {
-                    // Exit adjust mode
-                    adjustBtn.textContent = 'Adjust';
+                    // Exit adjust mode (UAT-04: label is now "Edit Plan")
+                    adjustBtn.textContent = 'Edit Plan';
                     adjustBtn.classList.remove('text-accent');
                     adjustBtn.classList.add('text-[#9CA3AF]');
                     adjustBtn.classList.remove('border-accent');
@@ -3069,6 +3513,10 @@
                 this.plannedHabitIds.add(habitId);
                 const habit = this.data.habits.find(h => h.id === habitId);
                 if (!habit) return;
+
+                // Bug 1b fix: Remove empty state message when adding a habit via picker
+                const emptyState = document.getElementById('plan-empty-state');
+                if (emptyState) emptyState.remove();
 
                 const listContainer = document.getElementById('plan-habits-list');
                 const addArea = document.getElementById('plan-add-habit-area');
@@ -3160,12 +3608,14 @@
                     this.data.dailyPlans.push(newPlan);
                 }
 
+                // UAT-10: Set confirmed date flag so re-opening shows confirmed state
+                this.data.tomorrowPlanConfirmedDate = this.getTodayString();
                 this.saveData();
 
-                // Show toast notification
+                // Show toast notification (UAT-10: updated text)
                 const toast = document.createElement('div');
                 toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 bg-[#333] text-text px-4 py-2 rounded-full text-sm font-medium z-50 whitespace-nowrap';
-                toast.textContent = "Plan locked in! 🔒";
+                toast.textContent = "Tomorrow's plan saved \u2713";
                 document.body.appendChild(toast);
                 setTimeout(() => toast.remove(), 2000);
 
@@ -3794,18 +4244,49 @@
 
                     blockHabits.forEach(habit => {
                         const isCompleted = this.isHabitCompletedToday(habit.id);
+                        const isSkipped = this.isHabitSkippedToday(habit.id);
                         const row = document.createElement('div');
-                        row.className = 'flex items-center justify-between py-2 cursor-pointer group hover:bg-[#1A1A1A] px-1 rounded transition-colors';
+                        row.className = `flex items-center justify-between py-2 cursor-pointer group hover:bg-[#1A1A1A] px-1 rounded transition-colors${isSkipped ? ' opacity-60' : ''}`;
                         row.onclick = () => this.openHabitCheckIn(habit.id);
+
+                        // Determine left icon
+                        let leftIcon = '';
+                        if (isCompleted) {
+                            // Done: teal filled checkmark
+                            leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 flex items-center justify-center transition-colors bg-text border-text text-background">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>`;
+                        } else if (isSkipped) {
+                            // Skipped: amber dash icon
+                            leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-[#FBBF24] flex items-center justify-center transition-colors">
+                                <span class="text-[#FBBF24] font-bold text-sm leading-none">—</span>
+                            </div>`;
+                        } else {
+                            // Pending: empty grey checkbox
+                            leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-muted flex items-center justify-center transition-colors text-transparent">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>`;
+                        }
+
+                        // Determine habit name style
+                        const nameClass = isCompleted ? 'text-muted line-through decoration-[#9CA3AF]' : (isSkipped ? 'text-[#9CA3AF]' : 'text-text');
+
+                        // Determine right side content
+                        let rightContent = '';
+                        if (isSkipped) {
+                            rightContent = `<div class="flex items-center space-x-2 ml-4">
+                                <span class="text-[10px] font-bold text-[#FBBF24] bg-[#FBBF24]/15 px-2 py-0.5 rounded-full whitespace-nowrap">Skipped</span>
+                            </div>`;
+                        } else {
+                            rightContent = `<span class="text-xs ${isCompleted ? 'text-muted' : 'text-text'} whitespace-nowrap ml-4">${habit.streakCurrent}-day streak</span>`;
+                        }
 
                         row.innerHTML = `
                             <div class="flex items-center space-x-3 overflow-hidden">
-                                <div class="w-6 h-6 rounded flex-shrink-0 border-2 flex items-center justify-center transition-colors ${isCompleted ? 'bg-text border-text text-background' : 'border-muted text-transparent'}">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                                </div>
-                                <span class="text-base truncate ${isCompleted ? 'text-muted line-through decoration-[#9CA3AF]' : 'text-text'}">${habit.name}</span>
+                                ${leftIcon}
+                                <span class="text-base truncate ${nameClass}">${habit.name}</span>
                             </div>
-                            <span class="text-xs ${isCompleted ? 'text-muted' : 'text-text'} whitespace-nowrap ml-4">${habit.streakCurrent}-day streak</span>
+                            ${rightContent}
                         `;
                         list.appendChild(row);
                     });
@@ -3821,6 +4302,20 @@
                         lastList.classList.remove('border-b', 'border-[#333]', 'pb-3', 'mb-3');
                     }
                 }
+
+                // UAT-01 fix: Add "+ Add Habit" button at bottom of habits list
+                const addHabitBtnEl = document.createElement('div');
+                addHabitBtnEl.className = 'mt-4';
+                addHabitBtnEl.innerHTML = `
+                    <button type="button" class="w-full py-3 border border-dashed border-[#555] rounded-card text-accent font-medium text-sm hover:bg-card transition-colors">
+                        + Add Habit
+                    </button>
+                `;
+                addHabitBtnEl.querySelector('button').addEventListener('click', () => {
+                    this.callerOrigin = 'dashboard';
+                    this.showOnboardingStep2();
+                });
+                habitsContainer.appendChild(addHabitBtnEl);
 
                 // Render Categories Progress based on user identity areas
                 const catContainer = document.getElementById('categories-progress');
