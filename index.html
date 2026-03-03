@@ -1445,15 +1445,23 @@
 
                     // If NOT handled by specific UI modals: check if we are on Dashboard vs regular Tabs
                     const mainContent = document.getElementById('main-content');
-                    console.log('DEBUG: Checking dashboard visibility...', mainContent && !mainContent.classList.contains('hidden'));
-                    if (mainContent && !mainContent.classList.contains('hidden')) {
-                        console.log('DEBUG: Dashboard IS VISIBLE! Showing exit dialog.');
-                        showExitDialog();
+                    const planScreen = document.getElementById('screen-plan');
+                    const reviewScreen = document.getElementById('screen-review');
+
+                    let anyTabVisible = false;
+                    if (planScreen && !planScreen.classList.contains('hidden')) anyTabVisible = true;
+                    if (reviewScreen && !reviewScreen.classList.contains('hidden')) anyTabVisible = true;
+
+                    // If a sub-tab is open, return to dashboard
+                    if (anyTabVisible) {
+                        console.log('DEBUG: Tab is visible! returning to Dashboard.');
+                        document.getElementById('btn-nav-home')?.click();
                         return;
                     }
 
-                    // Dashboard is hidden (we must be on plan/review tabs): Go back to dashboard!
-                    document.getElementById('btn-nav-home')?.click();
+                    // Fallback: if no screen overlay / tab is visible, always show exit dialog
+                    console.log('DEBUG: Fallback activated! Dashboard or unhandled state detected. Showing exit dialog.');
+                    showExitDialog();
                 });
             },
 
