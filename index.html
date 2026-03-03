@@ -1395,6 +1395,18 @@
                     dialog.classList.remove('flex');
                 };
 
+                if (btnStay) {
+                    btnStay.addEventListener('click', () => hideExitDialog());
+                }
+
+                if (btnLeave) {
+                    btnLeave.addEventListener('click', () => {
+                        allowExit = true;
+                        hideExitDialog();
+                        history.back(); // Triggers exit
+                    });
+                }
+
                 window.addEventListener('popstate', (e) => {
                     if (allowExit) return;
 
@@ -1427,25 +1439,16 @@
 
                     if (handled) return;
 
+                    // If NOT handled by specific UI modals: check if we are on Dashboard vs regular Tabs
                     const mainContent = document.getElementById('main-content');
                     if (mainContent && !mainContent.classList.contains('hidden')) {
+                        // Dashboard is visible: Show exit dialog
                         showExitDialog();
                         return;
-                    } else {
-                        document.getElementById('btn-nav-home')?.click();
-                        return;
                     }
 
-                    // Let tabs return to Dashboard immediately
-                    const planTab = document.getElementById('screen-plan');
-                    const reviewTab = document.getElementById('screen-review');
-                    if ((planTab && !planTab.classList.contains('hidden')) || (reviewTab && !reviewTab.classList.contains('hidden'))) {
-                        document.getElementById('btn-nav-home')?.click();
-                        return;
-                    }
-
-                    // Otherwise, we are back on the base Dashboard
-                    showExitDialog();
+                    // Dashboard is hidden (we must be on plan/review tabs): Go back to dashboard!
+                    document.getElementById('btn-nav-home')?.click();
                 });
             },
 
