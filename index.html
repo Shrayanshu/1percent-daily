@@ -1400,24 +1400,43 @@
 
                     // Re-push guard so trap stays active
                     history.pushState({ exitGuard: true }, '');
-                    showExitDialog();
-                });
 
-                btnStay.addEventListener('click', () => {
-                    hideExitDialog();
-                });
+                    // Map specific screens to the native UI close buttons or logic
+                    const screenCloseMap = [
+                        { id: 'screen-onboarding-1', handle: () => { document.getElementById('screen-onboarding-1').classList.add('hidden'); document.getElementById('screen-splash').classList.remove('hidden'); } },
+                        { id: 'screen-onboarding', handle: () => App.handleAddHabitBack() },
+                        { id: 'screen-checkin', handle: () => document.getElementById('btn-back-checkin')?.click() },
+                        { id: 'screen-celebration', handle: () => document.getElementById('btn-celeb-back')?.click() },
+                        { id: 'screen-summary', handle: () => App.closeTodaySummary() },
+                        { id: 'screen-goals', handle: () => App.closeSetGoalsScreen() },
+                        { id: 'screen-reward', handle: () => App.closeRewardScreen() },
+                        { id: 'screen-weekly-review', handle: () => document.getElementById('btn-weekly-review-back')?.click() },
+                        { id: 'screen-new-week', handle: () => document.getElementById('btn-new-week-back')?.click() },
+                        { id: 'screen-settings', handle: () => document.getElementById('btn-settings-back')?.click() }
+                    ];
 
-                btnLeave.addEventListener('click', () => {
-                    hideExitDialog();
-                    allowExit = true;
-                    history.back();
-                });
-
-                // Dismiss on backdrop tap
-                dialog.addEventListener('click', (e) => {
-                    if (e.target === dialog || e.target.classList.contains('exit-dialog-backdrop')) {
-                        hideExitDialog();
+                    let handled = false;
+                    for (const { id, handle } of screenCloseMap) {
+                        const el = document.getElementById(id);
+                        if (el && !el.classList.contains('hidden')) {
+                            handle();
+                            handled = true;
+                            break; // Handled the topmost/active logical modal
+                        }
                     }
+
+                    if (handled) return;
+
+                    // Let tabs return to Dashboard immediately
+                    const planTab = document.getElementById('screen-plan');
+                    const reviewTab = document.getElementById('screen-review');
+                    if ((planTab && !planTab.classList.contains('hidden')) || (reviewTab && !reviewTab.classList.contains('hidden'))) {
+                        document.getElementById('btn-nav-home')?.click();
+                        return;
+                    }
+
+                    // Otherwise, we are back on the base Dashboard
+                    showExitDialog();
                 });
             },
 
