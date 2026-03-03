@@ -1427,6 +1427,15 @@
 
                     if (handled) return;
 
+                    const mainContent = document.getElementById('main-content');
+                    if (mainContent && !mainContent.classList.contains('hidden')) {
+                        showExitDialog();
+                        return;
+                    } else {
+                        document.getElementById('btn-nav-home')?.click();
+                        return;
+                    }
+
                     // Let tabs return to Dashboard immediately
                     const planTab = document.getElementById('screen-plan');
                     const reviewTab = document.getElementById('screen-review');
