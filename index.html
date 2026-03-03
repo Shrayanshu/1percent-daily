@@ -1375,6 +1375,8 @@
                 const isStandalone = window.matchMedia('(display-mode: standalone)').matches
                     || window.navigator.standalone === true;
 
+                console.log('DEBUG: isStandalone checked:', isStandalone);
+
                 if (!isStandalone) return;
 
                 // Push initial guard state
@@ -1386,6 +1388,7 @@
                 const btnLeave = document.getElementById('btn-exit-leave');
 
                 const showExitDialog = () => {
+                    console.log('DEBUG: showExitDialog() called!');
                     dialog.classList.remove('hidden');
                     dialog.classList.add('flex');
                 };
@@ -1408,6 +1411,7 @@
                 }
 
                 window.addEventListener('popstate', (e) => {
+                    console.log('DEBUG: popstate event fired!');
                     if (allowExit) return;
 
                     // Re-push guard so trap stays active
@@ -1441,8 +1445,9 @@
 
                     // If NOT handled by specific UI modals: check if we are on Dashboard vs regular Tabs
                     const mainContent = document.getElementById('main-content');
+                    console.log('DEBUG: Checking dashboard visibility...', mainContent && !mainContent.classList.contains('hidden'));
                     if (mainContent && !mainContent.classList.contains('hidden')) {
-                        // Dashboard is visible: Show exit dialog
+                        console.log('DEBUG: Dashboard IS VISIBLE! Showing exit dialog.');
                         showExitDialog();
                         return;
                     }
