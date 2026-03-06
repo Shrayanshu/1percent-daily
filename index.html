@@ -4424,21 +4424,21 @@
                         // Build optional detail lines (Tiny Version + Cue)
                         let detailLines = '';
                         if (habit.tinyVersion && habit.tinyVersion.trim()) {
-                            detailLines += `<div class="text-xs text-[#9CA3AF] truncate"><span class="text-[#6B7280]">Tiny version:</span> ${habit.tinyVersion}</div>`;
+                            detailLines += `<div class="text-xs bg-yellow-500/20 text-yellow-400 rounded-full px-2 py-0.5 inline-block mt-1">💡 ${habit.tinyVersion}</div>`;
                         }
                         if (habit.anchor && habit.anchor.trim()) {
-                            detailLines += `<div class="text-xs text-[#9CA3AF] truncate"><span class="text-[#6B7280]">Cue:</span> ${habit.anchor}</div>`;
+                            detailLines += `<div class="text-xs bg-blue-500/10 text-blue-400 rounded-full px-2 py-0.5 inline-block mt-1">📍 ${habit.anchor}</div>`;
                         }
 
                         row.innerHTML = `
-                            <div class="flex items-start space-x-3 overflow-hidden flex-1 min-w-0">
+                            <div class="flex items-start space-x-3 flex-1 min-w-0">
                                 ${leftIcon}
-                                <div class="flex flex-col min-w-0">
+                                <div class="flex flex-col gap-1 min-w-0">
                                     <span class="text-base truncate ${nameClass}">${habit.name}</span>
                                     ${detailLines}
                                 </div>
                             </div>
-                            ${rightContent}
+                            <div class="flex-shrink-0 self-start">${rightContent}</div>
                         `;
                         list.appendChild(row);
                     });
