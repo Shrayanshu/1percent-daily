@@ -528,6 +528,25 @@
                 </div>
 
                 <div>
+                    <label class="block text-[13px] text-text mb-1.5 font-medium">Goal Tag</label>
+                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Optional — group your habit under a goal.</p>
+                    <div class="flex space-x-2" id="nh-goal-tags">
+                        <button type="button" data-goal="Career"
+                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">💼
+                            Career</button>
+                        <button type="button" data-goal="Health"
+                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">💪
+                            Health</button>
+                        <button type="button" data-goal="Mind"
+                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">🧠
+                            Mind</button>
+                        <button type="button" data-goal="Custom"
+                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">⭐
+                            Custom</button>
+                    </div>
+                </div>
+
+                <div>
                     <label class="block text-[13px] text-text mb-1.5 font-medium">Identity Area</label>
                     <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Habits stick when they match who you're becoming, not
                         just what you want to do.</p>
@@ -1292,6 +1311,48 @@
 
         </div>
 
+        <!-- Screen 15: Week Stats -->
+        <div id="screen-week-stats"
+            class="absolute inset-0 bg-background z-[55] flex flex-col hidden overflow-y-auto pb-24">
+            <header
+                class="px-5 pt-10 pb-4 flex items-center bg-background sticky top-0 z-10 w-full relative justify-center">
+                <button id="btn-week-stats-back" class="text-text hover:text-accent transition-colors absolute left-5">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </button>
+                <h1 class="text-xl font-bold text-text">Week Review</h1>
+            </header>
+
+            <div class="px-5 pt-2 flex-1 flex flex-col">
+                <!-- Overall Score -->
+                <div class="bg-card rounded-card border border-[#333] p-5 mb-6 text-center">
+                    <p class="text-[#9CA3AF] text-xs uppercase tracking-wide mb-2">Overall Weekly Score</p>
+                    <span id="ws-overall-score" class="text-4xl font-bold text-text">0%</span>
+                </div>
+
+                <!-- Best & Most Skipped -->
+                <div class="flex space-x-3 mb-6">
+                    <div class="flex-1 bg-card rounded-card border border-[#333] p-4">
+                        <p class="text-[#9CA3AF] text-[10px] uppercase tracking-wide mb-1">🏆 Best Habit</p>
+                        <p id="ws-best-habit" class="text-text font-bold text-sm">—</p>
+                    </div>
+                    <div class="flex-1 bg-card rounded-card border border-[#333] p-4">
+                        <p class="text-[#9CA3AF] text-[10px] uppercase tracking-wide mb-1">⚠️ Most Skipped</p>
+                        <p id="ws-skipped-habit" class="text-text font-bold text-sm">—</p>
+                    </div>
+                </div>
+
+                <!-- Per-habit progress -->
+                <h2 class="text-text font-bold text-sm mb-3">Habit Breakdown</h2>
+                <div class="w-full h-px bg-[#333] mb-4"></div>
+                <div id="ws-habit-list" class="space-y-4 mb-6">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
         <!-- PWA Exit Confirmation Dialog -->
         <div id="exit-confirm-dialog" class="fixed inset-0 z-[300] hidden items-center justify-center px-8">
             <div class="absolute inset-0 bg-black/70 exit-dialog-backdrop"></div>
@@ -1568,6 +1629,12 @@
                 const nameErr = document.getElementById('nh-name-error');
                 if (nameErr) { nameErr.textContent = ''; nameErr.classList.add('hidden'); }
 
+                // Reset goal tag buttons to inactive
+                document.querySelectorAll('.goal-tag-btn').forEach(b => {
+                    b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                    b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                });
+
                 // Reset day buttons to inactive
                 document.querySelectorAll('.day-btn').forEach(b => {
                     b.classList.remove('bg-accent', 'text-background', 'border-accent');
@@ -1768,6 +1835,21 @@
                 });
 
                 // ================= Step 2 Logic =================
+                // Goal tag buttons
+                document.querySelectorAll('.goal-tag-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const wasActive = btn.classList.contains('bg-accent');
+                        document.querySelectorAll('.goal-tag-btn').forEach(b => {
+                            b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                            b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                        });
+                        if (!wasActive) {
+                            btn.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                            btn.classList.add('bg-accent', 'text-background', 'border-accent');
+                        }
+                    });
+                });
+
                 // Day buttons
                 document.querySelectorAll('.day-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -2106,6 +2188,9 @@
                 document.getElementById('btn-modal-cancel').addEventListener('click', () => {
                     document.getElementById('modal-destructive').classList.add('hidden');
                 });
+                document.getElementById('btn-week-stats-back').addEventListener('click', () => {
+                    this.closeWeekStats();
+                });
             },
 
             updateNavTabs(activeTab) {
@@ -2170,10 +2255,14 @@
                 const rewardInput = document.getElementById('nh-reward');
                 const weeklyReward = rewardInput ? rewardInput.value.trim() : '';
 
+                const activeGoalBtn = document.querySelector('.goal-tag-btn.bg-accent');
+                const goal = activeGoalBtn ? activeGoalBtn.dataset.goal : '';
+
                 const habit = {
                     id: 'h' + Date.now(),
                     name: name,
                     category: category,
+                    goal: goal,
                     timeOfDay: timeOfDay,
                     tinyVersion: tinyVersion,
                     anchor: anchor,
@@ -4429,12 +4518,73 @@
                 progressBar.value = completedToday;
                 document.getElementById('daily-progress-text').textContent = `${completedToday} / ${totalHabits}`;
 
-                // Render Habits Grouped by Time
+                // ── Week Review button ──
+                const existingWeekBtn = document.getElementById('dashboard-week-review-btn');
+                if (existingWeekBtn) existingWeekBtn.remove();
+                const weekBtnEl = document.createElement('div');
+                weekBtnEl.id = 'dashboard-week-review-btn';
+                weekBtnEl.className = 'mb-4';
+                weekBtnEl.innerHTML = `
+                    <button type="button" class="w-full py-3 rounded-card border border-[#333] bg-card text-text font-medium text-sm flex justify-center items-center space-x-2 tracking-wide transition-colors hover:border-accent hover:text-accent">
+                        <span>📊</span><span>Week Review</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                `;
+                const dailyScoreCard = document.getElementById('daily-score').closest('.bg-card');
+                if (dailyScoreCard && dailyScoreCard.parentElement) {
+                    dailyScoreCard.parentElement.insertBefore(weekBtnEl, dailyScoreCard.nextSibling);
+                }
+                weekBtnEl.querySelector('button').addEventListener('click', () => this.openWeekStats());
+
+                // ── Goal Progress Pills (CHANGE 4) ──
+                const GOAL_ORDER = [
+                    { key: 'Career', emoji: '💼', label: 'Career' },
+                    { key: 'Health', emoji: '💪', label: 'Health' },
+                    { key: 'Mind', emoji: '🧠', label: 'Mind' },
+                    { key: 'Custom', emoji: '⭐', label: 'Custom' }
+                ];
+                const existingGoalRow = document.getElementById('dashboard-goal-progress');
+                if (existingGoalRow) existingGoalRow.remove();
+
+                const goalPillsData = [];
+                GOAL_ORDER.forEach(g => {
+                    const goalHabits = activeHabits.filter(h => h.goal === g.key);
+                    if (goalHabits.length === 0) return;
+                    const weekStart = this.getCurrentWeekStart();
+                    let weekCompleted = 0;
+                    let weekTotal = 0;
+                    goalHabits.forEach(h => {
+                        const stats = this.getWeeklyCompletionsCount(h.id);
+                        weekCompleted += stats.count;
+                        weekTotal += (h.targetDays || 7);
+                    });
+                    const pct = weekTotal > 0 ? Math.round((weekCompleted / weekTotal) * 100) : 0;
+                    goalPillsData.push({ ...g, pct });
+                });
+
+                if (goalPillsData.length > 0) {
+                    const goalRow = document.createElement('div');
+                    goalRow.id = 'dashboard-goal-progress';
+                    goalRow.className = 'flex space-x-2 overflow-x-auto hide-scrollbar mb-4 pb-1';
+                    goalPillsData.forEach(g => {
+                        goalRow.innerHTML += `<button type="button" class="goal-scroll-pill flex-shrink-0 text-xs font-medium bg-card border border-[#333] text-text rounded-full px-3 py-1.5 whitespace-nowrap transition-colors hover:border-accent" data-goal="${g.key}">${g.emoji} ${g.label} ${g.pct}%</button>`;
+                    });
+                    if (weekBtnEl.parentElement) {
+                        weekBtnEl.parentElement.insertBefore(goalRow, weekBtnEl.nextSibling);
+                    }
+                    goalRow.querySelectorAll('.goal-scroll-pill').forEach(pill => {
+                        pill.addEventListener('click', () => {
+                            const section = document.getElementById('goal-section-' + pill.dataset.goal);
+                            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        });
+                    });
+                }
+
+                // ── Render Habits Grouped by Goal Tag ──
                 const habitsContainer = document.getElementById('habits-list');
                 habitsContainer.innerHTML = '';
 
                 // Add 'View Summary' button on dashboard if all are completed
-                // First remove any existing summary button to prevent duplicates
                 const existingSummaryBtn = document.getElementById('dashboard-summary-btn');
                 if (existingSummaryBtn) existingSummaryBtn.remove();
 
@@ -4448,95 +4598,84 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
                         </button>
                     `;
-                    // Insert before "Today's Habits" section
                     const todayHabitsDiv = document.getElementById('habits-list').parentElement;
                     todayHabitsDiv.parentElement.insertBefore(btnHtml, todayHabitsDiv);
-
-                    btnHtml.querySelector('button').addEventListener('click', () => {
-                        this.openTodaySummary();
-                    });
+                    btnHtml.querySelector('button').addEventListener('click', () => this.openTodaySummary());
                 }
 
-                const timeBlocks = ['Morning', 'Afternoon', 'Evening'];
+                const goalGroups = [
+                    { key: 'Career', emoji: '💼', label: 'Career' },
+                    { key: 'Health', emoji: '💪', label: 'Health' },
+                    { key: 'Mind', emoji: '🧠', label: 'Mind' },
+                    { key: 'Custom', emoji: '⭐', label: 'Custom' },
+                    { key: '', emoji: '📋', label: 'Other' }
+                ];
 
-                timeBlocks.forEach(time => {
-                    const blockHabits = activeHabits.filter(h => h.timeOfDay === time);
-                    if (blockHabits.length === 0) return;
+                const renderHabitRow = (habit) => {
+                    const isCompleted = this.isHabitCompletedToday(habit.id);
+                    const isSkipped = this.isHabitSkippedToday(habit.id);
+                    const row = document.createElement('div');
+                    row.className = `flex items-center justify-between py-2 cursor-pointer group hover:bg-[#1A1A1A] px-1 rounded transition-colors${isSkipped ? ' opacity-60' : ''}`;
+                    row.onclick = () => this.openHabitCheckIn(habit.id);
+
+                    let leftIcon = '';
+                    if (isCompleted) {
+                        leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 flex items-center justify-center transition-colors bg-text border-text text-background"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>`;
+                    } else if (isSkipped) {
+                        leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-[#FBBF24] flex items-center justify-center transition-colors"><span class="text-[#FBBF24] font-bold text-sm leading-none">—</span></div>`;
+                    } else {
+                        leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-muted flex items-center justify-center transition-colors text-transparent"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>`;
+                    }
+
+                    const nameClass = isCompleted ? 'text-muted line-through decoration-[#9CA3AF]' : (isSkipped ? 'text-[#9CA3AF]' : 'text-text');
+
+                    let rightContent = '';
+                    if (isSkipped) {
+                        rightContent = `<div class="flex items-center space-x-2 ml-4"><span class="text-[10px] font-bold text-[#FBBF24] bg-[#FBBF24]/15 px-2 py-0.5 rounded-full whitespace-nowrap">Skipped</span></div>`;
+                    } else {
+                        rightContent = `<span class="text-xs ${isCompleted ? 'text-muted' : 'text-text'} whitespace-nowrap ml-4">${habit.streakCurrent}-day streak</span>`;
+                    }
+
+                    let detailLines = '';
+                    if (habit.tinyVersion && habit.tinyVersion.trim()) {
+                        detailLines += `<div class="text-xs bg-yellow-500/20 text-yellow-400 rounded-full px-2 py-0.5 inline-block mt-1">💡 ${habit.tinyVersion}</div>`;
+                    }
+                    if (habit.anchor && habit.anchor.trim()) {
+                        detailLines += `<div class="text-xs bg-blue-500/10 text-blue-400 rounded-full px-2 py-0.5 inline-block mt-1">📍 ${habit.anchor}</div>`;
+                    }
+
+                    row.innerHTML = `
+                        <div class="flex items-start space-x-3 flex-1 min-w-0">
+                            ${leftIcon}
+                            <div class="flex flex-col gap-1 min-w-0">
+                                <span class="text-base truncate ${nameClass}">${habit.name}</span>
+                                ${detailLines}
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0 self-start">${rightContent}</div>
+                    `;
+                    return row;
+                };
+
+                goalGroups.forEach(group => {
+                    const groupHabits = group.key === ''
+                        ? activeHabits.filter(h => !h.goal || h.goal.trim() === '')
+                        : activeHabits.filter(h => h.goal === group.key);
+                    if (groupHabits.length === 0) return;
 
                     const blockEl = document.createElement('div');
+                    blockEl.id = 'goal-section-' + (group.key || 'other');
 
-                    // Time Header
                     const header = document.createElement('div');
                     header.className = 'flex items-center space-x-2 text-text mb-3 ml-1';
-                    header.innerHTML = `
-                        ${TIME_BLOCK_ICONS[time]}
-                        <h3 class="text-lg font-medium">${time}</h3>
-                    `;
+                    header.innerHTML = `<span class="text-lg">${group.emoji}</span><h3 class="text-lg font-medium">${group.label}</h3>`;
                     blockEl.appendChild(header);
 
-                    // Habits List
                     const list = document.createElement('div');
                     list.className = 'space-y-0 relative border-b border-[#333] pb-3 mb-3';
 
-                    blockHabits.forEach(habit => {
-                        const isCompleted = this.isHabitCompletedToday(habit.id);
-                        const isSkipped = this.isHabitSkippedToday(habit.id);
-                        const row = document.createElement('div');
-                        row.className = `flex items-center justify-between py-2 cursor-pointer group hover:bg-[#1A1A1A] px-1 rounded transition-colors${isSkipped ? ' opacity-60' : ''}`;
-                        row.onclick = () => this.openHabitCheckIn(habit.id);
-
-                        // Determine left icon
-                        let leftIcon = '';
-                        if (isCompleted) {
-                            // Done: teal filled checkmark
-                            leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 flex items-center justify-center transition-colors bg-text border-text text-background">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            </div>`;
-                        } else if (isSkipped) {
-                            // Skipped: amber dash icon
-                            leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-[#FBBF24] flex items-center justify-center transition-colors">
-                                <span class="text-[#FBBF24] font-bold text-sm leading-none">—</span>
-                            </div>`;
-                        } else {
-                            // Pending: empty grey checkbox
-                            leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-muted flex items-center justify-center transition-colors text-transparent">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            </div>`;
-                        }
-
-                        // Determine habit name style
-                        const nameClass = isCompleted ? 'text-muted line-through decoration-[#9CA3AF]' : (isSkipped ? 'text-[#9CA3AF]' : 'text-text');
-
-                        // Determine right side content
-                        let rightContent = '';
-                        if (isSkipped) {
-                            rightContent = `<div class="flex items-center space-x-2 ml-4">
-                                <span class="text-[10px] font-bold text-[#FBBF24] bg-[#FBBF24]/15 px-2 py-0.5 rounded-full whitespace-nowrap">Skipped</span>
-                            </div>`;
-                        } else {
-                            rightContent = `<span class="text-xs ${isCompleted ? 'text-muted' : 'text-text'} whitespace-nowrap ml-4">${habit.streakCurrent}-day streak</span>`;
-                        }
-
-                        // Build optional detail lines (Tiny Version + Cue)
-                        let detailLines = '';
-                        if (habit.tinyVersion && habit.tinyVersion.trim()) {
-                            detailLines += `<div class="text-xs bg-yellow-500/20 text-yellow-400 rounded-full px-2 py-0.5 inline-block mt-1">💡 ${habit.tinyVersion}</div>`;
-                        }
-                        if (habit.anchor && habit.anchor.trim()) {
-                            detailLines += `<div class="text-xs bg-blue-500/10 text-blue-400 rounded-full px-2 py-0.5 inline-block mt-1">📍 ${habit.anchor}</div>`;
-                        }
-
-                        row.innerHTML = `
-                            <div class="flex items-start space-x-3 flex-1 min-w-0">
-                                ${leftIcon}
-                                <div class="flex flex-col gap-1 min-w-0">
-                                    <span class="text-base truncate ${nameClass}">${habit.name}</span>
-                                    ${detailLines}
-                                </div>
-                            </div>
-                            <div class="flex-shrink-0 self-start">${rightContent}</div>
-                        `;
-                        list.appendChild(row);
+                    groupHabits.forEach(habit => {
+                        list.appendChild(renderHabitRow(habit));
                     });
 
                     blockEl.appendChild(list);
@@ -4569,17 +4708,14 @@
                 const catContainer = document.getElementById('categories-progress');
                 catContainer.innerHTML = '';
 
-                // Generate progress for the areas user selected
                 const areas = this.data.user.identityAreas && this.data.user.identityAreas.length > 0
                     ? this.data.user.identityAreas
                     : ['General'];
 
                 areas.forEach(area => {
-                    // Count habits in this area
                     const areaHabits = activeHabits.filter(h => h.category === area);
                     const total = areaHabits.length;
-
-                    if (total === 0) return; // Optional: Only show categories with habits
+                    if (total === 0) return;
 
                     let completed = 0;
                     areaHabits.forEach(h => {
@@ -4595,6 +4731,60 @@
                     `;
                     catContainer.appendChild(row);
                 });
+            },
+
+            openWeekStats() {
+                const activeHabits = this.data.habits.filter(h => h.isActive);
+                const listEl = document.getElementById('ws-habit-list');
+                listEl.innerHTML = '';
+
+                let totalCompleted = 0;
+                let totalPossible = 0;
+                let bestHabit = { name: '—', rate: -1 };
+                let worstHabit = { name: '—', rate: 101 };
+
+                activeHabits.forEach(habit => {
+                    const stats = this.getWeeklyCompletionsCount(habit.id);
+                    const target = habit.targetDays || 7;
+                    const count = stats.count;
+                    const rate = target > 0 ? Math.round((count / target) * 100) : 0;
+
+                    totalCompleted += count;
+                    totalPossible += target;
+
+                    if (rate > bestHabit.rate) bestHabit = { name: habit.name, rate };
+                    if (rate < worstHabit.rate) worstHabit = { name: habit.name, rate };
+
+                    const row = document.createElement('div');
+                    row.innerHTML = `
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-text text-sm font-medium">${habit.name}</span>
+                            <span class="text-[#9CA3AF] text-xs">${count} / ${target} days</span>
+                        </div>
+                        <div class="w-full h-2 bg-[#333] rounded-full overflow-hidden">
+                            <div class="h-full bg-accent rounded-full transition-all" style="width:${Math.min(rate, 100)}%"></div>
+                        </div>
+                    `;
+                    listEl.appendChild(row);
+                });
+
+                const overallPct = totalPossible > 0 ? Math.round((totalCompleted / totalPossible) * 100) : 0;
+                document.getElementById('ws-overall-score').textContent = overallPct + '%';
+                document.getElementById('ws-best-habit').textContent = bestHabit.name;
+                document.getElementById('ws-skipped-habit').textContent = worstHabit.name;
+
+                document.getElementById('main-content').classList.add('hidden');
+                document.querySelector('header').classList.add('hidden');
+                document.querySelector('nav').classList.add('hidden');
+                document.getElementById('screen-week-stats').classList.remove('hidden');
+            },
+
+            closeWeekStats() {
+                document.getElementById('screen-week-stats').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                document.querySelector('header').classList.remove('hidden');
+                document.querySelector('nav').classList.remove('hidden');
+                this.renderDashboard();
             }
         };
 
