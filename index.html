@@ -1546,6 +1546,64 @@
                 // Default callerOrigin if not set by caller
                 if (!this.callerOrigin) this.callerOrigin = 'onboarding';
 
+                // ── Reset ALL form fields on every open ──
+                const formEl = document.getElementById('new-habit-form');
+                if (formEl) formEl.reset();
+
+                // Clear text inputs and textareas
+                ['nh-name', 'nh-tiny', 'nh-anchor', 'nh-reward'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.value = '';
+                        el.classList.remove('is-placeholder', 'border-red-500');
+                        el._isPlaceholder = false;
+                    }
+                });
+
+                // Clear coach hints and validation errors
+                ['nh-name-coach', 'nh-tiny-coach', 'nh-anchor-coach'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = '';
+                });
+                const nameErr = document.getElementById('nh-name-error');
+                if (nameErr) { nameErr.textContent = ''; nameErr.classList.add('hidden'); }
+
+                // Reset day buttons to inactive
+                document.querySelectorAll('.day-btn').forEach(b => {
+                    b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                    b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                });
+
+                // Reset time buttons — default to Morning
+                document.querySelectorAll('.time-btn').forEach(b => {
+                    b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                    b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                });
+                const morningBtn = document.querySelector('.time-btn[data-time="Morning"]');
+                if (morningBtn) {
+                    morningBtn.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                    morningBtn.classList.add('bg-accent', 'text-background', 'border-accent');
+                }
+
+                // Reset target buttons — default to 5
+                document.querySelectorAll('.target-btn').forEach(b => {
+                    b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                    b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                });
+                const target5 = document.querySelector('.target-btn[data-target="5"]');
+                if (target5) {
+                    target5.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                    target5.classList.add('bg-accent', 'text-background', 'border-accent');
+                }
+                const customInput = document.getElementById('nh-target-custom-input');
+                if (customInput) { customInput.value = '7'; customInput.classList.add('hidden'); }
+                const customBtn = document.getElementById('nh-target-custom-btn');
+                if (customBtn) {
+                    customBtn.classList.remove('bg-accent', 'text-background', 'border-accent');
+                    customBtn.classList.add('bg-card', 'text-text', 'border-[#333]');
+                }
+                // ── End reset ──
+
                 document.getElementById('screen-onboarding-1').classList.add('hidden');
                 document.getElementById('screen-onboarding').classList.remove('hidden');
                 document.getElementById('main-content').classList.add('hidden');
