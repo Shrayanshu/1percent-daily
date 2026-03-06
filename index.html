@@ -233,9 +233,10 @@
         <main class="flex-1 px-5 overflow-y-auto pb-24 hidden" id="main-content">
 
             <!-- Greeting -->
-            <div class="mb-6">
+            <div class="mb-2">
                 <h2 id="greeting-text" class="text-2xl font-bold text-text text-center">Good morning, Name</h2>
             </div>
+            <p id="dashboard-date-indicator" class="text-xs text-muted text-center mb-4"></p>
 
             <!-- TODAY vs YESTERDAY Card -->
             <div class="bg-card rounded-card border border-[#333] shadow-lg mb-8 overflow-hidden">
@@ -666,13 +667,15 @@
         <!-- Screen 5: Habit Check-in -->
         <div id="screen-checkin" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
             <!-- Header -->
-            <header class="px-5 pt-10 pb-4 flex items-center">
+            <header class="px-5 pt-10 pb-4 flex items-center justify-between">
                 <button type="button" id="btn-back-checkin" class="text-text hover:text-accent transition-colors">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                 </button>
+                <button type="button" id="btn-edit-habit"
+                    class="text-muted text-sm font-medium hover:text-accent transition-colors">Edit</button>
             </header>
 
             <!-- Habit Title Section -->
@@ -1695,7 +1698,11 @@
                 const origin = this.callerOrigin;
                 this.callerOrigin = null;
 
-                if (origin === 'settings') {
+                if (origin === 'edit') {
+                    this.editingHabitId = null;
+                    document.getElementById('screen-onboarding').classList.add('hidden');
+                    document.getElementById('screen-checkin').classList.remove('hidden');
+                } else if (origin === 'settings') {
                     document.getElementById('screen-onboarding').classList.add('hidden');
                     document.getElementById('screen-settings').classList.remove('hidden');
                     document.querySelector('nav').classList.remove('hidden');
@@ -1995,6 +2002,9 @@
 
             setupAppEvents() {
                 document.getElementById('btn-back-checkin').addEventListener('click', () => this.closeHabitCheckIn());
+                document.getElementById('btn-edit-habit').addEventListener('click', () => {
+                    if (this.currentCheckInHabitId) this.openEditHabit(this.currentCheckInHabitId);
+                });
                 document.getElementById('btn-checkin-done').addEventListener('click', () => {
                     const logInput = document.getElementById('checkin-log-value');
                     const logVal = logInput.value.trim();
@@ -2225,8 +2235,8 @@
                     return;
                 }
 
-                // Bug 2 fix: Check for duplicate habit name (case-insensitive)
-                const duplicate = this.data.habits.find(h => h.isActive && h.name.toLowerCase() === name.toLowerCase());
+                // Duplicate check: skip self when editing
+                const duplicate = this.data.habits.find(h => h.isActive && h.name.toLowerCase() === name.toLowerCase() && h.id !== this.editingHabitId);
                 if (duplicate) {
                     nameInput.classList.add('border-red-500');
                     nameError.textContent = 'A habit with this name already exists. Please use a different name.';
@@ -2258,6 +2268,35 @@
                 const activeGoalBtn = document.querySelector('.goal-tag-btn.bg-accent');
                 const goal = activeGoalBtn ? activeGoalBtn.dataset.goal : '';
 
+                if (this.editingHabitId) {
+                    // UPDATE existing habit
+                    const existingHabit = this.data.habits.find(h => h.id === this.editingHabitId);
+                    if (existingHabit) {
+                        existingHabit.name = name;
+                        existingHabit.category = category;
+                        existingHabit.goal = goal;
+                        existingHabit.timeOfDay = timeOfDay;
+                        existingHabit.tinyVersion = tinyVersion;
+                        existingHabit.anchor = anchor;
+                        existingHabit.frequency = Array.from(document.querySelectorAll('#nh-days .day-btn')).filter(b => b.classList.contains('bg-accent')).map(b => b.dataset.day);
+                        existingHabit.targetDays = targetDays;
+                        existingHabit.weeklyReward = weeklyReward;
+                    }
+                    this.editingHabitId = null;
+                    this.saveData();
+
+                    // Return to dashboard after edit
+                    this.callerOrigin = null;
+                    document.getElementById('screen-onboarding').classList.add('hidden');
+                    document.getElementById('screen-checkin').classList.add('hidden');
+                    document.getElementById('main-content').classList.remove('hidden');
+                    document.querySelector('header').classList.remove('hidden');
+                    document.querySelector('nav').classList.remove('hidden');
+                    this.renderDashboard();
+                    window.scrollTo(0, 0);
+                    return;
+                }
+
                 const habit = {
                     id: 'h' + Date.now(),
                     name: name,
@@ -2266,7 +2305,7 @@
                     timeOfDay: timeOfDay,
                     tinyVersion: tinyVersion,
                     anchor: anchor,
-                    icon: '🌟', // Default icon for new habits
+                    icon: '🌟',
                     frequency: Array.from(document.querySelectorAll('#nh-days .day-btn')).filter(b => b.classList.contains('bg-accent')).map(b => b.dataset.day),
                     targetDays: targetDays,
                     weeklyReward: weeklyReward,
@@ -2511,6 +2550,97 @@
                     document.querySelector('header').classList.remove('hidden');
                     document.querySelector('nav').classList.remove('hidden');
                     this.renderDashboard();
+                }
+            },
+
+            openEditHabit(habitId) {
+                const habit = this.data.habits.find(h => h.id === habitId);
+                if (!habit) return;
+
+                this.editingHabitId = habitId;
+                this.callerOrigin = 'edit';
+
+                // Open the form (this resets all fields first)
+                this.showOnboardingStep2();
+
+                // Pre-fill text fields
+                const nameEl = document.getElementById('nh-name');
+                if (nameEl) nameEl.value = habit.name || '';
+                const tinyEl = document.getElementById('nh-tiny');
+                if (tinyEl) tinyEl.value = habit.tinyVersion || '';
+                const anchorEl = document.getElementById('nh-anchor');
+                if (anchorEl) anchorEl.value = habit.anchor || '';
+                const rewardEl = document.getElementById('nh-reward');
+                if (rewardEl) rewardEl.value = habit.weeklyReward || '';
+
+                // Pre-select goal tag
+                if (habit.goal) {
+                    document.querySelectorAll('.goal-tag-btn').forEach(b => {
+                        b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                        b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                        if (b.dataset.goal === habit.goal) {
+                            b.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                            b.classList.add('bg-accent', 'text-background', 'border-accent');
+                        }
+                    });
+                }
+
+                // Pre-select identity/category
+                const identityEl = document.getElementById('nh-identity');
+                if (identityEl && habit.category) {
+                    for (let i = 0; i < identityEl.options.length; i++) {
+                        if (identityEl.options[i].value === habit.category) {
+                            identityEl.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+
+                // Pre-select time button
+                if (habit.timeOfDay) {
+                    document.querySelectorAll('.time-btn').forEach(b => {
+                        b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                        b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                        if (b.dataset.time === habit.timeOfDay) {
+                            b.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                            b.classList.add('bg-accent', 'text-background', 'border-accent');
+                        }
+                    });
+                }
+
+                // Pre-select target button
+                const targetVal = habit.targetDays || 7;
+                let foundTarget = false;
+                document.querySelectorAll('.target-btn').forEach(b => {
+                    b.classList.remove('bg-accent', 'text-background', 'border-accent');
+                    b.classList.add('bg-card', 'text-text', 'border-[#333]');
+                    if (parseInt(b.dataset.target) === targetVal) {
+                        b.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                        b.classList.add('bg-accent', 'text-background', 'border-accent');
+                        foundTarget = true;
+                    }
+                });
+                if (!foundTarget) {
+                    const customBtn = document.getElementById('nh-target-custom-btn');
+                    const customInput = document.getElementById('nh-target-custom-input');
+                    if (customBtn) {
+                        customBtn.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                        customBtn.classList.add('bg-accent', 'text-background', 'border-accent');
+                    }
+                    if (customInput) {
+                        customInput.classList.remove('hidden');
+                        customInput.value = targetVal;
+                    }
+                }
+
+                // Pre-select day buttons
+                if (habit.frequency && habit.frequency.length > 0) {
+                    document.querySelectorAll('.day-btn').forEach(b => {
+                        if (habit.frequency.includes(b.dataset.day)) {
+                            b.classList.remove('bg-card', 'text-text', 'border-[#333]');
+                            b.classList.add('bg-accent', 'text-background', 'border-accent');
+                        }
+                    });
                 }
             },
 
@@ -3825,7 +3955,8 @@
                         const item = document.createElement('button');
                         item.type = 'button';
                         item.className = 'w-full flex items-center space-x-3 px-4 py-3 hover:bg-background transition-colors text-left' + (i < availableHabits.length - 1 ? ' border-b border-[#333]' : '');
-                        item.innerHTML = `<span class="text-lg">${icon}</span><span class="text-text text-sm">${habit.name}</span>`;
+                        const categoryBadge = habit.category ? `<span class="text-xs border border-[#333] rounded-full px-2 py-0.5 text-muted ml-2">${habit.category}</span>` : '';
+                        item.innerHTML = `<span class="text-lg">${icon}</span><span class="text-text text-sm">${habit.name}</span>${categoryBadge}`;
                         item.onclick = () => this.addToPlanFromPicker(habit.id);
                         picker.appendChild(item);
                     });
@@ -4494,6 +4625,15 @@
 
             renderDashboard() {
                 this.updateGreeting();
+
+                // FIX 3: Date indicator
+                const now = new Date();
+                const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                const dateStr = `${dayNames[now.getDay()]}, ${now.getDate()} ${monthNames[now.getMonth()]} ${now.getFullYear()}`;
+                const streakStr = `🔥 ${this.data.user.streakCount || 0}-day streak`;
+                const dateIndicator = document.getElementById('dashboard-date-indicator');
+                if (dateIndicator) dateIndicator.textContent = `${dateStr}  ·  ${streakStr}`;
 
                 const todayStr = this.getTodayString();
                 const activeHabits = this.data.habits.filter(h => h.isActive);
