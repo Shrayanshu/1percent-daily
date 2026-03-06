@@ -664,10 +664,28 @@
             </div>
 
             <!-- Tiny Version Reminder Card (above Done/Skip) -->
-            <div id="checkin-tiny-card" class="px-5 mb-5 hidden">
+            <div id="checkin-tiny-card" class="px-5 mb-3 hidden">
                 <div class="bg-card border-l-4 border-[#FBBF24] rounded-md px-4 py-3">
-                    <p id="checkin-tiny-version" class="text-sm text-[#9CA3AF]">💡 Your tiny version: Even 1 minute
-                        counts</p>
+                    <span id="checkin-tiny-version"
+                        class="text-xs bg-yellow-500/20 text-yellow-400 rounded-full px-2 py-0.5 inline-block">💡 Tiny
+                        version</span>
+                </div>
+            </div>
+
+            <!-- Cue Reminder (below Tiny Version) -->
+            <div id="checkin-cue-card" class="px-5 mb-3 hidden">
+                <div class="bg-card border-l-4 border-blue-500 rounded-md px-4 py-3">
+                    <span id="checkin-cue-value"
+                        class="text-xs bg-blue-500/10 text-blue-400 rounded-full px-2 py-0.5 inline-block">📍 Cue</span>
+                </div>
+            </div>
+
+            <!-- Weekly Reward (below Cue) -->
+            <div id="checkin-reward-card" class="px-5 mb-5 hidden">
+                <div class="bg-card border-l-4 border-green-500 rounded-md px-4 py-3">
+                    <p class="text-xs text-[#9CA3AF] mb-1">🎁 Your reward:</p>
+                    <span id="checkin-reward-value"
+                        class="text-xs bg-green-500/10 text-green-400 rounded-full px-2 py-0.5 inline-block">Reward</span>
                 </div>
             </div>
 
@@ -2251,14 +2269,34 @@
                 document.getElementById('checkin-habit-name').textContent = habit.name;
                 document.getElementById('checkin-habit-category').textContent = habit.category;
 
-                // Tiny version reminder card
+                // Tiny version reminder card (amber pill)
                 const tinyCard = document.getElementById('checkin-tiny-card');
                 const tinyText = document.getElementById('checkin-tiny-version');
                 if (habit.tinyVersion && habit.tinyVersion.trim()) {
-                    tinyText.textContent = `\ud83d\udca1 Your tiny version: ${habit.tinyVersion}`;
+                    tinyText.textContent = `💡 ${habit.tinyVersion}`;
                     tinyCard.classList.remove('hidden');
                 } else {
                     tinyCard.classList.add('hidden');
+                }
+
+                // Cue reminder (blue pill)
+                const cueCard = document.getElementById('checkin-cue-card');
+                const cueText = document.getElementById('checkin-cue-value');
+                if (habit.anchor && habit.anchor.trim()) {
+                    cueText.textContent = `📍 ${habit.anchor}`;
+                    cueCard.classList.remove('hidden');
+                } else {
+                    cueCard.classList.add('hidden');
+                }
+
+                // Weekly reward (green pill)
+                const rewardCard = document.getElementById('checkin-reward-card');
+                const rewardText = document.getElementById('checkin-reward-value');
+                if (habit.weeklyReward && habit.weeklyReward.trim()) {
+                    rewardText.textContent = habit.weeklyReward;
+                    rewardCard.classList.remove('hidden');
+                } else {
+                    rewardCard.classList.add('hidden');
                 }
 
                 // Reset UI states
