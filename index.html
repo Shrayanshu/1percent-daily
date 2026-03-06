@@ -4421,10 +4421,22 @@
                             rightContent = `<span class="text-xs ${isCompleted ? 'text-muted' : 'text-text'} whitespace-nowrap ml-4">${habit.streakCurrent}-day streak</span>`;
                         }
 
+                        // Build optional detail lines (Tiny Version + Cue)
+                        let detailLines = '';
+                        if (habit.tinyVersion && habit.tinyVersion.trim()) {
+                            detailLines += `<div class="text-xs text-[#9CA3AF] truncate"><span class="text-[#6B7280]">Tiny version:</span> ${habit.tinyVersion}</div>`;
+                        }
+                        if (habit.anchor && habit.anchor.trim()) {
+                            detailLines += `<div class="text-xs text-[#9CA3AF] truncate"><span class="text-[#6B7280]">Cue:</span> ${habit.anchor}</div>`;
+                        }
+
                         row.innerHTML = `
-                            <div class="flex items-center space-x-3 overflow-hidden">
+                            <div class="flex items-start space-x-3 overflow-hidden flex-1 min-w-0">
                                 ${leftIcon}
-                                <span class="text-base truncate ${nameClass}">${habit.name}</span>
+                                <div class="flex flex-col min-w-0">
+                                    <span class="text-base truncate ${nameClass}">${habit.name}</span>
+                                    ${detailLines}
+                                </div>
                             </div>
                             ${rightContent}
                         `;
