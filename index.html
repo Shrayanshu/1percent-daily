@@ -263,6 +263,7 @@
         <!-- Screen 2: Onboarding Step 1 (What do you want to improve?) -->
         <div id="screen-onboarding-1"
             class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
+            style="background: radial-gradient(circle at top right, #0a2e28, #061f1a)"
             <!-- Progress Header -->
             <div class="px-5 pt-10 pb-2 relative">
                 <button
@@ -429,7 +430,8 @@
 
         <!-- Screen 3: Add Your First Habit -->
         <div id="screen-onboarding"
-            class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
+            class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6"
+            style="background: linear-gradient(180deg, #061312 0%, #0a2e2a 100%)">
             <!-- Progress Header -->
             <div class="px-5 pt-10 pb-2 relative">
                 <button onclick="App.handleAddHabitBack()"
@@ -601,6 +603,7 @@
 
         <!-- Screen 5: Habit Check-in -->
         <div id="screen-checkin" class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
+            style="background: radial-gradient(circle at top left, #0d2e24, #05140f)"
             <!-- Header -->
             <header class="px-5 pt-10 pb-4 flex items-center justify-between">
                 <button type="button" id="btn-back-checkin" class="text-white hover:text-teal-accent transition-colors">
@@ -686,7 +689,8 @@
 
         <!-- Screen 6: Habit Celebration -->
         <div id="screen-celebration"
-            class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
+            class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6"
+            style="background: linear-gradient(135deg, #061a14 0%, #0a2e26 100%)">
             <div class="flex-1 flex flex-col items-center justify-center px-5 py-10 mt-10">
                 <!-- Checkmark Circle -->
                 <div class="w-20 h-20 rounded-full border-[3px] border-teal-accent flex items-center justify-center mb-6 scale-0 transition-transform duration-500 ease-out"
@@ -700,11 +704,11 @@
                 <h1 class="text-3xl font-bold text-white mb-8 tracking-tight">Great work!</h1>
 
                 <!-- Divider -->
-                <div class="w-full h-px glass/10 mb-6"></div>
+                <div class="w-full h-px bg-white/10 mb-6"></div>
 
                 <!-- Character Image -->
                 <div class="flex justify-center mb-4">
-                    <div id="celeb-character-img"></div>
+                    <img id="celeb-character-img" src="images/strong-mind-male-motivating.png" style="height:130px; object-fit:contain;" onerror="this.style.display='none'" />
                 </div>
 
                 <!-- Streak Row -->
@@ -714,7 +718,7 @@
                 </div>
 
                 <!-- Divider -->
-                <div class="w-full h-px glass/10 mb-6"></div>
+                <div class="w-full h-px bg-white/10 mb-6"></div>
 
                 <!-- Progress Row (Logged Number) - Optional -->
                 <div id="celeb-log-row" class="w-full mb-8 hidden">
@@ -747,7 +751,8 @@
         </div>
 
         <!-- Screen 7: Today's Summary -->
-        <div id="screen-summary" class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
+        <div id="screen-summary" class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6"
+            style="background: linear-gradient(135deg, #064e3b 0%, #022c22 100%)">
             <div class="px-5 pt-10 pb-6 flex-1 relative">
                 <button onclick="App.closeTodaySummary()"
                     class="text-white hover:text-teal-accent transition-colors absolute left-5 top-11">
@@ -763,7 +768,7 @@
                 <div class="glass rounded-card border border-white/10 p-5 mb-8 text-center">
                     <div id="summary-habits-done" class="font-bold text-white text-[17px] mb-4 tracking-wide">X of Y
                         Habits Done</div>
-                    <div class="w-full h-px glass/10 mb-4"></div>
+                    <div class="w-full h-px bg-white/10 mb-4"></div>
                     <div class="text-white font-medium mb-1">Daily Score: <span id="summary-daily-score"
                             class="text-4xl font-bold ml-1">87%</span></div>
                     <div id="summary-score-diff" class="text-teal-accent font-medium text-sm mt-2 hidden tracking-wide">↑ +6%
@@ -774,7 +779,7 @@
                 <div id="summary-logged-improvement" class="mb-8 hidden">
                     <div class="flex items-center mb-4">
                         <span class="text-sm font-semibold text-white whitespace-nowrap mr-3">Logged Improvement</span>
-                        <div class="flex-1 h-px glass/10"></div>
+                        <div class="flex-1 h-px bg-white/10"></div>
                     </div>
                     <div id="summary-logged-list" class="space-y-0">
                         <!-- Populated by JS -->
@@ -785,7 +790,7 @@
                 <div id="summary-streaks" class="mb-8 hidden">
                     <div class="flex items-center mb-4">
                         <span class="text-sm font-semibold text-white whitespace-nowrap mr-3">Streaks</span>
-                        <div class="flex-1 h-px glass/10"></div>
+                        <div class="flex-1 h-px bg-white/10"></div>
                     </div>
                     <div id="summary-streaks-list" class="space-y-0">
                         <!-- Populated by JS -->
@@ -810,7 +815,8 @@
         </div>
 
         <!-- Screen 8: Tomorrow's Plan -->
-        <div id="screen-plan" class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
+        <div id="screen-plan" class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6"
+            style="background: linear-gradient(180deg, #064e3b 0%, #062d24 100%)">
             <div class="px-5 pt-10 pb-6 flex-1 relative">
                 <button onclick="App.closePlanTomorrow()"
                     class="text-white hover:text-teal-accent transition-colors absolute left-5 top-11">
@@ -834,7 +840,7 @@
                 </div>
 
                 <!-- Divider -->
-                <div class="w-full h-px glass/10 mb-6"></div>
+                <div class="w-full h-px bg-white/10 mb-6"></div>
 
                 <!-- Habits List Container -->
                 <div id="plan-habits-list" class="space-y-6">
@@ -862,6 +868,7 @@
 
         <!-- Screen 9: This Week's Progress -->
         <div id="screen-review" class="absolute inset-0 z-40 flex flex-col hidden overflow-y-auto pb-24">
+            style="background: linear-gradient(135deg, #061a14 0%, #1e1b4b 100%)"
             <div class="px-5 pt-10 flex-1 relative">
                 <button onclick="App.closeReviewScreen()"
                     class="text-white hover:text-teal-accent transition-colors absolute left-5 top-11">
@@ -923,6 +930,7 @@
 
         <!-- Screen 11: Goal Hit! Claim Reward -->
         <div id="screen-reward" class="absolute inset-0 z-[60] flex flex-col hidden overflow-y-auto">
+            style="background: linear-gradient(135deg, #061a14 0%, #0a2e26 100%)"
             <!-- Confetti container -->
             <div id="confetti-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
 
@@ -947,7 +955,7 @@
                 <!-- Your Wins -->
                 <div class="w-full mb-8">
                     <h2 class="text-white font-bold text-lg mb-2">Your Wins</h2>
-                    <div class="w-full h-px glass/10 mb-4"></div>
+                    <div class="w-full h-px bg-white/10 mb-4"></div>
 
                     <div id="reward-wins-list" class="space-y-4">
                         <!-- Populated by JS -->
@@ -983,7 +991,8 @@
 
         <!-- Screen 12: Weekly Review -->
         <div id="screen-weekly-review"
-            class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24">
+            class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24"
+            style="background: linear-gradient(135deg, #064e3b 0%, #022c22 100%)">
             <header
                 class="px-5 pt-10 pb-4 flex items-center bg-transparent sticky top-0 z-10 w-full relative justify-center">
                 <button id="btn-weekly-review-back"
@@ -999,14 +1008,18 @@
             <div class="px-5 pt-2 flex-1 flex flex-col">
                 
                 <div id="weekly-review-date-badge"
-                    class="border border-white/10 text-white/60 rounded-full px-4 py-1 text-sm mb-6 mx-auto w-max">April
+                    class="border border-white/10 text-white/60 rounded-full px-4 py-1 text-sm mb-4 mx-auto w-max">April
                     15 –
                     April 21</div>
+
+                <div class="flex justify-center mb-4">
+                    <img id="weekly-review-char-img" src="images/strong-mind-male-motivating.png" style="height:120px; object-fit:contain;" onerror="this.style.display='none'" />
+                </div>
 
                 <!-- Overview Card -->
                 <div class="glass rounded-card border border-white/10 p-4 mb-6">
                     <span class="text-white/60 text-sm mb-3 block">Overview</span>
-                    <div class="w-full h-px glass/10 mb-4"></div>
+                    <div class="w-full h-px bg-white/10 mb-4"></div>
 
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-white/60">Habits Completed</span>
@@ -1016,7 +1029,7 @@
                         </div>
                     </div>
 
-                    <div class="w-full h-px glass/10 mb-4"></div>
+                    <div class="w-full h-px bg-white/10 mb-4"></div>
 
                     <div class="grid grid-cols-2 divide-x divide-[#333]">
                         <div class="pr-3">
@@ -1032,7 +1045,7 @@
 
                 <!-- Habit Breakdown -->
                 <h2 class="text-white font-bold text-lg mb-3">Habit Breakdown</h2>
-                <div class="w-full h-px glass/10 mb-3"></div>
+                <div class="w-full h-px bg-white/10 mb-3"></div>
                 <div id="wr-breakdown-list"
                     class="space-y-0 mb-6 border border-white/10 rounded-card overflow-hidden glass">
                     <!-- Populated by JS -->
@@ -1040,7 +1053,7 @@
 
                 <!-- Reflection -->
                 <h2 class="text-white font-bold text-lg mb-3">Reflection</h2>
-                <div class="w-full h-px glass/10 mb-4"></div>
+                <div class="w-full h-px bg-white/10 mb-4"></div>
 
                 <div class="space-y-4 mb-8">
                     <div>
@@ -1075,7 +1088,8 @@
 
         <!-- Screen 13: New Week Starting -->
         <div id="screen-new-week"
-            class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24">
+            class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24"
+            style="background: linear-gradient(135deg, #061a14 0%, #0a2e26 100%)">
             <header
                 class="px-5 pt-10 pb-4 flex items-center bg-transparent sticky top-0 z-10 w-full relative justify-center">
                 <button id="btn-new-week-back" class="text-white hover:text-teal-accent transition-colors absolute left-5">
@@ -1096,7 +1110,7 @@
                 <!-- Last Week's Wins Card -->
                 <div id="nw-last-week-wins" class="glass rounded-card border border-white/10 p-4 mb-8 hidden">
                     <span class="text-white font-bold text-sm block mb-3">Last Week's Wins</span>
-                    <div class="w-full h-px glass/10 mb-4"></div>
+                    <div class="w-full h-px bg-white/10 mb-4"></div>
 
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-white/60">Total Habits Done:</span>
@@ -1111,7 +1125,7 @@
                                 0</span></span>
                     </div>
 
-                    <div class="w-full h-px glass/10 mb-4"></div>
+                    <div class="w-full h-px bg-white/10 mb-4"></div>
 
                     <div class="grid grid-cols-2 divide-x divide-[#333]">
                         <div class="pr-3">
@@ -1127,7 +1141,7 @@
 
                 <!-- This Week's Pre-loaded Plan -->
                 <h2 class="text-white font-bold text-lg mb-3">This Week's Pre-loaded Plan</h2>
-                <div class="w-full h-px glass/10 mb-4"></div>
+                <div class="w-full h-px bg-white/10 mb-4"></div>
 
                 <div id="nw-preload-list" class="space-y-0 mb-6 border-b border-white/10">
                     <!-- Populated by JS -->
@@ -1148,7 +1162,8 @@
 
         <!-- Screen 14: Settings -->
         <div id="screen-settings"
-            class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24">
+            class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24"
+            style="background: linear-gradient(135deg, #061a14 0%, #1e1b4b 100%)">
             <header class="px-5 pt-10 pb-4 flex items-center bg-transparent sticky top-0 z-10 w-full justify-center">
                 <button id="btn-settings-back" class="text-white hover:text-teal-accent transition-colors absolute left-5">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1163,7 +1178,7 @@
                 <!-- SECTION 1: My Habits -->
                 <div>
                     <h2 class="text-white font-bold text-lg mb-3">My Habits</h2>
-                    <div class="w-full h-px glass/10 mb-2"></div>
+                    <div class="w-full h-px bg-white/10 mb-2"></div>
                     <div id="settings-habits-list" class="space-y-0 text-sm">
                         <!-- Populated by JS -->
                     </div>
@@ -1176,7 +1191,7 @@
                 <!-- SECTION 2: My Goals -->
                 <div>
                     <h2 class="text-white font-bold text-lg mb-3">My Goals</h2>
-                    <div class="w-full h-px glass/10 mb-2"></div>
+                    <div class="w-full h-px bg-white/10 mb-2"></div>
                     <div id="settings-goals-list" class="space-y-0 text-sm border-b border-white/10">
                         <!-- Populated by JS -->
                     </div>
@@ -1185,7 +1200,7 @@
                 <!-- SECTION 3: My Rewards -->
                 <div>
                     <h2 class="text-white font-bold text-lg mb-3">My Rewards</h2>
-                    <div class="w-full h-px glass/10 mb-2"></div>
+                    <div class="w-full h-px bg-white/10 mb-2"></div>
                     <div id="settings-rewards-list" class="space-y-0 text-sm border-b border-white/10">
                         <!-- Populated by JS -->
                     </div>
@@ -1194,7 +1209,7 @@
                 <!-- SECTION 4: Account -->
                 <div>
                     <h2 class="text-white font-bold text-lg mb-3">Account</h2>
-                    <div class="w-full h-px glass/10 mb-2"></div>
+                    <div class="w-full h-px bg-white/10 mb-2"></div>
                     <div class="space-y-0 text-sm border-b border-white/10">
 
                         <div class="flex justify-between items-center py-4 border-b border-white/10 last:border-0">
@@ -1290,7 +1305,7 @@
 
                 <!-- Per-habit progress -->
                 <h2 class="text-white font-bold text-sm mb-3">Habit Breakdown</h2>
-                <div class="w-full h-px glass/10 mb-4"></div>
+                <div class="w-full h-px bg-white/10 mb-4"></div>
                 <div id="ws-habit-list" class="space-y-4 mb-6">
                     <!-- Populated by JS -->
                 </div>
@@ -2801,7 +2816,7 @@
                         loggedList.appendChild(row);
                         if (index < loggedImprovements.length - 1) {
                             const divider = document.createElement('div');
-                            divider.className = 'w-full h-px glass/10';
+                            divider.className = 'w-full h-px bg-white/10';
                             loggedList.appendChild(divider);
                         }
                     });
@@ -2825,7 +2840,7 @@
                         streaksList.appendChild(row);
                         if (index < activeStreaks.length - 1) {
                             const divider = document.createElement('div');
-                            divider.className = 'w-full h-px glass/10';
+                            divider.className = 'w-full h-px bg-white/10';
                             streaksList.appendChild(divider);
                         }
                     });
@@ -2959,7 +2974,7 @@
                             const blockEl = document.createElement('div');
                             const header = document.createElement('div');
                             header.className = 'flex items-center mb-4';
-                            header.innerHTML = `<span class="text-white/60 text-sm uppercase mr-3 tracking-wide">${time}</span><div class="flex-1 h-px glass/10"></div>`;
+                            header.innerHTML = `<span class="text-white/60 text-sm uppercase mr-3 tracking-wide">${time}</span><div class="flex-1 h-px bg-white/10"></div>`;
                             blockEl.appendChild(header);
                             const list = document.createElement('div');
                             list.className = 'space-y-0';
@@ -2987,7 +3002,7 @@
                                 list.appendChild(row);
                                 if (index < blockHabits.length - 1) {
                                     const divider = document.createElement('div');
-                                    divider.className = 'w-full h-px glass/10';
+                                    divider.className = 'w-full h-px bg-white/10';
                                     list.appendChild(divider);
                                 }
                             });
@@ -3055,7 +3070,7 @@
                             const blockEl = document.createElement('div');
                             const header = document.createElement('div');
                             header.className = 'flex items-center mb-4';
-                            header.innerHTML = `<span class="text-white/60 text-sm uppercase mr-3 tracking-wide">${time}</span><div class="flex-1 h-px glass/10"></div>`;
+                            header.innerHTML = `<span class="text-white/60 text-sm uppercase mr-3 tracking-wide">${time}</span><div class="flex-1 h-px bg-white/10"></div>`;
                             blockEl.appendChild(header);
                             const list = document.createElement('div');
                             list.className = 'space-y-0';
@@ -3075,7 +3090,7 @@
                                 list.appendChild(row);
                                 if (index < blockHabits.length - 1) {
                                     const divider = document.createElement('div');
-                                    divider.className = 'w-full h-px glass/10 plan-divider';
+                                    divider.className = 'w-full h-px bg-white/10 plan-divider';
                                     list.appendChild(divider);
                                 }
                             });
@@ -3723,7 +3738,7 @@
                             <div class="w-10 h-10 glass rounded-md flex items-center justify-center text-xl">🔥</div>
                             <span class="text-white">${habit.streakCurrent}-day streak</span>
                         </div>
-                        <div class="w-full h-px glass/10 mb-4"></div>
+                        <div class="w-full h-px bg-white/10 mb-4"></div>
                     `;
                 }
 
@@ -3736,7 +3751,7 @@
                                 <div class="w-10 h-10 glass rounded-md flex items-center justify-center text-xl">📈</div>
                                 <span class="text-white">Consistent improvement vs last week average</span>
                             </div>
-                            <div class="w-full h-px glass/10 mb-4"></div>
+                            <div class="w-full h-px bg-white/10 mb-4"></div>
                         `;
                     }
                 }
@@ -4000,7 +4015,7 @@
                 if (addArea) {
                     // Add a divider before the new row
                     const divider = document.createElement('div');
-                    divider.className = 'w-full h-px glass/10 plan-divider';
+                    divider.className = 'w-full h-px bg-white/10 plan-divider';
                     listContainer.insertBefore(divider, addArea);
                     listContainer.insertBefore(row, addArea);
                 } else {
@@ -4668,6 +4683,7 @@
                         <h2 class="text-white text-xl font-bold mb-1">${heroGreeting}, ${heroUserName} 👋</h2>
                         <p class="text-teal-300 text-sm italic">${iCfg.msg}</p>
                     </div>
+                    <img src="${iCfg.img}" style="height:110px; width:auto; object-fit:contain; flex-shrink:0;" onerror="this.style.display='none'" />
                 `;
                 const mainContentEl = document.getElementById('main-content');
                 if (mainContentEl) {
