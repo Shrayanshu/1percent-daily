@@ -1,120 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I% Daily - Habit Tracker</title>
+    <title>1% Daily - Habit Tracker</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0a1a14", /* Midnight Emerald base */
+                        "stitch-card": "#14352a"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .midnight-emerald-gradient {
+            background: radial-gradient(circle at top left, #0d2e24, #05140f);
         }
 
-        :root {
-            --bg-primary: #0a1f1a;
-            --bg-secondary: #0f2820;
-            --bg-card: #14352a;
-            --accent-teal: #2dd4bf;
-            --accent-orange: #fb923c;
-            --accent-red: #f87171;
-            --accent-blue: #60a5fa;
-            --text-primary: #e0f2f1;
-            --text-secondary: #94a3b8;
-            --border-color: #1e4a3a;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #051510 100%);
-            color: var(--text-primary);
-            min-height: 100vh;
-            padding: 20px;
-            padding-bottom: 100px;
-        }
-
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--accent-teal);
-        }
-
-        .back-btn {
-            width: 40px;
-            height: 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: var(--text-primary);
-            font-size: 20px;
-        }
-
-        .back-btn:hover {
-            border-color: var(--accent-teal);
-            background: rgba(45, 212, 191, 0.1);
-        }
-
-        .settings-icon {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .settings-icon:hover {
-            opacity: 1;
-        }
-
-        /* Step Indicator */
-        .step-indicator {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 40px;
-            animation: slideDown 0.6s ease-out;
-        }
-
-        .step {
-            flex: 1;
-            height: 4px;
-            background: var(--border-color);
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .step.active {
-            background: var(--accent-teal);
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Screen Content */
+        /* Essential logic classes keeping the JS working */
         .screen {
             display: none;
             animation: fadeIn 0.5s ease-out;
@@ -125,947 +54,14 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .screen-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .screen-subtitle {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            line-height: 1.5;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .avatar-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 24px;
-            position: relative;
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .empty-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .empty-subtitle {
-            font-size: 15px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            line-height: 1.6;
-        }
-
-        /* Dashboard Styles */
-        .greeting-card {
-            background: linear-gradient(135deg, var(--bg-card) 0%, #1a4536 100%);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 24px;
-            border: 1px solid var(--border-color);
-        }
-
-        .greeting-label {
-            font-size: 12px;
-            color: var(--accent-orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .greeting-text {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .greeting-subtitle {
-            font-size: 14px;
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-top: 4px;
-        }
-
-        .date-info {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .score-section {
-            margin-bottom: 24px;
-        }
-
-        .score-header {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-
-        .score-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 12px;
-        }
-
-        .score-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .score-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .score-label {
-            font-size: 15px;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .score-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .score-value-small {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .week-review-btn {
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px;
-            color: var(--text-primary);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .week-review-btn:hover {
-            border-color: var(--accent-teal);
-            background: rgba(45, 212, 191, 0.05);
-        }
-
-        .category-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 24px;
-        }
-
-        .category-badge {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .section-title-simple {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-        }
-
-        .habit-list-grouped {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .habit-category-group {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-        }
-
-        .habit-item-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 12px 0;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .habit-item-checkbox:hover {
-            padding-left: 8px;
-        }
-
-        .checkbox-circle {
-            width: 24px;
-            height: 24px;
-            min-width: 24px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            margin-top: 2px;
-        }
-
-        .checkbox-circle.checked {
-            background: var(--accent-teal);
-            border-color: var(--accent-teal);
-        }
-
-        .habit-item-info {
-            flex: 1;
-        }
-
-        .habit-item-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .habit-item-details {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 2px;
-            background: rgba(251, 146, 60, 0.1);
-            padding: 4px 8px;
-            border-radius: 6px;
-            display: inline-block;
-        }
-
-        .habit-item-anchor {
-            font-size: 12px;
-            color: var(--accent-blue);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 4px;
-            background: rgba(96, 165, 250, 0.1);
-            padding: 4px 8px;
-            border-radius: 6px;
-            display: inline-block;
-        }
-
-        .habit-streak {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-align: right;
-            white-space: nowrap;
-        }
-
-        .add-habit-btn {
-            width: 100%;
-            background: transparent;
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            color: var(--text-secondary);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 16px;
-        }
-
-        .add-habit-btn:hover {
-            border-color: var(--accent-teal);
-            color: var(--accent-teal);
-            background: rgba(45, 212, 191, 0.05);
-        }
-
-        .weekly-progress-section {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .weekly-progress-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .weekly-progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .weekly-progress-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .weekly-progress-count {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--accent-teal);
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-
-        /* Habit Detail Screen */
-        .habit-badge {
-            display: inline-block;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-        }
-
-        .detail-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border-left: 4px solid var(--border-color);
-            position: relative;
-        }
-
-        .detail-card.orange-border {
-            border-left-color: var(--accent-orange);
-        }
-
-        .detail-card.blue-border {
-            border-left-color: var(--accent-blue);
-        }
-
-        .detail-card.green-border {
-            border-left-color: var(--accent-teal);
-        }
-
-        .detail-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--accent-orange);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-
-        .detail-card.blue-border .detail-label {
-            color: var(--accent-blue);
-        }
-
-        .detail-card.green-border .detail-label {
-            color: var(--accent-teal);
-        }
-
-        .detail-content {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-primary);
-        }
-
-        .detail-icon {
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .detail-action-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .detail-action-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .completion-section {
-            margin-top: 32px;
-        }
-
-        .completion-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .completion-btn {
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .completion-btn:hover {
-            border-color: var(--accent-teal);
-        }
-
-        .btn-checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
-        }
-
-        .btn-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .btn-subtitle {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .log-section {
-            margin-bottom: 24px;
-        }
-
-        .log-label {
-            display: block;
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .log-input {
-            width: 100%;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px 16px;
-            color: var(--text-primary);
-            font-size: 15px;
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .log-input:focus {
-            outline: none;
-            border-color: var(--accent-teal);
-        }
-
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .form-input {
-            width: 100%;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px 16px;
-            color: var(--text-primary);
-            font-size: 15px;
-            font-family: 'DM Sans', sans-serif;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-teal);
-            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.5;
-        }
-
-        textarea.form-input {
-            min-height: 80px;
-            resize: vertical;
-        }
-
-        .select-wrapper {
-            position: relative;
-        }
-
-        select.form-input {
-            appearance: none;
-            cursor: pointer;
-            padding-right: 40px;
-        }
-
-        .select-wrapper::after {
-            content: '▼';
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        /* Tag Selection */
-        .tag-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .tag-btn {
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px;
-            color: var(--text-primary);
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 500;
-        }
-
-        .tag-btn:hover {
-            border-color: var(--accent-teal);
-        }
-
-        .tag-btn.selected {
-            background: var(--accent-teal);
-            border-color: var(--accent-teal);
-            color: var(--bg-primary);
-        }
-
-        /* Identity Area Cards */
-        .identity-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .identity-card {
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .identity-card:hover {
-            border-color: var(--accent-teal);
-            transform: translateY(-4px);
-        }
-
-        .identity-card.selected {
-            border-color: var(--accent-teal);
-            background: rgba(45, 212, 191, 0.1);
-        }
-
-        .identity-card.selected::after {
-            content: '✓';
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: var(--accent-teal);
-            color: var(--bg-primary);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .identity-icon {
-            font-size: 32px;
-            margin-bottom: 12px;
-        }
-
-        .identity-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* Day Selection */
-        .days-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-        }
-
-        .day-btn {
-            aspect-ratio: 1;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .day-btn:hover {
-            border-color: var(--accent-teal);
-        }
-
-        .day-btn.selected {
-            background: var(--accent-teal);
-            border-color: var(--accent-teal);
-            color: var(--bg-primary);
-        }
-
-        .day-note {
-            font-size: 13px;
-            color: var(--text-secondary);
-            text-align: center;
-            margin-top: 12px;
-        }
-
-        /* Time Block */
-        .time-blocks {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        /* Weekly Target */
-        .target-selector {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .target-btn {
-            width: 56px;
-            height: 56px;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .target-btn:hover {
-            border-color: var(--accent-teal);
-        }
-
-        .target-btn.selected {
-            background: var(--accent-teal);
-            border-color: var(--accent-teal);
-            color: var(--bg-primary);
-        }
-
-        .target-btn.add {
-            font-size: 24px;
-        }
-
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 32px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: none;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'DM Sans', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--accent-teal);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(45, 212, 191, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent-teal);
-            border: 2px solid var(--accent-teal);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(45, 212, 191, 0.1);
-        }
-
-        /* Helper Text */
-        .helper-text {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 6px;
-        }
-
-        .helper-text::before {
-            content: '💡';
-            flex-shrink: 0;
-        }
-
-        /* Review Tab */
-        .review-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--accent-teal);
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Settings */
-        .settings-section {
-            margin-bottom: 32px;
-        }
-
-        .settings-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-bottom: 8px;
-        }
-
-        .settings-label {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .settings-toggle,
-        .settings-value {
-            font-size: 14px;
-            color: var(--accent-teal);
-            font-weight: 600;
-        }
-
-        .settings-button {
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 16px;
-            color: var(--text-primary);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-bottom: 8px;
-            transition: all 0.3s;
-        }
-
-        .settings-button:hover {
-            border-color: var(--accent-teal);
-        }
-
-        .settings-button.danger {
-            color: var(--accent-red);
-            border-color: var(--accent-red);
-        }
-
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            z-index: 100;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: color 0.3s;
-            text-decoration: none;
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            color: var(--accent-teal);
-        }
-
-        .nav-icon {
-            font-size: 24px;
-        }
-
-        .nav-label {
-            font-size: 11px;
-            font-weight: 500;
-        }
-
-        .nav-item.add {
-            background: var(--accent-orange);
-            color: var(--bg-primary);
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            margin-top: -28px;
-            box-shadow: 0 4px 12px rgba(251, 146, 60, 0.4);
-        }
-
-        .nav-item.add .nav-icon {
-            font-size: 28px;
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .identity-cards {
-                grid-template-columns: 1fr;
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            
-            .tag-grid {
-                grid-template-columns: repeat(2, 1fr);
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -1075,30 +71,143 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
+            background: #0a1a14;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-teal);
+            background: #ec5b13;
+        }
+    </style>
+
+    <style type="text/tailwindcss">
+        /* 
+           These are styles for the HTML elements generated entirely by Javascript. 
+           We use @apply to give them the new Tailwind aesthetic! 
+        */
+
+        .category-badge {
+            @apply bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-[11px] font-bold text-white flex items-center gap-1.5 whitespace-nowrap;
+        }
+
+        .habit-category-group {
+            @apply mb-4 bg-transparent;
+        }
+
+        .category-header {
+            @apply flex items-center gap-2 text-[13px] font-bold text-primary tracking-wider uppercase mb-3 opacity-90 px-1;
+        }
+
+        .habit-list-grouped {
+            @apply flex flex-col gap-2;
+        }
+
+        .habit-item-checkbox {
+            @apply flex items-center justify-between p-4 glass-card rounded-xl border-l-[3px] border-l-white/20 cursor-pointer transition-all hover:bg-white/10 mb-3;
+        }
+        .habit-item-checkbox:hover { @apply border-l-primary shadow-lg shadow-black/20; }
+
+        .checkbox-circle {
+            @apply w-10 h-10 border-2 border-white/20 rounded-lg flex items-center justify-center text-transparent transition-all mr-4 bg-white/5;
+        }
+        .checkbox-circle.checked {
+            @apply bg-primary border-primary text-white shadow-[0_0_10px_rgba(236,91,19,0.3)];
+        }
+
+        .habit-item-info {
+            @apply flex-1 flex flex-col;
+        }
+
+        .habit-item-name {
+            @apply text-white font-bold text-base mb-1;
+        }
+
+        .habit-item-details {
+            @apply text-white/50 text-xs font-medium bg-transparent p-0 flex items-center gap-1;
+        }
+        
+        .habit-item-anchor {
+            @apply text-teal-300/80 text-[11px] italic mt-1.5 flex items-center gap-1 bg-transparent p-0;
+        }
+
+        .habit-streak {
+            @apply text-[10px] text-white/40 font-bold uppercase tracking-wider bg-white/5 px-2 py-1 rounded ml-2 whitespace-nowrap;
+        }
+
+        .weekly-progress-item {
+            @apply glass-card rounded-xl p-4 mb-3 border-l-2 border-l-primary/60;
+        }
+        .weekly-progress-header {
+            @apply flex items-center justify-between mb-3 text-sm;
+        }
+        .weekly-progress-name {
+            @apply text-white font-bold tracking-wide;
+        }
+        .weekly-progress-count {
+            @apply text-primary font-black bg-primary/10 px-2 py-0.5 rounded text-xs;
+        }
+        .progress-bar {
+            @apply h-2.5 w-full bg-white/10 rounded-full overflow-hidden;
+        }
+        .progress-bar-fill {
+            @apply h-full bg-gradient-to-r from-primary to-orange-400 rounded-full shadow-[0_0_10px_rgba(236,91,19,0.4)] transition-all duration-500;
+        }
+        
+        /* Tag Selection & Days Selection (Add Habit Flow) */
+        .tag-btn, .day-btn, .identity-card, .target-btn {
+            @apply glass-card border border-white/10 rounded-xl p-3 text-white text-sm font-semibold cursor-pointer transition-all text-center flex flex-col justify-center items-center hover:bg-white/10 hover:border-primary/50;
+        }
+        .identity-card {
+            @apply p-4 relative overflow-hidden;
+        }
+        .identity-icon {
+            @apply text-3xl mb-2;
+        }
+        .identity-title {
+            @apply text-[13px];
+        }
+        
+        .tag-btn.selected, .day-btn.selected, .target-btn.selected {
+            @apply bg-primary/20 border-primary text-white shadow-[0_0_15px_rgba(236,91,19,0.15)];
+        }
+        
+        .identity-card.selected {
+            @apply border-primary bg-primary/10 border-2;
+        }
+        .identity-card.selected::after {
+            content: '✓';
+            @apply absolute top-2 right-2 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold shadow-md;
         }
     </style>
 </head>
-<body>
-    <div class="container">
+
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="relative flex min-h-screen w-full flex-col midnight-emerald-gradient overflow-x-hidden pb-24">
         <!-- Header -->
-        <div class="header">
-            <button class="back-btn" id="backBtn" style="display: none;" onclick="goBack()">←</button>
-            <div class="logo">I% Daily</div>
-            <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" onclick="switchTab('settings')">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M12 1v6m0 6v6m0-6h6m-6 0H6"></path>
-            </svg>
-        </div>
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 glass-card border-b border-white/10 mb-6">
+            <div class="flex items-center gap-3 w-1/3">
+                <button id="backBtn"
+                    class="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 transition-colors"
+                    style="display: none;" onclick="goBack()">
+                    <span class="material-symbols-outlined text-white">arrow_back</span>
+                </button>
+            </div>
+
+            <h2 class="text-xl font-bold tracking-tight text-white flex-1 text-center">1% Daily</h2>
+
+            <div class="flex items-center justify-end w-1/3">
+                <button
+                    class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/10 transition-colors"
+                    onclick="switchTab('settings')">
+                    <span class="material-symbols-outlined text-white">settings</span>
+                </button>
+            </div>
+        </header>
 
         <!-- Step Indicator -->
         <div class="step-indicator" id="stepIndicator" style="display: none;">
@@ -1108,58 +217,119 @@
         </div>
 
         <!-- Screen 1: Dashboard -->
-        <div class="screen active" id="screen-dashboard">
+        <div class="screen active p-4 @container" id="screen-dashboard">
             <!-- Empty State -->
-            <div class="empty-state" id="emptyState">
-                <div class="avatar-container">
-                    <svg class="avatar-img" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="100" r="80" fill="var(--bg-card)" stroke="var(--accent-teal)" stroke-width="3"/>
-                        <circle cx="85" cy="85" r="8" fill="var(--accent-teal)"/>
-                        <circle cx="115" cy="85" r="8" fill="var(--accent-teal)"/>
-                        <path d="M 75 120 Q 100 135 125 120" stroke="var(--accent-teal)" stroke-width="3" fill="none" stroke-linecap="round"/>
-                    </svg>
+            <div class="empty-state glass-card rounded-2xl p-8 flex flex-col items-center justify-center border border-white/10 shadow-2xl mt-12 mb-8"
+                id="emptyState">
+                <div
+                    class="avatar-container w-40 h-40 mb-6 bg-white/5 rounded-full flex items-center justify-center border-4 border-primary/20 relative">
+                    <span class="material-symbols-outlined text-6xl text-primary opacity-80 z-10">psychology</span>
+                    <div class="absolute inset-0 bg-primary/20 rounded-full blur-xl animate-pulse"></div>
                 </div>
-                <div class="empty-title">Start Your Journey</div>
-                <div class="empty-subtitle">Build better habits, one day at a time.<br>Your consistency creates your identity.</div>
-                <button class="btn btn-primary" onclick="goToAddHabit()">Add Your First Habit →</button>
+                <div class="empty-title text-2xl font-bold text-white tracking-tight mb-2">Start Your Journey</div>
+                <div class="empty-subtitle text-white/60 text-sm text-center font-medium leading-relaxed mb-8">
+                    Build better habits, one day at a time.<br>Your consistency creates your identity.
+                </div>
+                <button
+                    class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
+                    onclick="goToAddHabit()">
+                    Add Your First Habit <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </button>
             </div>
 
             <!-- Habits Dashboard -->
             <div class="habits-dashboard" id="habitsDashboard" style="display: none;">
-                <div class="greeting-card">
-                    <div class="greeting-label" id="userIdentity">STRONG BODY BUILDER</div>
-                    <div class="greeting-text">Good evening, Player 👋</div>
-                    <div class="greeting-subtitle">Every rep counts.</div>
-                    <div class="date-info">
-                        <span id="currentDate">Saturday, 7 March 2026</span> • 🔥 <span id="currentStreak">0-day streak</span>
+                <!-- Hero Card (Greeting) -->
+                <div
+                    class="relative overflow-hidden flex flex-col bg-stitch-card md:flex-row items-stretch justify-between rounded-xl glass-card shadow-lg border border-teal-500/30 mb-6 mt-2">
+                    <div class="flex flex-col flex-1 gap-2 p-6 z-10 w-full">
+                        <div>
+                            <span
+                                class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold tracking-widest uppercase mb-1"
+                                id="userIdentity">STRONG BODY BUILDER</span>
+                            <h1 class="text-2xl font-bold leading-tight text-white mt-1 greeting-text">Good evening,
+                                Player 👋</h1>
+                            <p class="text-teal-300 text-sm font-medium italic opacity-90 mt-1">"I build my future."</p>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
+                            <span class="text-white/60 text-xs font-medium" id="currentDate">Saturday, 7 March
+                                2026</span>
+                            <span
+                                class="bg-orange-500/20 text-orange-400 text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1">
+                                <span>🔥</span> <span id="currentStreak">0-day streak</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute -right-20 -top-20 w-64 h-64 bg-teal-500/10 rounded-full blur-[60px] pointer-events-none">
                     </div>
                 </div>
 
-                <div class="score-section">
-                    <div class="score-header">TODAY VS YESTERDAY</div>
-                    <div class="score-card">
-                        <div class="score-item">
-                            <div class="score-label">Daily Score:</div>
-                            <div class="score-value" id="dailyScore">0%</div>
+                <!-- Score Section (Today vs Yesterday) -->
+                <div class="score-section glass-card rounded-xl p-5 border border-white/5 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-white text-[10px] font-bold tracking-[0.15em] uppercase opacity-70">Today vs
+                            Yesterday</h3>
+                        <span
+                            class="text-teal-400 text-[10px] font-bold bg-teal-400/10 px-2 py-0.5 rounded uppercase tracking-wider">Progress</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Daily Score -->
+                        <div>
+                            <div class="flex justify-between items-end mb-2">
+                                <p class="text-white text-sm font-semibold">Daily Score</p>
+                                <p class="text-primary text-3xl font-black" id="dailyScore">0%</p>
+                            </div>
+                            <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-primary to-orange-400 rounded-full shadow-[0_0_15px_rgba(236,91,19,0.5)] transition-all duration-700 w-0"
+                                    id="dailyScoreBar"></div>
+                            </div>
                         </div>
-                        <div class="score-item">
-                            <div class="score-label">Streak: <span id="streakDays">0 days</span></div>
-                            <div class="score-value-small" id="streakRatio">0/1</div>
+
+                        <!-- Streak Info inside Score Card -->
+                        <div class="flex justify-between items-center border-t border-white/5 pt-3">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="material-symbols-outlined text-orange-400 text-[16px]">local_fire_department</span>
+                                <span class="text-white/80 text-xs font-semibold">Streak: <span id="streakDays"
+                                        class="text-white">0 days</span></span>
+                            </div>
+                            <div class="text-white/50 text-xs font-bold bg-white/5 px-2 py-1 rounded" id="streakRatio">
+                                0/1</div>
                         </div>
                     </div>
-                    <button class="week-review-btn">📅 Week Review →</button>
+
+                    <button
+                        class="w-full mt-4 bg-white/5 hover:bg-white/10 text-white text-xs font-bold tracking-widest uppercase py-3 rounded-lg border border-white/10 transition-colors flex items-center justify-center gap-2 week-review-btn">
+                        <span class="material-symbols-outlined text-sm">calendar_month</span> Week Review
+                    </button>
                 </div>
 
-                <div id="categoryBadges" class="category-badges"></div>
+                <!-- Category Badges JS Container -->
+                <div id="categoryBadges" class="flex flex-wrap gap-2 mb-6"></div>
 
-                <div class="habits-section">
-                    <div class="section-title-simple">TODAY'S HABITS</div>
+                <!-- Today's Habits JS Container -->
+                <div class="habits-section mb-8">
+                    <div class="flex items-center justify-between mb-4 px-1">
+                        <h3 class="text-white text-sm font-bold tracking-tight">Today's Habits</h3>
+                    </div>
+
                     <div id="habitsList" class="habit-list-grouped"></div>
-                    <button class="add-habit-btn" onclick="goToAddHabit()">+ Add Habit</button>
+
+                    <button
+                        class="w-full bg-transparent border-2 border-dashed border-white/20 hover:border-primary/50 hover:bg-white/5 text-white/50 hover:text-white rounded-xl py-4 flex flex-col items-center justify-center gap-1 transition-all mt-4"
+                        onclick="goToAddHabit()">
+                        <span class="material-symbols-outlined text-2xl">add_circle</span>
+                        <span class="text-xs font-bold uppercase tracking-wider">Add Habit</span>
+                    </button>
                 </div>
 
-                <div class="weekly-progress-section">
-                    <div class="section-title-simple">THIS WEEK'S PROGRESS</div>
+                <!-- Weekly Progress JS Container -->
+                <div class="weekly-progress-section mt-8 pt-6 border-t border-white/10">
+                    <div class="flex items-center justify-between mb-4 px-1">
+                        <h3 class="text-white text-sm font-bold tracking-tight">This Week's Progress</h3>
+                    </div>
                     <div id="weeklyProgressList"></div>
                 </div>
             </div>
@@ -1189,7 +359,8 @@
 
             <div class="form-group">
                 <label class="form-label">Identity Statement</label>
-                <input type="text" class="form-input" placeholder="I am an athlete building my endurance" id="identityStatement">
+                <input type="text" class="form-input" placeholder="I am an athlete building my endurance"
+                    id="identityStatement">
                 <div class="helper-text">
                     This is how you see yourself. Examples: "I am a focused learner", "I am a healthy person"
                 </div>
@@ -1237,9 +408,11 @@
 
             <div class="form-group">
                 <label class="form-label">Anchor or Cue</label>
-                <input type="text" class="form-input" placeholder="After I [existing routine], I will [tiny habit] at [place]" id="anchor">
+                <input type="text" class="form-input"
+                    placeholder="After I [existing routine], I will [tiny habit] at [place]" id="anchor">
                 <div class="helper-text">
-                    Where you do it matters. Same location = stronger cue. Example: "After I go for my morning walk, I will do exercise in the park"
+                    Where you do it matters. Same location = stronger cue. Example: "After I go for my morning walk, I
+                    will do exercise in the park"
                 </div>
             </div>
 
@@ -1357,7 +530,7 @@
         <div class="screen" id="screen-review-tab">
             <div class="screen-title">Review</div>
             <div class="screen-subtitle">Track your progress and celebrate wins</div>
-            
+
             <div class="review-stats">
                 <div class="stat-card">
                     <div class="stat-value" id="reviewStreak">0</div>
@@ -1383,7 +556,7 @@
         <!-- Screen 7: Settings Tab -->
         <div class="screen" id="screen-settings-tab">
             <div class="screen-title">Settings</div>
-            
+
             <div class="settings-section">
                 <div class="settings-item">
                     <div class="settings-label">Notifications</div>
@@ -1438,6 +611,14 @@
         let selectedHabitId = null;
 
         function init() {
+            const savedHabits = localStorage.getItem('1daily_habits');
+            if (savedHabits) {
+                try {
+                    habits = JSON.parse(savedHabits);
+                } catch (e) {
+                    console.error("Error loading habits from localStorage", e);
+                }
+            }
             updateStepIndicator();
             updateBackButton();
             updateDashboard();
@@ -1447,8 +628,8 @@
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById('stepIndicator').style.display = 'none';
-            
-            switch(tab) {
+
+            switch (tab) {
                 case 'home':
                     document.getElementById('screen-dashboard').classList.add('active');
                     document.querySelector('[data-tab="home"]').classList.add('active');
@@ -1470,14 +651,14 @@
                     document.querySelector('[data-tab="settings"]').classList.add('active');
                     break;
             }
-            
+
             updateBackButton();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function updateReviewStats() {
             document.getElementById('reviewStreak').textContent = '0';
-            document.getElementById('reviewWeekPercent').textContent = habits.length > 0 ? 
+            document.getElementById('reviewWeekPercent').textContent = habits.length > 0 ?
                 Math.round((habits.filter(h => h.completed).length / habits.length) * 100) + '%' : '0%';
             document.getElementById('reviewTotalHabits').textContent = habits.length;
         }
@@ -1503,13 +684,13 @@
             if (!habit) return;
 
             selectedHabitId = habitId;
-            
+
             document.getElementById('habitDetailTitle').textContent = habit.name;
             document.getElementById('habitDetailBadge').textContent = habit.identityAreas?.[0] || 'Habit';
             document.getElementById('habitDetailTiny').textContent = habit.tinyVersion || 'Do it!';
             document.getElementById('habitDetailCue').textContent = habit.anchor || 'Whenever you can';
             document.getElementById('habitDetailReward').textContent = habit.reward || 'Feel accomplished!';
-            
+
             const checkbox = document.getElementById('completionCheckbox');
             if (habit.completed) {
                 checkbox.style.background = 'var(--accent-teal)';
@@ -1520,7 +701,7 @@
                 checkbox.style.borderColor = '';
                 checkbox.textContent = '';
             }
-            
+
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen-habit-detail').classList.add('active');
             document.getElementById('stepIndicator').style.display = 'none';
@@ -1543,11 +724,13 @@
                         checkbox.style.borderColor = '';
                         checkbox.textContent = '';
                     }
+                    localStorage.setItem('1daily_habits', JSON.stringify(habits));
                 }
             }
         }
 
         function skipHabit() {
+            localStorage.setItem('1daily_habits', JSON.stringify(habits));
             switchTab('home');
         }
 
@@ -1557,9 +740,10 @@
                 const habit = habits.find(h => h.id === selectedHabitId);
                 if (habit) {
                     habit.log = logValue;
+                    localStorage.setItem('1daily_habits', JSON.stringify(habits));
                 }
             }
-            
+
             switchTab('home');
             document.getElementById('habitLog').value = '';
         }
@@ -1578,7 +762,7 @@
                     alert('Please enter a habit name');
                     return;
                 }
-                
+
                 currentHabitData.name = habitName;
                 currentHabitData.identityStatement = document.getElementById('identityStatement').value.trim();
                 currentHabitData.tags = Array.from(document.querySelectorAll('.tag-btn.selected'))
@@ -1628,21 +812,21 @@
             document.getElementById('tinyVersion').value = '';
             document.getElementById('anchor').value = '';
             document.getElementById('reward').value = '';
-            
+
             document.querySelectorAll('.tag-btn.selected').forEach(btn => btn.classList.remove('selected'));
             document.querySelectorAll('.identity-card.selected').forEach(card => card.classList.remove('selected'));
             document.querySelectorAll('.day-btn.selected').forEach(btn => btn.classList.remove('selected'));
             document.querySelectorAll('.time-blocks .tag-btn.selected').forEach(btn => btn.classList.remove('selected'));
-            
+
             document.querySelectorAll('.target-btn').forEach(btn => btn.classList.remove('selected'));
             document.querySelectorAll('.target-btn')[1].classList.add('selected');
-            
+
             currentHabitData = {};
         }
 
         function saveHabit() {
             const habitName = currentHabitData.name;
-            
+
             if (!habitName) {
                 alert('Please go back and enter a habit name');
                 return;
@@ -1674,6 +858,7 @@
             };
 
             habits.push(habit);
+            localStorage.setItem('1daily_habits', JSON.stringify(habits));
             alert(`✅ Habit "${habitName}" saved successfully!`);
             switchTab('home');
             resetForm();
@@ -1712,8 +897,11 @@
                 const completedCount = habits.filter(h => h.completed).length;
                 const totalCount = habits.length;
                 const dailyScorePercent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
-                
+
                 document.getElementById('dailyScore').textContent = dailyScorePercent + '%';
+                const scoreBar = document.getElementById('dailyScoreBar');
+                if (scoreBar) scoreBar.style.width = dailyScorePercent + '%';
+
                 document.getElementById('streakDays').textContent = '0 days';
                 document.getElementById('streakRatio').textContent = `${completedCount}/${totalCount}`;
 
@@ -1722,7 +910,7 @@
                 const habitsList = document.getElementById('habitsList');
                 habitsList.innerHTML = '';
                 const groupedHabits = groupHabitsByCategory();
-                
+
                 Object.keys(groupedHabits).forEach(category => {
                     const categoryGroup = createCategoryGroup(category, groupedHabits[category]);
                     habitsList.appendChild(categoryGroup);
@@ -1778,7 +966,7 @@
 
         function groupHabitsByCategory() {
             const grouped = {};
-            
+
             habits.forEach(habit => {
                 let category = 'General';
                 if (habit.identityAreas && habit.identityAreas.length > 0) {
@@ -1786,30 +974,30 @@
                 } else if (habit.tags && habit.tags.length > 0) {
                     category = habit.tags[0];
                 }
-                
+
                 if (!grouped[category]) {
                     grouped[category] = [];
                 }
                 grouped[category].push(habit);
             });
-            
+
             return grouped;
         }
 
         function createCategoryGroup(category, categoryHabits) {
             const group = document.createElement('div');
             group.className = 'habit-category-group';
-            
+
             const header = document.createElement('div');
             header.className = 'category-header';
             header.innerHTML = `${getCategoryIcon(category)} ${category}`;
             group.appendChild(header);
-            
+
             categoryHabits.forEach(habit => {
                 const habitItem = createHabitItemCheckbox(habit);
                 group.appendChild(habitItem);
             });
-            
+
             return group;
         }
 
@@ -1817,10 +1005,10 @@
             const item = document.createElement('div');
             item.className = 'habit-item-checkbox';
             item.setAttribute('data-habit-id', habit.id);
-            
+
             const tinyText = habit.tinyVersion ? `💡 ${habit.tinyVersion}` : '';
             const anchorText = habit.anchor ? `📍 ${habit.anchor}` : '';
-            
+
             item.innerHTML = `
                 <div class="checkbox-circle ${habit.completed ? 'checked' : ''}">
                     ${habit.completed ? '✓' : ''}
@@ -1832,11 +1020,11 @@
                 </div>
                 <div class="habit-streak">0-day streak</div>
             `;
-            
-            item.addEventListener('click', function() {
+
+            item.addEventListener('click', function () {
                 openHabitDetail(habit.id);
             });
-            
+
             return item;
         }
 
@@ -1860,9 +1048,9 @@
             Object.keys(categories).forEach(category => {
                 const progressItem = document.createElement('div');
                 progressItem.className = 'weekly-progress-item';
-                
+
                 const percent = (categories[category].completed / categories[category].target) * 100;
-                
+
                 progressItem.innerHTML = `
                     <div class="weekly-progress-header">
                         <div class="weekly-progress-name">${category}</div>
@@ -1872,7 +1060,7 @@
                         <div class="progress-bar-fill" style="width: ${Math.min(percent, 100)}%"></div>
                     </div>
                 `;
-                
+
                 weeklyProgressList.appendChild(progressItem);
             });
         }
@@ -1915,6 +1103,7 @@
         function resetAllData() {
             if (confirm('Are you sure you want to delete all habits? This cannot be undone.')) {
                 habits = [];
+                localStorage.setItem('1daily_habits', JSON.stringify(habits));
                 updateDashboard();
                 alert('All data has been reset.');
             }
@@ -1923,4 +1112,5 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
+
 </html>
