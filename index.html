@@ -104,6 +104,31 @@
         .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; opacity: 0; }
         .is-placeholder { color: rgba(255,255,255,0.3) !important; }
 
+        /* Stitch design additions */
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+        .goal-card.selected {
+            background: rgba(20, 184, 166, 0.12);
+            border-color: rgba(20, 184, 166, 0.5) !important;
+        }
+        .goal-card.selected .checkbox { background: #14b8a6; border-color: #14b8a6; }
+        .goal-card.selected .check-mark { display: block !important; }
+        .text-primary { color: #ec5b13; }
+        .bg-primary { background-color: #ec5b13; }
+        .border-primary { border-color: #ec5b13; }
+        /* Scrollbar hide all screens */
+        .absolute::-webkit-scrollbar { display: none; }
+        .absolute { -ms-overflow-style: none; scrollbar-width: none; }
         /* Exit Dialog */
         .exit-dialog-backdrop { animation: fadeIn 0.2s ease-out forwards; }
         @keyframes exitDialogSlideUp {
@@ -126,33 +151,53 @@
 
         <!-- Screen 1: Splash / Welcome Screen -->
         <div id="screen-splash"
-            class="absolute inset-0 z-[200] flex flex-col items-center justify-between pb-12 pt-[20vh]" style="background: linear-gradient(135deg, #061a14 0%, #0a2e26 50%, #1e1b4b 100%);">
-
-            <div class="flex flex-col items-center">
-                <!-- Logo Box -->
-                <div
-                    class="w-[120px] h-[120px] glass border-2 border-primary rounded-[24px] flex items-center justify-center mb-6 animate-fade-in-scale">
-                    <span class="text-primary font-bold text-5xl font-sans tracking-tighter">1%</span>
-                </div>
-
-                <!-- App Name & Tagline -->
-                <h1 class="text-white font-bold text-[32px] mb-2 animate-fade-in" style="animation-delay: 0.2s;">1% Daily
-                </h1>
-                <p class="text-white/60 text-base animate-fade-in" style="animation-delay: 0.4s;">Get 1% better every
-                    day.</p>
+            class="absolute inset-0 z-[200] flex flex-col overflow-hidden"
+            style="background: linear-gradient(135deg, #064e3b 0%, #1e1b4b 100%);">
+            <!-- Decorative glows -->
+            <div class="absolute -top-24 -left-24 w-64 h-64 rounded-full pointer-events-none" style="background:rgba(236,91,19,0.10);filter:blur(80px)"></div>
+            <div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full pointer-events-none" style="background:rgba(16,185,129,0.10);filter:blur(80px)"></div>
+            <!-- Top help button -->
+            <div class="flex items-center p-4 pb-2 justify-end relative z-10">
+                <button class="text-white/60 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </button>
             </div>
-
-            <!-- Get Started Button -->
-            <button type="button" id="btn-splash-start"
-                class="w-[calc(100%-32px)] py-4 bg-teal-accent text-bg-dark font-bold text-[18px] rounded-btn opacity-0 animate-fade-in hover:opacity-90 transition-opacity"
-                style="animation-delay: 0.6s;">
-                Get Started
-            </button>
+            <!-- Main Content -->
+            <div class="flex flex-col items-center justify-center flex-grow px-6 relative z-10 animate-fade-in-scale">
+                <!-- Glass Logo Panel -->
+                <div class="glass p-8 rounded-3xl flex flex-col items-center gap-6 shadow-2xl mb-8">
+                    <div class="w-32 h-32 rounded-xl flex items-center justify-center shadow-lg" style="background:#ec5b13;transform:rotate(3deg)">
+                        <span class="text-white font-extrabold" style="font-size:72px;line-height:1">1</span>
+                    </div>
+                    <div class="text-center">
+                        <h1 class="text-white tracking-tight text-[40px] font-extrabold leading-tight">1% Daily</h1>
+                        <div class="h-1 w-12 mx-auto my-2 rounded-full" style="background:#ec5b13"></div>
+                    </div>
+                </div>
+                <!-- Tagline -->
+                <div class="max-w-xs text-center">
+                    <h2 class="text-slate-200 text-xl font-medium leading-relaxed tracking-wide animate-fade-in" style="animation-delay:0.3s;opacity:0">
+                        Get <span class="font-bold" style="color:#ec5b13">1% better</span> every day.
+                    </h2>
+                </div>
+            </div>
+            <!-- CTA -->
+            <div class="w-full px-8 pb-16 relative z-10">
+                <button type="button" id="btn-splash-start"
+                    class="w-full flex items-center justify-center gap-2 rounded-full h-16 px-8 font-bold text-lg tracking-widest uppercase shadow-xl hover:opacity-90 transition-all active:scale-95 animate-fade-in"
+                    style="background:#ec5b13;color:#fff;animation-delay:0.5s;opacity:0">
+                    Get Started
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+                <p class="text-white/40 text-sm text-center mt-6 font-medium animate-fade-in" style="animation-delay:0.7s;opacity:0">
+                    Build habits. 1% at a time.
+                </p>
+            </div>
         </div>
 
         <!-- Header -->
-        <header class="px-5 pt-10 pb-4 flex justify-between items-center glass sticky top-0 z-10 hidden border-b border-white/10">
-            <h1 class="text-xl font-bold font-sans text-white">1% Daily</h1>
+        <header class="px-6 py-4 flex justify-between items-center glass sticky top-0 z-10 hidden border-b border-white/10">
+            <h2 class="text-xl font-bold tracking-tight text-white">1% Daily</h2>
             <button onclick="App.openSettingsScreen()" class="text-white hover:text-teal-accent transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -174,8 +219,8 @@
             <p id="dashboard-date-indicator" class="text-xs text-white/60 text-center mb-4"></p>
 
             <!-- TODAY vs YESTERDAY Card -->
-            <div class="glass rounded-card border border-white/10 mb-8 overflow-hidden">
-                <div class="glass/5 px-4 py-2 border-b border-white/10">
+            <div class="glass rounded-xl border border-white/10 mb-6 overflow-hidden shadow-lg">
+                <div class="px-4 py-2 border-b border-white/10" style="background:rgba(255,255,255,0.03)">
                     <span class="text-xs font-semibold text-white/50 tracking-wider uppercase">TODAY vs YESTERDAY</span>
                 </div>
                 <div class="p-4">
@@ -221,49 +266,32 @@
 
         <!-- Bottom Navigation -->
         <nav
-            class="absolute bottom-0 w-full h-[64px] bg-[#061a14]/90 backdrop-blur-md border-t border-white/10 flex justify-around items-center px-2 z-20 hidden">
-            <button id="btn-nav-home" class="flex flex-col items-center justify-center w-16 h-full text-teal-accent">
-                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-                    </path>
-                </svg>
-                <span class="text-[10px] font-medium">Home</span>
+            class="absolute bottom-0 w-full bg-[#061a14]/90 backdrop-blur-md border-t border-white/10 flex justify-around items-center px-2 pb-2 pt-2 z-20 hidden" style="height:64px">
+            <button id="btn-nav-home" class="flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-teal-accent">
+                <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1">home</span>
+                <span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
             </button>
             <button id="btn-nav-plan"
-                class="flex flex-col items-center justify-center w-16 h-full text-white/60 hover:text-teal-light transition-colors">
-                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span class="text-[10px] font-medium">Habits</span>
+                class="flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-white/50 hover:text-teal-light transition-colors">
+                <span class="material-symbols-outlined text-2xl">format_list_bulleted</span>
+                <span class="text-[10px] font-bold uppercase tracking-tighter">Habits</span>
             </button>
             <button id="btn-nav-review"
-                class="flex flex-col items-center justify-center w-16 h-full text-white/60 hover:text-teal-light transition-colors">
-                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                    </path>
-                </svg>
-                <span class="text-[10px] font-medium">Review</span>
+                class="flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-white/50 hover:text-teal-light transition-colors">
+                <span class="material-symbols-outlined text-2xl">leaderboard</span>
+                <span class="text-[10px] font-bold uppercase tracking-tighter">Review</span>
             </button>
             <button id="btn-nav-settings"
-                class="flex flex-col items-center justify-center w-16 h-full text-white/60 hover:text-teal-light transition-colors">
-                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                    </path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
-                <span class="text-[10px] font-medium">Settings</span>
+                class="flex flex-col items-center justify-center gap-0.5 flex-1 h-full text-white/50 hover:text-teal-light transition-colors">
+                <span class="material-symbols-outlined text-2xl">settings</span>
+                <span class="text-[10px] font-bold uppercase tracking-tighter">Settings</span>
             </button>
         </nav>
 
         <!-- Screen 2: Onboarding Step 1 (What do you want to improve?) -->
         <div id="screen-onboarding-1"
-            class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
-            style="background: radial-gradient(circle at top right, #0a2e28, #061f1a)"
+            class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6"
+            style="background: radial-gradient(circle at top right, #0a2e28, #061f1a)">
             <!-- Progress Header -->
             <div class="px-5 pt-10 pb-2 relative">
                 <button
@@ -280,105 +308,85 @@
             </div>
 
             <!-- Title Section -->
-            <div class="text-center mb-6 mt-4 px-5">
-                <h1 class="text-2xl font-bold text-white mb-2 tracking-tight">What do you want to improve?</h1>
-                <p class="text-[13px] text-white/60">Pick one or more areas</p>
+            <div class="px-6 pt-8 pb-4">
+                <h1 class="text-white text-3xl font-bold leading-tight tracking-tight">What do you want to <span class="text-teal-light">improve?</span></h1>
+                <p class="text-white/60 mt-2 text-base">Select the goals that resonate most with you today.</p>
             </div>
 
-            <div class="px-5 space-y-4 flex-1">
+            <div class="px-4 flex-1">
                 <!-- Add Goal Button -->
                 <button type="button" id="btn-add-custom-goal"
-                    class="w-full py-3 border border-white/10 text-white rounded-md flex items-center justify-center space-x-2 hover:glass transition-colors">
+                    class="w-full mb-3 py-3 border border-white/10 text-white rounded-xl flex items-center justify-center space-x-2 hover:bg-white/5 transition-colors">
                     <svg class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
-                    <span class="text-sm font-medium">Add Goal</span>
+                    <span class="text-sm font-medium">Add Custom Goal</span>
                 </button>
-
                 <!-- Hidden Custom Goal Input -->
-                <div id="custom-goal-input-container" class="hidden flex space-x-2">
+                <div id="custom-goal-input-container" class="hidden flex space-x-2 mb-3">
                     <input type="text" id="custom-goal-input"
-                        class="flex-1 bg-transparent border border-teal-accent rounded-md px-3 py-2 text-white placeholder-white/30 text-sm focus:outline-none"
+                        class="flex-1 bg-white/5 border border-teal-accent rounded-xl px-3 py-2 text-white placeholder-white/30 text-sm focus:outline-none"
                         placeholder="Enter goal name...">
                     <button type="button" id="btn-save-custom-goal"
-                        class="px-4 bg-teal-accent text-background rounded-md text-sm font-medium">Add</button>
+                        class="px-4 bg-teal-accent text-bg-dark rounded-xl text-sm font-bold">Add</button>
                 </div>
-
-                <!-- Goal Area Cards -->
-                <div id="goal-cards-container" class="space-y-3">
+                <!-- Goal Area Cards — Grid -->
+                <div id="goal-cards-container" class="grid grid-cols-2 gap-3 pb-6">
                     <!-- Strong Body -->
-                    <div class="goal-card flex items-center glass border border-white/10 rounded-md p-3 cursor-pointer transition-colors hover:border-teal-accent"
+                    <div class="goal-card glass flex flex-col gap-3 rounded-xl p-4 aspect-square justify-between cursor-pointer transition-colors border border-white/10 hover:border-teal-accent"
                         data-value="Strong Body">
-                        <div
-                            class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xl mr-4 bg-transparent">
-                            💪</div>
-                        <span class="flex-1 text-white font-bold text-[15px]">Strong Body</span>
-                        <div
-                            class="w-6 h-6 border-2 border-white/10 rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">💪</span>
+                            <div class="size-5 rounded-full border border-white/20 checkbox flex items-center justify-center transition-colors">
+                                <svg class="w-3 h-3 text-bg-dark hidden check-mark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                         </div>
+                        <p class="text-white text-base font-bold leading-tight">Strong Body</p>
                     </div>
                     <!-- Strong Mind -->
-                    <div class="goal-card flex items-center glass border border-white/10 rounded-md p-3 cursor-pointer transition-colors hover:border-teal-accent"
+                    <div class="goal-card glass flex flex-col gap-3 rounded-xl p-4 aspect-square justify-between cursor-pointer transition-colors border border-white/10 hover:border-teal-accent"
                         data-value="Strong Mind">
-                        <div
-                            class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xl mr-4 bg-transparent">
-                            🧠</div>
-                        <span class="flex-1 text-white font-bold text-[15px]">Strong Mind</span>
-                        <div
-                            class="w-6 h-6 border-2 border-white/10 rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">🧠</span>
+                            <div class="size-5 rounded-full border border-white/20 checkbox flex items-center justify-center transition-colors">
+                                <svg class="w-3 h-3 text-bg-dark hidden check-mark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                         </div>
+                        <p class="text-white text-base font-bold leading-tight">Strong Mind</p>
                     </div>
                     <!-- Strong Spirit -->
-                    <div class="goal-card flex items-center glass border border-white/10 rounded-md p-3 cursor-pointer transition-colors hover:border-teal-accent"
+                    <div class="goal-card glass flex flex-col gap-3 rounded-xl p-4 aspect-square justify-between cursor-pointer transition-colors border border-white/10 hover:border-teal-accent"
                         data-value="Strong Spirit">
-                        <div
-                            class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xl mr-4 bg-transparent">
-                            🧘</div>
-                        <span class="flex-1 text-white font-bold text-[15px]">Strong Spirit</span>
-                        <div
-                            class="w-6 h-6 border-2 border-white/10 rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">🧘</span>
+                            <div class="size-5 rounded-full border border-white/20 checkbox flex items-center justify-center transition-colors">
+                                <svg class="w-3 h-3 text-bg-dark hidden check-mark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                         </div>
+                        <p class="text-white text-base font-bold leading-tight">Strong Spirit</p>
                     </div>
                     <!-- Career -->
-                    <div class="goal-card flex items-center glass border border-white/10 rounded-md p-3 cursor-pointer transition-colors hover:border-teal-accent"
+                    <div class="goal-card glass flex flex-col gap-3 rounded-xl p-4 aspect-square justify-between cursor-pointer transition-colors border border-white/10 hover:border-teal-accent"
                         data-value="Career">
-                        <div
-                            class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xl mr-4 bg-transparent">
-                            🚀</div>
-                        <span class="flex-1 text-white font-bold text-[15px]">Career</span>
-                        <div
-                            class="w-6 h-6 border-2 border-white/10 rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">🚀</span>
+                            <div class="size-5 rounded-full border border-white/20 checkbox flex items-center justify-center transition-colors">
+                                <svg class="w-3 h-3 text-bg-dark hidden check-mark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                         </div>
+                        <p class="text-white text-base font-bold leading-tight">Career</p>
                     </div>
                     <!-- Relationships -->
-                    <div class="goal-card flex items-center glass border border-white/10 rounded-md p-3 cursor-pointer transition-colors hover:border-teal-accent"
+                    <div class="goal-card glass flex flex-col gap-3 rounded-xl p-4 aspect-square justify-between cursor-pointer transition-colors border border-white/10 hover:border-teal-accent"
                         data-value="Relationships">
-                        <div
-                            class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xl mr-4 bg-transparent">
-                            🤝</div>
-                        <span class="flex-1 text-white font-bold text-[15px]">Relationships</span>
-                        <div
-                            class="w-6 h-6 border-2 border-white/10 rounded checkbox flex items-center justify-center transition-colors">
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">🤝</span>
+                            <div class="size-5 rounded-full border border-white/20 checkbox flex items-center justify-center transition-colors">
+                                <svg class="w-3 h-3 text-bg-dark hidden check-mark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </div>
+                        <p class="text-white text-base font-bold leading-tight">Relationships</p>
+                    </div>
                             <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
@@ -387,44 +395,38 @@
                         </div>
                     </div>
                     <!-- Creativity -->
-                    <div class="goal-card flex items-center glass border border-white/10 rounded-md p-3 cursor-pointer transition-colors hover:border-teal-accent"
+                    <div class="goal-card glass flex flex-col gap-3 rounded-xl p-4 aspect-square justify-between cursor-pointer transition-colors border border-white/10 hover:border-teal-accent"
                         data-value="Creativity">
-                        <div
-                            class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xl mr-4 bg-transparent">
-                            🎨</div>
-                        <span class="flex-1 text-white font-bold text-[15px]">Creativity</span>
-                        <div
-                            class="w-6 h-6 border-2 border-white/10 rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">🎨</span>
+                            <div class="size-5 rounded-full border border-white/20 checkbox flex items-center justify-center transition-colors">
+                                <svg class="w-3 h-3 text-bg-dark hidden check-mark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                         </div>
+                        <p class="text-white text-base font-bold leading-tight">Creativity</p>
                     </div>
                     <!-- Finance -->
-                    <div class="goal-card flex items-center glass border border-white/10 rounded-md p-3 cursor-pointer transition-colors hover:border-teal-accent"
+                    <div class="goal-card glass flex flex-col gap-3 rounded-xl p-4 aspect-square justify-between cursor-pointer transition-colors border border-white/10 hover:border-teal-accent"
                         data-value="Finance">
-                        <div
-                            class="w-10 h-10 border border-white/10 rounded flex items-center justify-center text-xl mr-4 bg-transparent">
-                            💰</div>
-                        <span class="flex-1 text-white font-bold text-[15px]">Finance</span>
-                        <div
-                            class="w-6 h-6 border-2 border-white/10 rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                        <div class="flex justify-between items-start">
+                            <span class="text-3xl">💰</span>
+                            <div class="size-5 rounded-full border border-white/20 checkbox flex items-center justify-center transition-colors">
+                                <svg class="w-3 h-3 text-bg-dark hidden check-mark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                         </div>
+                        <p class="text-white text-base font-bold leading-tight">Finance</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Bottom Action -->
-            <div class="px-5 pt-6 mt-auto">
+            <!-- Bottom CTA — Stitch style -->
+            <div class="px-4 pb-8 mt-auto" style="background: linear-gradient(to top, #061f1a, transparent)">
                 <button type="button" id="btn-continue-onboarding"
-                    class="w-full py-3.5 glass/10 text-white font-bold text-base rounded-btn transition-all pointer-events-none opacity-50 tracking-wide">Continue</button>
+                    class="w-full flex items-center justify-center gap-2 rounded-full h-14 px-5 font-bold text-lg tracking-wide shadow-lg pointer-events-none opacity-50 transition-all active:scale-95"
+                    style="background:#14b8a6;color:#061f1a">
+                    Continue
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
             </div>
         </div>
 
@@ -447,9 +449,9 @@
             </div>
 
             <!-- Title Section -->
-            <div class="text-center mb-6 mt-4 px-5">
-                <h1 class="text-2xl font-bold text-white mb-2 tracking-tight">Add Your First Habit</h1>
-                <p class="text-[13px] text-white/60">Start small. Even 1 minute counts.</p>
+            <div class="px-4 pt-6 pb-2">
+                <h1 class="text-white tracking-tight text-3xl font-bold leading-tight">Add Your First Habit</h1>
+                <p class="text-white/60 text-sm mt-1">Design your new routine for long-term success.</p>
             </div>
 
             <!-- Form Fields -->
@@ -602,8 +604,8 @@
         </div>
 
         <!-- Screen 5: Habit Check-in -->
-        <div id="screen-checkin" class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6">
-            style="background: radial-gradient(circle at top left, #0d2e24, #05140f)"
+        <div id="screen-checkin" class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6"
+            style="background: radial-gradient(circle at top left, #0d2e24, #05140f)">
             <!-- Header -->
             <header class="px-5 pt-10 pb-4 flex items-center justify-between">
                 <button type="button" id="btn-back-checkin" class="text-white hover:text-teal-accent transition-colors">
@@ -625,35 +627,48 @@
 
             <!-- Tiny Version Reminder Card (above Done/Skip) -->
             <div id="checkin-tiny-card" class="px-5 mb-3 hidden">
-                <div class="glass border-l-4 border-amber-400 rounded-md px-4 py-3">
-                    <span id="checkin-tiny-version"
-                        class="text-xs bg-yellow-500/20 text-yellow-400 rounded-full px-2 py-0.5 inline-block">💡 Tiny
-                        version</span>
+                <div id="checkin-tiny-card-inner" class="glass rounded-xl p-4 flex items-center gap-4 border-l-4" style="border-left-color:#ec5b13">
+                    <div class="flex-1">
+                        <p class="text-xs font-bold uppercase mb-1 tracking-wider" style="color:#ec5b13">Tiny Version</p>
+                        <p id="checkin-tiny-version" class="text-white text-base font-semibold">tiny version</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(255,255,255,0.05)">
+                        <svg class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
                 </div>
             </div>
 
-            <!-- Cue Reminder (below Tiny Version) -->
+            <!-- Cue Reminder -->
             <div id="checkin-cue-card" class="px-5 mb-3 hidden">
-                <div class="glass border-l-4 border-blue-500 rounded-md px-4 py-3">
-                    <span id="checkin-cue-value"
-                        class="text-xs bg-blue-500/10 text-blue-400 rounded-full px-2 py-0.5 inline-block">📍 Cue</span>
+                <div class="glass rounded-xl p-4 flex items-center gap-4 border-l-4 border-blue-400">
+                    <div class="flex-1">
+                        <p class="text-blue-400 text-xs font-bold uppercase mb-1 tracking-wider">Cue</p>
+                        <p id="checkin-cue-value" class="text-white text-base font-semibold">cue</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(255,255,255,0.05)">
+                        <svg class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                    </div>
                 </div>
             </div>
 
-            <!-- Weekly Reward (below Cue) -->
+            <!-- Weekly Reward -->
             <div id="checkin-reward-card" class="px-5 mb-5 hidden">
-                <div class="glass border-l-4 border-green-500 rounded-md px-4 py-3">
-                    <p class="text-xs text-white/60 mb-1">🎁 Your reward:</p>
-                    <span id="checkin-reward-value"
-                        class="text-xs bg-green-500/10 text-green-400 rounded-full px-2 py-0.5 inline-block">Reward</span>
+                <div class="glass rounded-xl p-4 flex items-center gap-4 border-l-4 border-green-400">
+                    <div class="flex-1">
+                        <p class="text-green-400 text-xs font-bold uppercase mb-1 tracking-wider">Weekly Reward</p>
+                        <p id="checkin-reward-value" class="text-white text-base font-semibold">reward</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(255,255,255,0.05)">
+                        <svg class="w-5 h-5 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
                 </div>
             </div>
 
             <!-- Action Buttons -->
-            <div class="px-5 flex space-x-3 mb-8">
+            <div class="px-5 flex gap-4 mb-8 mt-4">
                 <!-- Done Card -->
                 <div id="btn-checkin-done"
-                    class="flex-1 glass rounded-card border border-white/10 h-[120px] p-4 flex flex-col justify-between cursor-pointer transition-colors">
+                    class="flex-1 glass rounded-2xl border border-white/10 py-6 flex flex-col items-center justify-center gap-3 cursor-pointer transition-colors hover:bg-white/10">
                     <span id="checkin-done-label" class="font-bold text-white text-lg">Done</span>
                     <div class="flex items-center space-x-2">
                         <div id="checkin-done-checkbox"
@@ -670,7 +685,7 @@
 
                 <!-- Skip Card -->
                 <div id="btn-checkin-skip"
-                    class="flex-1 glass rounded-card border border-white/10 h-[120px] p-4 flex flex-col justify-between cursor-pointer transition-colors">
+                    class="flex-1 glass rounded-2xl border border-white/10 py-6 flex flex-col items-center justify-center gap-3 cursor-pointer transition-colors hover:bg-white/10">
                     <span class="font-bold text-white text-lg">Skip</span>
                     <span class="text-sm text-white/60 font-medium">- not today</span>
                 </div>
@@ -691,63 +706,81 @@
         <div id="screen-celebration"
             class="absolute inset-0 z-50 flex flex-col hidden overflow-y-auto pb-6"
             style="background: linear-gradient(135deg, #061a14 0%, #0a2e26 100%)">
-            <div class="flex-1 flex flex-col items-center justify-center px-5 py-10 mt-10">
-                <!-- Checkmark Circle -->
-                <div class="w-20 h-20 rounded-full border-[3px] border-teal-accent flex items-center justify-center mb-6 scale-0 transition-transform duration-500 ease-out"
-                    id="celeb-circle">
-                    <svg class="w-10 h-10 text-teal-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                    </svg>
+            <!-- Top nav -->
+            <header class="flex items-center p-4 justify-between">
+                <button type="button" id="btn-celeb-back-top" onclick="document.getElementById('btn-celeb-back').click()"
+                    class="flex w-10 h-10 items-center justify-center rounded-full glass">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <h2 class="text-lg font-bold text-white flex-1 text-center pr-10">1% Daily</h2>
+            </header>
+            <main class="flex-1 flex flex-col items-center px-5 pb-8">
+                <!-- Success Icon -->
+                <div class="mt-2 mb-2 flex flex-col items-center">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full mb-3 scale-0 transition-transform duration-500 ease-out"
+                        id="celeb-circle" style="background:rgba(20,184,166,0.2)">
+                        <svg class="w-8 h-8 text-teal-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-teal-accent text-sm font-bold uppercase tracking-widest">Goal Reached</h4>
                 </div>
-
                 <!-- Title -->
-                <h1 class="text-3xl font-bold text-white mb-8 tracking-tight">Great work!</h1>
-
-                <!-- Divider -->
-                <div class="w-full h-px bg-white/10 mb-6"></div>
-
-                <!-- Character Image -->
-                <div class="flex justify-center mb-4">
-                    <img id="celeb-character-img" src="images/strong-mind-male-motivating.png" style="height:130px; object-fit:contain;" onerror="this.style.display='none'" />
+                <h1 class="text-4xl font-extrabold tracking-tight text-center text-white mt-2 mb-4">Great work!</h1>
+                <!-- Character Image — full panel with gradient overlay -->
+                <div class="w-full max-w-sm relative rounded-3xl overflow-hidden shadow-2xl mb-6 border border-white/10" style="aspect-ratio:4/3">
+                    <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, rgba(236,91,19,0.1), rgba(236,91,19,0.3))"></div>
+                    <img id="celeb-character-img" src="images/strong-mind-male-motivating.png"
+                        class="w-full h-full object-contain relative z-10"
+                        onerror="this.style.display='none'" />
                 </div>
-
-                <!-- Streak Row -->
-                <div class="w-full flex items-center space-x-3 mb-6">
-                    <span class="text-xl">🔥</span>
-                    <span id="celeb-streak-text" class="text-white font-bold text-lg tracking-wide">Streak: 8 days</span>
-                </div>
-
-                <!-- Divider -->
-                <div class="w-full h-px bg-white/10 mb-6"></div>
-
-                <!-- Progress Row (Logged Number) - Optional -->
-                <div id="celeb-log-row" class="w-full mb-8 hidden">
-                    <p id="celeb-log-text" class="text-white text-[15px] font-medium mb-3 tracking-wide">Habit: X today
-                    </p>
-                    <div id="celeb-log-segments" class="flex space-x-1 h-2 w-full">
-                        <!-- Populated by JS -->
+                <!-- Stats Cards -->
+                <div class="w-full flex flex-col gap-4 mb-6">
+                    <!-- Streak card -->
+                    <div class="glass flex items-center justify-between p-5 rounded-2xl border border-white/10">
+                        <div>
+                            <p class="text-white/60 text-xs font-bold uppercase tracking-wider">Current Streak</p>
+                            <p id="celeb-streak-text" class="text-white text-3xl font-bold mt-1">0 Days 🔥</p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(236,91,19,0.15)">
+                            <svg class="w-6 h-6" style="color:#ec5b13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/></svg>
+                        </div>
+                    </div>
+                    <!-- Progress Row (Logged Number) - Optional -->
+                    <div id="celeb-log-row" class="glass p-5 rounded-2xl border border-white/10 hidden">
+                        <div class="flex justify-between items-center mb-3">
+                            <p class="text-white/60 text-xs font-bold uppercase tracking-wider">Today's Log</p>
+                        </div>
+                        <p id="celeb-log-text" class="text-white text-base font-medium mb-3">Habit: X today</p>
+                        <div id="celeb-log-segments" class="flex gap-1 h-3 w-full rounded-full overflow-hidden">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <!-- Weekly Progress -->
+                    <div class="glass p-5 rounded-2xl border border-white/10">
+                        <div class="flex justify-between items-center mb-3">
+                            <p class="text-white/60 text-xs font-bold uppercase tracking-wider">Weekly Progress</p>
+                            <p id="celeb-weekly-text" class="text-white font-bold text-sm">0 / 7</p>
+                        </div>
+                        <div id="celeb-weekly-segments" class="flex gap-1.5 h-3 w-full">
+                            <!-- Populated by JS -->
+                        </div>
                     </div>
                 </div>
-
-                <!-- Weekly Goal Row -->
-                <div class="w-full mb-10">
-                    <p id="celeb-weekly-text" class="text-white text-[15px] font-medium mb-3 tracking-wide">Habit this
-                        week: X / Y</p>
-                    <div id="celeb-weekly-segments" class="flex space-x-1 h-2 w-full">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Buttons -->
-                <div class="w-full space-y-4 mt-auto pt-8">
+                <!-- CTA -->
+                <div class="w-full mt-auto space-y-3">
                     <button type="button" id="btn-celeb-back"
-                        class="w-full py-3.5 bg-teal-accent text-bg-dark font-bold text-base rounded-btn hover:opacity-90 transition-opacity tracking-wide">Back
-                        to Today</button>
+                        class="w-full flex items-center justify-center gap-2 py-4 px-8 bg-teal-accent rounded-full font-bold text-lg shadow-lg hover:opacity-90 transition-all active:scale-95 tracking-wide"
+                        style="color:#061a14">
+                        Back to Today
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
                     <button type="button" id="btn-celeb-reward"
-                        class="w-full py-3.5 border border-teal-accent text-teal-accent font-bold text-base rounded-btn hover:glass transition-colors tracking-wide hidden">Claim
-                        Reward now</button>
+                        class="w-full py-4 border border-teal-accent text-teal-accent font-bold text-base rounded-full hover:bg-teal-accent/10 transition-colors tracking-wide hidden">
+                        Claim Reward now 🎁
+                    </button>
                 </div>
-            </div>
+            </main>
         </div>
 
         <!-- Screen 7: Today's Summary -->
@@ -1006,14 +1039,21 @@
             </header>
 
             <div class="px-5 pt-2 flex-1 flex flex-col">
-                
-                <div id="weekly-review-date-badge"
-                    class="border border-white/10 text-white/60 rounded-full px-4 py-1 text-sm mb-4 mx-auto w-max">April
-                    15 –
-                    April 21</div>
-
-                <div class="flex justify-center mb-4">
-                    <img id="weekly-review-char-img" src="images/strong-mind-male-motivating.png" style="height:120px; object-fit:contain;" onerror="this.style.display='none'" />
+                <!-- Hero archetype section -->
+                <div class="flex flex-col items-center py-4">
+                    <div class="relative w-40 h-40 mb-3">
+                        <div class="absolute inset-0 rounded-full pointer-events-none" style="background:rgba(20,184,166,0.2);filter:blur(30px)"></div>
+                        <div class="relative w-full h-full rounded-2xl overflow-hidden border-2 shadow-2xl" style="border-color:rgba(20,184,166,0.3)">
+                            <img id="weekly-review-char-img" src="images/strong-mind-male-motivating.png"
+                                class="w-full h-full object-cover"
+                                onerror="this.style.display='none'" />
+                        </div>
+                    </div>
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full mb-2" style="background:rgba(20,184,166,0.1);border:1px solid rgba(20,184,166,0.2)">
+                        <span class="text-teal-accent text-sm font-semibold tracking-wide uppercase" id="weekly-review-archetype-label">Career Builder Archetype</span>
+                    </div>
+                    <div id="weekly-review-date-badge"
+                        class="text-white/50 text-sm">April 15 – April 21</div>
                 </div>
 
                 <!-- Overview Card -->
@@ -1089,7 +1129,7 @@
         <!-- Screen 13: New Week Starting -->
         <div id="screen-new-week"
             class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24"
-            style="background: linear-gradient(135deg, #061a14 0%, #0a2e26 100%)">
+            style="background: radial-gradient(circle at top center, #0a2e2a 0%, #061a1a 100%)">
             <header
                 class="px-5 pt-10 pb-4 flex items-center bg-transparent sticky top-0 z-10 w-full relative justify-center">
                 <button id="btn-new-week-back" class="text-white hover:text-teal-accent transition-colors absolute left-5">
@@ -1163,7 +1203,7 @@
         <!-- Screen 14: Settings -->
         <div id="screen-settings"
             class="absolute inset-0 z-[55] flex flex-col hidden overflow-y-auto pb-24"
-            style="background: linear-gradient(135deg, #061a14 0%, #1e1b4b 100%)">
+            style="background: linear-gradient(135deg, #061a14 0%, #0a2e26 50%, #1e1b4b 100%)">
             <header class="px-5 pt-10 pb-4 flex items-center bg-transparent sticky top-0 z-10 w-full justify-center">
                 <button id="btn-settings-back" class="text-white hover:text-teal-accent transition-colors absolute left-5">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -4675,15 +4715,15 @@
                 if (existingHero) existingHero.remove();
                 const heroEl = document.createElement('div');
                 heroEl.id = 'dashboard-hero-card';
-                heroEl.className = 'glass glass-teal rounded-card mb-6 overflow-hidden flex items-center justify-between px-4 py-4';
-                heroEl.style.cssText = 'border-left: 4px solid ' + iCfg.color;
+                heroEl.className = 'rounded-xl overflow-hidden flex items-stretch justify-between border border-teal-500/30 shadow-2xl mb-6';
+                heroEl.style.cssText = 'background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border-left: 4px solid ' + iCfg.color;
                 heroEl.innerHTML = `
-                    <div class="flex-1 pr-3">
-                        <p class="text-teal-light text-xs font-bold uppercase tracking-widest mb-1" style="color:${iCfg.color}">${iCfg.label}</p>
-                        <h2 class="text-white text-xl font-bold mb-1">${heroGreeting}, ${heroUserName} 👋</h2>
-                        <p class="text-teal-300 text-sm italic">${iCfg.msg}</p>
+                    <div class="flex flex-col flex-1 gap-2 p-5 z-10">
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase" style="background:rgba(236,91,19,0.2);color:#ec5b13">${iCfg.label}</span>
+                        <h2 class="text-2xl font-bold leading-tight text-white mt-1">${heroGreeting}, ${heroUserName} 👋</h2>
+                        <p class="text-teal-300 text-base font-medium italic opacity-90">"${iCfg.msg}"</p>
                     </div>
-                    <img src="${iCfg.img}" style="height:110px; width:auto; object-fit:contain; flex-shrink:0;" onerror="this.style.display='none'" />
+                    <img src="${iCfg.img}" style="height:130px; width:auto; object-fit:contain; flex-shrink:0; align-self:flex-end" onerror="this.style.display='none'" />
                 `;
                 const mainContentEl = document.getElementById('main-content');
                 if (mainContentEl) {
