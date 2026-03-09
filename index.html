@@ -935,6 +935,8 @@
             height: 60px !important;
             box-shadow: 0 12px 32px rgba(0, 201, 167, 0.35) !important;
             border: none !important;
+            z-index: 999 !important;
+            position: relative !important;
         }
 
         /* ── NEW WEEK SCREEN ── */
@@ -1364,7 +1366,7 @@
         }
 
         .hidden-on-splash {
-            display: none;
+            display: none !important;
         }
 
         #screen-splash~header {
@@ -1413,7 +1415,7 @@
 
         <!-- Header -->
         <header
-            class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b border-white/10 hidden-on-splash"
+            class="sticky top-0 z-40 flex items-center justify-between px-6 py-4 border-b border-white/10 hidden-on-splash"
             style="background:rgba(5,22,20,0.8); backdrop-filter:blur(12px);">
             <h1 class="text-xl font-bold font-sans text-text logo" style="color:#00C9A7;">1% Daily</h1>
             <button
