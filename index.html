@@ -524,7 +524,333 @@
             font-size: 12px;
             font-weight: 500;
             letter-spacing: 0.03em;
-        }
+
+            /* ── SUMMARY SCREEN ── */
+            #screen-summary {
+                background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+            }
+
+            #screen-summary .summary-stats-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                margin-bottom: 24px;
+            }
+
+            .summary-stat-card {
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 20px 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .summary-stat-label {
+                font-size: 10px;
+                font-weight: 600;
+                color: #9CA3AF;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+
+            .summary-stat-value {
+                font-size: 30px;
+                font-weight: 800;
+                color: #F5F5F5;
+                line-height: 1;
+            }
+
+            .summary-stat-sub {
+                font-size: 13px;
+                color: #9CA3AF;
+            }
+
+            .summary-stat-trend {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                font-size: 11px;
+                font-weight: 700;
+                color: #00C9A7;
+                margin-top: 6px;
+            }
+
+            .summary-section-title {
+                font-size: 17px;
+                font-weight: 600;
+                color: #F5F5F5;
+                margin-bottom: 12px;
+            }
+
+            .summary-logged-card {
+                background: rgba(255, 255, 255, 0.06);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 12px;
+                padding: 14px 16px;
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                margin-bottom: 10px;
+            }
+
+            .summary-logged-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 10px;
+                background: rgba(0, 201, 167, 0.15);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #00C9A7;
+                font-size: 22px;
+                flex-shrink: 0;
+            }
+
+            .summary-streak-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .summary-streak-row:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            /* ── PLAN SCREEN ── */
+            #screen-plan {
+                background: linear-gradient(180deg, #064e3b 0%, #062d24 100%);
+            }
+
+            #plan-tab-today,
+            #plan-tab-tomorrow {
+                flex: 1;
+                padding: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                border-radius: 8px;
+                transition: all 0.2s;
+                border: none;
+                cursor: pointer;
+            }
+
+            #plan-tab-today {
+                background: transparent;
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            #plan-tab-tomorrow {
+                background: rgba(255, 255, 255, 0.12);
+                color: #F5F5F5;
+            }
+
+            .plan-time-block-label {
+                font-size: 10px;
+                font-weight: 700;
+                color: rgba(20, 184, 166, 0.8);
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 12px;
+            }
+
+            .plan-time-block-label::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background: rgba(20, 184, 166, 0.2);
+            }
+
+            .plan-habit-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 14px 16px;
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                margin-bottom: 10px;
+            }
+
+            .plan-habit-card.priority {
+                border-left: 4px solid #14b8a6;
+            }
+
+            .plan-habit-icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 10px;
+                background: rgba(20, 184, 166, 0.15);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #2dd4bf;
+                font-size: 20px;
+                flex-shrink: 0;
+            }
+
+            .plan-insight-card {
+                background: rgba(20, 184, 166, 0.1);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(20, 184, 166, 0.2);
+                border-radius: 12px;
+                padding: 16px;
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                margin-top: 16px;
+                margin-bottom: 20px;
+            }
+
+            #btn-plan-confirm {
+                background: #14b8a6 !important;
+                color: #022c22 !important;
+                border: none !important;
+                border-radius: 12px !important;
+                font-weight: 700 !important;
+            }
+
+            #btn-plan-confirm:hover {
+                background: #2dd4bf !important;
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(20, 184, 166, 0.35) !important;
+            }
+
+            /* ── REWARD SCREEN ── */
+            #screen-reward {
+                background: radial-gradient(circle at top right, #134e4a, #022c22, #051614);
+            }
+
+            .reward-confetti-overlay {
+                pointer-events: none;
+                position: absolute;
+                inset: 0;
+                background-image:
+                    radial-gradient(circle, #FBBF24 2px, transparent 2px),
+                    radial-gradient(circle, #00C9A7 2px, transparent 2px);
+                background-size: 40px 40px, 60px 60px;
+                background-position: 0 0, 20px 30px;
+                opacity: 0.25;
+                z-index: 0;
+            }
+
+            #reward-identity-badge {
+                background: rgba(0, 201, 167, 0.15) !important;
+                border-color: rgba(0, 201, 167, 0.4) !important;
+                color: #00C9A7 !important;
+                font-weight: 700 !important;
+                font-size: 11px !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+            }
+
+            .reward-character-wrap {
+                position: relative;
+                width: 180px;
+                height: 180px;
+                margin: 0 auto 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .reward-character-glow {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 201, 167, 0.15);
+                border-radius: 50%;
+                filter: blur(40px);
+            }
+
+            .reward-win-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 14px 16px;
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                margin-bottom: 10px;
+            }
+
+            .reward-win-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                background: rgba(0, 201, 167, 0.15);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #00C9A7;
+                flex-shrink: 0;
+            }
+
+            .reward-card-glow-wrap {
+                position: relative;
+                margin-bottom: 32px;
+            }
+
+            .reward-card-glow-wrap::before {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                background: linear-gradient(135deg, #00C9A7, #FBBF24);
+                border-radius: 18px;
+                filter: blur(8px);
+                opacity: 0.3;
+                z-index: 0;
+            }
+
+            .reward-inner-card {
+                position: relative;
+                z-index: 1;
+                background: rgba(255, 255, 255, 0.06);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(0, 201, 167, 0.25);
+                border-radius: 16px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .reward-emoji-box {
+                width: 60px;
+                height: 60px;
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 32px;
+                flex-shrink: 0;
+            }
+
+            #btn-claim-primary {
+                background: #00C9A7 !important;
+                color: #051614 !important;
+                border-radius: 50px !important;
+                font-weight: 700 !important;
+                box-shadow: 0 0 20px rgba(0, 201, 167, 0.35) !important;
+                border: none !important;
+            }
+
+            #btn-claim-later {
+                background: transparent !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                color: #F5F5F5 !important;
+                border-radius: 50px !important;
+            }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -1161,49 +1487,51 @@
                             d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                     </svg>
                 </button>
-                <!-- Title -->
-                <div class="flex justify-center mt-2 mb-2">
-                    <div class="char-circle">📊</div>
-                </div>
-                <h1 class="text-3xl font-bold text-text mb-8 text-center tracking-tight mt-2 pl-10">Today's Summary</h1>
+                <h1 class="text-3xl font-bold text-white mb-6 text-center tracking-tight mt-2 pl-10">Today's Summary
+                </h1>
 
-                <!-- Top Stats Card -->
-                <div class="bg-card rounded-card border border-[#333] p-5 mb-8 text-center">
-                    <div id="summary-habits-done" class="font-bold text-text text-[17px] mb-4 tracking-wide">X of Y
-                        Habits Done</div>
-                    <div class="w-full h-px bg-[#333] mb-4"></div>
-                    <div class="text-text font-medium mb-1">Daily Score: <span id="summary-daily-score"
-                            class="text-4xl font-bold ml-1">87%</span></div>
-                    <div id="summary-score-diff" class="text-accent font-medium text-sm mt-2 hidden tracking-wide">↑ +6%
-                        from yesterday</div>
+                <!-- Stats Grid -->
+                <div class="summary-stats-grid">
+                    <div class="summary-stat-card">
+                        <span class="summary-stat-label">Habits Done</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="summary-stat-value" id="summary-habits-done">0</span>
+                        </div>
+                        <div class="summary-stat-trend">↑ Daily Score</div>
+                        <span class="summary-stat-sub">
+                            <span id="summary-daily-score" class="text-4xl font-bold text-white">0</span>%
+                        </span>
+                    </div>
+                    <div class="summary-stat-card">
+                        <span class="summary-stat-label">vs Yesterday</span>
+                        <div id="summary-score-diff" class="summary-stat-trend hidden">+6%</div>
+                        <div class="mt-2">
+                            <img src="./assets/strong-body-training.png"
+                                style="width:64px; height:64px; object-fit:contain; opacity:0.85;">
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Logged Improvement -->
-                <div id="summary-logged-improvement" class="mb-8 hidden">
-                    <div class="flex items-center mb-4">
-                        <span class="text-sm font-semibold text-text whitespace-nowrap mr-3">Logged Improvement</span>
-                        <div class="flex-1 h-px bg-[#333]"></div>
+                <!-- Logged Improvements -->
+                <div id="summary-logged-improvement" class="mb-6 hidden">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="summary-section-title">Logged Improvements</span>
                     </div>
-                    <div id="summary-logged-list" class="space-y-0">
-                        <!-- Populated by JS -->
-                    </div>
+                    <div id="summary-logged-list"></div>
                 </div>
 
                 <!-- Streaks -->
-                <div id="summary-streaks" class="mb-8 hidden">
-                    <div class="flex items-center mb-4">
-                        <span class="text-sm font-semibold text-text whitespace-nowrap mr-3">Streaks</span>
-                        <div class="flex-1 h-px bg-[#333]"></div>
+                <div id="summary-streaks" class="mb-6 hidden">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="summary-section-title">Current Streaks</span>
                     </div>
-                    <div id="summary-streaks-list" class="space-y-0">
-                        <!-- Populated by JS -->
+                    <div class="summary-stat-card" style="padding:16px 20px;">
+                        <div id="summary-streaks-list"></div>
                     </div>
                 </div>
 
-                <!-- Weekly Progress Row -->
-                <div id="summary-weekly-progress" class="mb-6 hidden">
-                    <!-- Populated by JS -->
-                </div>
+                <!-- Weekly Progress -->
+                <div id="summary-weekly-progress" class="mb-6 hidden"></div>
             </div>
 
             <!-- Buttons -->
@@ -1234,7 +1562,7 @@
                         class="font-bold text-[#F5F5F5]">Confirm or adjust.</span></p>
 
                 <!-- Today/Tomorrow Tab Toggle (UAT-03) -->
-                <div class="flex bg-card rounded-lg p-1 mb-6">
+                <div class="flex bg-white/8 rounded-xl p-1 mb-6 backdrop-blur-sm border border-white/10">
                     <button id="plan-tab-today" onclick="App.openPlanScreen('today')"
                         class="flex-1 py-2 text-sm font-medium rounded-md text-muted transition-colors">Today</button>
                     <button id="plan-tab-tomorrow" onclick="App.openPlanScreen('tomorrow')"
@@ -1250,10 +1578,11 @@
                 </div>
 
                 <!-- Insight Card -->
-                <div class="bg-card rounded-card border border-[#333] p-4 mt-8 flex items-start space-x-3">
+                <div class="plan-insight-card">
                     <span class="text-amber-400 text-xl mt-0.5">💡</span>
-                    <p class="text-[#9CA3AF] text-sm">You are <span class="font-bold text-[#F5F5F5]">2x more likely
-                            to do it</span> because you planned.</p>
+                    <p class="text-sm" style="color:rgba(255,255,255,0.75);">
+                        You are <span class="font-bold text-white">2x more likely to do it</span> because you planned.
+                    </p>
                 </div>
             </div>
 
@@ -1335,7 +1664,8 @@
         <!-- Screen 11: Goal Hit! Claim Reward -->
         <div id="screen-reward" class="absolute inset-0 bg-background z-[60] flex flex-col hidden overflow-y-auto">
             <!-- Confetti container -->
-            <div id="confetti-container" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+            <div id="confetti-container"
+                class="absolute inset-0 pointer-events-none overflow-hidden reward-confetti-overlay"></div>
 
             <header class="px-5 pt-10 pb-4 flex items-center bg-background sticky top-0 z-10 w-full relative">
                 <button id="btn-reward-back" class="text-text hover:text-accent transition-colors absolute left-5">
@@ -1350,6 +1680,13 @@
                 <!-- Title Section -->
                 <div class="char-circle ring-amber mt-2">🏆</div>
                 <h1 class="text-3xl font-bold text-text mb-3 text-center tracking-tight">Goal Hit! 🎯</h1>
+
+                <div class="reward-character-wrap">
+                    <div class="reward-character-glow"></div>
+                    <img src="./assets/career-builder-reflective.png" alt="Reward character"
+                        style="width:140px; height:140px; object-fit:contain; position:relative; z-index:1;">
+                </div>
+
                 <div id="reward-identity-badge"
                     class="border border-[#333] text-[#9CA3AF] rounded-full px-4 py-1 text-sm mb-6">Identity Area</div>
 
@@ -1367,16 +1704,16 @@
                 </div>
 
                 <!-- Your Reward Card -->
-                <div class="w-full bg-card rounded-card border border-[#333] p-5 flex flex-col items-center mb-8">
-                    <h3 class="text-text font-bold text-center mb-4">Your Reward:</h3>
-
-                    <!-- Emoji Circle -->
-                    <div
-                        class="w-20 h-20 rounded-full border-2 border-accent flex items-center justify-center text-4xl mb-4 bg-[#0d2922]">
-                        <span id="reward-emoji">🎁</span>
+                <div class="reward-card-glow-wrap w-full mb-8">
+                    <div class="reward-inner-card">
+                        <div class="reward-emoji-box">
+                            <span id="reward-emoji"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-primary font-bold text-xs uppercase tracking-wide mb-1">Your Reward</div>
+                            <p id="reward-text" class="text-white font-bold text-base">Reward Description Here</p>
+                        </div>
                     </div>
-
-                    <p id="reward-text" class="text-[#F5F5F5] text-center font-medium">Reward Description Here</p>
                 </div>
             </div>
 
