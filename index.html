@@ -44,11 +44,38 @@
         }
     </script>
     <style>
+        :root {
+            --bg-primary: #051614;
+            --bg-secondary: #0a2e26;
+            --accent-teal: #00C9A7;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
         body {
-            background-color: #000;
+            background: radial-gradient(circle at top right, #0a2e26, #051614);
             color: #F5F5F5;
             display: flex;
             justify-content: center;
+            min-height: 100dvh;
+        }
+
+        .btn-primary {
+            background: #00C9A7;
+            color: #05140f;
+            border-radius: 999px;
+            box-shadow: 0 0 20px rgba(0, 201, 167, 0.3);
+        }
+
+        .bottom-nav {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(5, 22, 20, 0.95);
+        }
+
+        .logo {
+            color: #00C9A7;
         }
 
         #app-container {
