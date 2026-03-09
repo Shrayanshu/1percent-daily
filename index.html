@@ -1362,6 +1362,14 @@
             justify-content: center;
             margin-bottom: 16px;
         }
+
+        .hidden-on-splash {
+            display: none;
+        }
+
+        #screen-splash~header {
+            display: flex !important;
+        }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -1377,7 +1385,7 @@
 
         <!-- Screen 1: Splash / Welcome Screen -->
         <div id="screen-splash"
-            class="absolute inset-0 bg-background z-[200] flex flex-col items-center justify-between pb-12 pt-[20vh]">
+            class="absolute inset-0 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 z-[200] flex flex-col items-center justify-between p-8 pb-24 pt-[20vh]">
 
             <div class="splash-glow-left"></div>
             <div class="splash-glow-right"></div>
@@ -1397,14 +1405,15 @@
 
             <!-- Get Started Button -->
             <button type="button" id="btn-splash-start"
-                class="w-[calc(100%-32px)] py-4 bg-accent text-[#0D0D0D] font-bold text-[18px] rounded-btn opacity-0 animate-fade-in hover:opacity-90 transition-opacity"
+                class="w-[calc(100%-32px)] py-4 bg-accent text-[#0D0D0D] font-bold text-[18px] rounded-btn opacity-0 animate-fade-in hover:opacity-90 transition-opacity z-50 pointer-events-auto relative"
                 style="animation-delay: 0.6s;">
                 Get Started
             </button>
         </div>
 
         <!-- Header -->
-        <header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b border-white/10"
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b border-white/10 hidden-on-splash"
             style="background:rgba(5,22,20,0.8); backdrop-filter:blur(12px);">
             <h1 class="text-xl font-bold font-sans text-text logo" style="color:#00C9A7;">1% Daily</h1>
             <button
