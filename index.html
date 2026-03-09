@@ -851,6 +851,516 @@
                 color: #F5F5F5 !important;
                 border-radius: 50px !important;
             }
+
+            /* ── SPLASH SCREEN ── */
+            #screen-splash {
+                background: linear-gradient(135deg, #064e3b 0%, #1e1b4b 100%) !important;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                padding: 32px 24px 48px;
+            }
+
+            .splash-logo-box {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 24px;
+                padding: 32px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            }
+
+            .splash-logo-icon {
+                width: 120px;
+                height: 120px;
+                background: #00C9A7;
+                border-radius: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transform: rotate(3deg);
+                box-shadow: 0 8px 32px rgba(0, 201, 167, 0.4);
+                font-size: 64px;
+                font-weight: 900;
+                color: #051614;
+            }
+
+            .splash-divider {
+                width: 48px;
+                height: 4px;
+                background: #00C9A7;
+                border-radius: 2px;
+                margin: 4px auto;
+            }
+
+            .splash-glow-left {
+                position: absolute;
+                top: -80px;
+                left: -80px;
+                width: 240px;
+                height: 240px;
+                background: rgba(0, 201, 167, 0.08);
+                border-radius: 50%;
+                filter: blur(60px);
+                pointer-events: none;
+            }
+
+            .splash-glow-right {
+                position: absolute;
+                bottom: -80px;
+                right: -80px;
+                width: 240px;
+                height: 240px;
+                background: rgba(16, 185, 129, 0.08);
+                border-radius: 50%;
+                filter: blur(60px);
+                pointer-events: none;
+            }
+
+            #btn-splash-start {
+                background: #00C9A7 !important;
+                color: #051614 !important;
+                border-radius: 50px !important;
+                font-weight: 700 !important;
+                font-size: 15px !important;
+                letter-spacing: 0.1em !important;
+                text-transform: uppercase !important;
+                height: 60px !important;
+                box-shadow: 0 12px 32px rgba(0, 201, 167, 0.35) !important;
+                border: none !important;
+            }
+
+            /* ── NEW WEEK SCREEN ── */
+            #screen-new-week {
+                background: radial-gradient(circle at top center, #0a2e2a 0%, #061a1a 100%);
+            }
+
+            .nw-character-wrap {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 8px;
+            }
+
+            .nw-character-glow {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 201, 167, 0.18);
+                border-radius: 50%;
+                filter: blur(40px);
+            }
+
+            .nw-stats-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-top: 16px;
+            }
+
+            .nw-stat-cell {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 12px 8px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: 12px;
+            }
+
+            .nw-stat-cell.highlight {
+                background: rgba(0, 201, 167, 0.15);
+                border-color: rgba(0, 201, 167, 0.3);
+            }
+
+            .nw-stat-value {
+                font-size: 22px;
+                font-weight: 800;
+                color: #00C9A7;
+            }
+
+            .nw-stat-label {
+                font-size: 9px;
+                font-weight: 700;
+                color: #9CA3AF;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                margin-top: 2px;
+            }
+
+            .nw-habit-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 14px 16px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+            .nw-habit-icon {
+                width: 40px;
+                height: 40px;
+                background: rgba(6, 46, 36, 0.8);
+                border: 1px solid rgba(0, 201, 167, 0.2);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #00C9A7;
+                flex-shrink: 0;
+            }
+
+            .nw-reward-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-left: 4px solid #00C9A7;
+                border-radius: 12px;
+                padding: 16px;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .nw-reward-icon {
+                width: 48px;
+                height: 48px;
+                background: rgba(0, 201, 167, 0.1);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #00C9A7;
+                font-size: 24px;
+                flex-shrink: 0;
+            }
+
+            #btn-nw-start {
+                background: #00C9A7 !important;
+                color: #061a1a !important;
+                border-radius: 50px !important;
+                font-weight: 700 !important;
+                letter-spacing: 0.08em !important;
+                text-transform: uppercase !important;
+                box-shadow: 0 10px 30px rgba(0, 201, 167, 0.3) !important;
+                border: none !important;
+            }
+
+            /* ── THIS WEEK'S PROGRESS (screen-review) ── */
+            #screen-review {
+                background: radial-gradient(circle at top left, #0a2e28, #051512);
+            }
+
+            .review-hero-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 16px;
+                overflow: hidden;
+                margin-bottom: 24px;
+            }
+
+            .review-hero-image {
+                width: 100%;
+                aspect-ratio: 16/9;
+                object-fit: cover;
+                background: linear-gradient(135deg, #0a2e28, #134e4a);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .review-habit-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 14px;
+                padding: 16px;
+                margin-bottom: 14px;
+            }
+
+            .review-day-dot {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 10px;
+                font-weight: 700;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+            .review-day-dot.done {
+                background: #00C9A7;
+                border-color: #00C9A7;
+                color: #051512;
+                font-size: 13px;
+            }
+
+            .review-progress-bar {
+                height: 8px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 4px;
+                overflow: hidden;
+                margin: 12px 0 8px;
+            }
+
+            .review-progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #00C9A7, #2dd4bf);
+                border-radius: 4px;
+                box-shadow: 0 0 8px rgba(0, 201, 167, 0.4);
+            }
+
+            .review-summary-stat {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 14px;
+                padding: 20px;
+                flex: 1;
+                min-width: 140px;
+            }
+
+            /* ── SET GOALS SCREEN (screen-goals) ── */
+            #screen-goals {
+                background: radial-gradient(circle at top left, #0a2e28, #051512);
+            }
+
+            #screen-goals .goals-section-header {
+                font-size: 10px;
+                font-weight: 700;
+                color: rgba(255, 255, 255, 0.5);
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+            }
+
+            .goals-habit-card {
+                background: rgba(255, 255, 255, 0.04);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 14px;
+                padding: 20px;
+                margin-bottom: 14px;
+            }
+
+            .goals-habit-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .goals-range-track {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 100%;
+                height: 6px;
+                border-radius: 3px;
+                background: rgba(255, 255, 255, 0.12);
+                outline: none;
+                cursor: pointer;
+            }
+
+            .goals-range-track::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #00C9A7;
+                cursor: pointer;
+                box-shadow: 0 0 8px rgba(0, 201, 167, 0.5);
+            }
+
+            .goals-tip-card {
+                background: rgba(0, 201, 167, 0.06);
+                border: 1px solid rgba(0, 201, 167, 0.15);
+                border-radius: 12px;
+                padding: 16px;
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                margin: 20px 0;
+            }
+
+            #btn-wr-plan {
+                background: #00C9A7 !important;
+                color: #051512 !important;
+                border-radius: 14px !important;
+                font-weight: 700 !important;
+                border: none !important;
+            }
+
+            /* ── SETTINGS SCREEN ── */
+            #screen-settings {
+                background: radial-gradient(circle at top left, #061a14, #030d09);
+            }
+
+            .settings-section-label {
+                font-size: 10px;
+                font-weight: 700;
+                color: rgba(0, 201, 167, 0.7);
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                padding: 0 4px;
+                margin-bottom: 10px;
+                margin-top: 4px;
+            }
+
+            .settings-group {
+                background: rgba(0, 201, 167, 0.03);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(0, 201, 167, 0.08);
+                border-radius: 16px;
+                overflow: hidden;
+                margin-bottom: 24px;
+            }
+
+            .settings-row {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                padding: 16px;
+                border-bottom: 1px solid rgba(0, 201, 167, 0.06);
+                transition: background 0.2s;
+                cursor: pointer;
+            }
+
+            .settings-row:last-child {
+                border-bottom: none;
+            }
+
+            .settings-row:hover {
+                background: rgba(0, 201, 167, 0.04);
+            }
+
+            .settings-icon-wrap {
+                width: 40px;
+                height: 40px;
+                background: rgba(0, 201, 167, 0.08);
+                border: 1px solid rgba(0, 201, 167, 0.12);
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #00C9A7;
+                flex-shrink: 0;
+            }
+
+            .settings-toggle {
+                width: 48px;
+                height: 28px;
+                background: rgba(0, 201, 167, 0.8);
+                border-radius: 14px;
+                position: relative;
+                cursor: pointer;
+                flex-shrink: 0;
+            }
+
+            .settings-toggle::after {
+                content: '';
+                position: absolute;
+                right: 3px;
+                top: 3px;
+                width: 22px;
+                height: 22px;
+                background: #fff;
+                border-radius: 50%;
+                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            .settings-danger-btn {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 16px;
+                border-radius: 14px;
+                border: 1px solid rgba(251, 146, 60, 0.3);
+                background: rgba(251, 146, 60, 0.08);
+                color: #fb923c;
+                font-weight: 700;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+
+            .settings-danger-btn:hover {
+                background: rgba(251, 146, 60, 0.15);
+            }
+
+            .settings-version {
+                text-align: center;
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.2);
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                margin-top: 12px;
+            }
+
+            /* ── WEEKLY REVIEW SCREEN ── */
+            #screen-weekly-review {
+                background: radial-gradient(circle at top left, #0a2e28, #051512);
+            }
+
+            .wr-stat-card {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 14px;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .wr-stat-value {
+                font-size: 30px;
+                font-weight: 800;
+                color: #00C9A7;
+                margin-bottom: 4px;
+            }
+
+            .wr-stat-label {
+                font-size: 10px;
+                font-weight: 700;
+                color: #9CA3AF;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+            }
+
+            .wr-input {
+                width: 100%;
+                background: rgba(255, 255, 255, 0.05) !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                border-radius: 12px !important;
+                padding: 14px 16px !important;
+                color: #F5F5F5 !important;
+                font-size: 14px !important;
+            }
+
+            .wr-input:focus {
+                border-color: #00C9A7 !important;
+                box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.12) !important;
+                outline: none !important;
+            }
+
+            .wr-character-wrap {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 16px;
+            }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -868,17 +1378,17 @@
         <div id="screen-splash"
             class="absolute inset-0 bg-background z-[200] flex flex-col items-center justify-between pb-12 pt-[20vh]">
 
-            <div class="flex flex-col items-center">
+            <div class="splash-glow-left"></div>
+            <div class="splash-glow-right"></div>
+            <div class="flex flex-col items-center splash-logo-box">
                 <!-- Logo Box -->
-                <div
-                    class="w-[120px] h-[120px] bg-card border-2 border-accent rounded-[24px] flex items-center justify-center mb-6 animate-fade-in-scale">
-                    <span class="text-accent font-bold text-5xl font-sans tracking-tighter">1%</span>
-                </div>
+                <div class="splash-logo-icon">1</div>
 
                 <!-- App Name & Tagline -->
-                <h1 class="text-text font-bold text-[32px] mb-2 animate-fade-in" style="animation-delay: 0.2s;">1% Daily
-                </h1>
-                <p class="text-[#9CA3AF] text-base animate-fade-in" style="animation-delay: 0.4s;">Get 1% better every
+                <h1 class="text-text font-bold text-[32px] animate-fade-in" style="animation-delay: 0.2s;">1% Daily</h1>
+                <div class="splash-divider"></div>
+                <p class="text-[#9CA3AF] text-base animate-fade-in" style="animation-delay: 0.4s; margin-top:8px;">Get
+                    1% better every
                     day.</p>
             </div>
 
@@ -1610,7 +2120,14 @@
                 <!-- Title -->
                 <h1 class="text-3xl font-bold text-text mb-2 text-center tracking-tight mt-2 pl-10">This Week's Progress
                 </h1>
-                <p class="text-[#9CA3AF] text-center mb-8">Max consistency beats daily perfection.</p>
+                <p class="text-[#9CA3AF] text-center mb-6">Max consistency beats daily perfection.</p>
+
+                <div class="review-hero-card">
+                    <div class="review-hero-image">
+                        <img src="./assets/strong-body-training.png"
+                            style="width:120px; height:120px; object-fit:contain; opacity:0.85;">
+                    </div>
+                </div>
 
                 <!-- Cards Container -->
                 <div id="review-cards-container" class="space-y-4">
@@ -1618,14 +2135,17 @@
                 </div>
 
                 <!-- Bottom Summary Card -->
-                <div class="bg-background rounded-card border border-[#333] py-4 px-5 mt-6 text-center">
-                    <h2 id="review-total-text" class="text-text font-bold text-[17px] tracking-wide mb-1">Total this
-                        week: X of Y habits</h2>
-                </div>
-                <p id="review-motivational-text" class="text-[#9CA3AF] text-sm text-center mt-3">Keep it up! You're well
-                    on your way.</p>
-                <div class="flex justify-center mt-6">
-                    <div class="char-circle">📈</div>
+                <div class="flex gap-3 mt-6 mb-8">
+                    <div class="review-summary-stat text-center">
+                        <div class="text-[#9CA3AF] text-[10px] font-bold uppercase tracking-wider mb-2">Total Days Hit
+                        </div>
+                        <h2 id="review-total-text" class="text-text font-bold text-2xl tracking-wide mb-1">0 / 0</h2>
+                    </div>
+                    <div class="review-summary-stat text-center">
+                        <div class="text-[#9CA3AF] text-[10px] font-bold uppercase tracking-wider mb-2">Focus Score
+                        </div>
+                        <div class="text-accent font-bold text-2xl">85%</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1643,11 +2163,21 @@
                 <!-- Title -->
                 <h1 class="text-3xl font-bold text-text mb-2 text-center tracking-tight mt-2 pl-10">Set This Week's
                     Goals</h1>
-                <p class="text-[#9CA3AF] text-center mb-8">Max consistency beats daily perfection.</p>
+                <p class="text-[#9CA3AF] text-center mb-6">Max consistency beats daily perfection.</p>
+
+                <div class="goals-section-header mb-3 mt-4">MY HABITS</div>
 
                 <!-- Cards Container -->
                 <div id="goals-cards-container" class="space-y-4">
                     <!-- Populated by JS -->
+                </div>
+
+                <div class="goals-tip-card">
+                    <span class="text-xl mt-0.5">💡</span>
+                    <p class="text-[13px] text-[#9CA3AF] leading-snug">
+                        <span class="text-white font-bold block mb-1">Reward Loop</span>
+                        Setting a reward makes the habit 40% more likely to stick. Pick something small and immediate!
+                    </p>
                 </div>
             </div>
 
@@ -1746,33 +2276,34 @@
             </header>
 
             <div class="px-5 pt-2 flex-1 flex flex-col">
+                <div class="wr-character-wrap">
+                    <img src="./assets/strong-spirit-calm.png" style="width:140px; height:140px; object-fit:contain;">
+                </div>
                 <div id="weekly-review-date-badge" class="identity-pill mb-6 mx-auto">April
                     15 –
                     April 21</div>
 
                 <!-- Overview Card -->
-                <div class="bg-card rounded-card border border-[#333] p-4 mb-6">
+                <div class="mb-6">
                     <span class="text-[#9CA3AF] text-sm mb-3 block">Overview</span>
-                    <div class="w-full h-px bg-[#333] mb-4"></div>
-
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-[#9CA3AF]">Habits Completed</span>
-                        <div class="text-right">
-                            <div class="text-text font-bold text-lg" id="wr-habits-completed">0 / 0 • 0%</div>
-                            <div id="wr-vs-last-week" class="text-sm mt-1 hidden"></div>
+                    <div class="grid grid-cols-1 gap-3 mb-3">
+                        <div class="wr-stat-card">
+                            <span class="wr-stat-label">Habits Completed</span>
+                            <div class="text-right">
+                                <div class="wr-stat-value text-lg" id="wr-habits-completed">0 / 0 • 0%</div>
+                                <div id="wr-vs-last-week" class="text-sm mt-1 hidden"></div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="w-full h-px bg-[#333] mb-4"></div>
-
-                    <div class="grid grid-cols-2 divide-x divide-[#333]">
-                        <div class="pr-3">
-                            <span class="text-[#9CA3AF] text-sm block mb-1">Best Day:</span>
-                            <span id="wr-best-day" class="text-text font-medium block">None</span>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="wr-stat-card flex-col items-start gap-1">
+                            <span class="wr-stat-label">Best Day:</span>
+                            <span id="wr-best-day" class="wr-stat-value text-base">None</span>
                         </div>
-                        <div class="pl-3">
-                            <span class="text-[#9CA3AF] text-sm block mb-1">Hardest Day:</span>
-                            <span id="wr-hardest-day" class="text-text font-medium block">None</span>
+                        <div class="wr-stat-card flex-col items-start gap-1">
+                            <span class="wr-stat-label">Hardest Day:</span>
+                            <span id="wr-hardest-day" class="wr-stat-value text-base">None</span>
                         </div>
                     </div>
                 </div>
@@ -1793,13 +2324,13 @@
                     <div>
                         <label class="text-text text-sm mb-2 block font-medium">What worked this week?</label>
                         <textarea id="wr-worked" rows="2"
-                            class="w-full bg-card border border-[#333] rounded-lg p-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
+                            class="w-full bg-card border border-[#333] rounded-lg p-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent wr-input"
                             placeholder="e.g. Morning habits felt natural"></textarea>
                     </div>
                     <div>
                         <label class="text-text text-sm mb-2 block font-medium">What will you change?</label>
                         <textarea id="wr-change" rows="2"
-                            class="w-full bg-card border border-[#333] rounded-lg p-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
+                            class="w-full bg-card border border-[#333] rounded-lg p-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent wr-input"
                             placeholder="e.g. Move gym to evening"></textarea>
                     </div>
                 </div>
@@ -1838,38 +2369,33 @@
                 <div id="new-week-date-badge" class="identity-pill mb-4 mx-auto">April
                     22 –
                     April 28</div>
-                <div class="flex justify-center mb-4">
-                    <div class="char-circle ring-accent">🗓️</div>
+                <div class="nw-character-wrap">
+                    <div class="nw-character-glow"></div>
+                    <img src="./assets/strong-mind-determined.png" alt="New week character"
+                        style="width:180px; height:180px; object-fit:contain; position:relative; z-index:1;">
                 </div>
 
                 <!-- Last Week's Wins Card -->
-                <div id="nw-last-week-wins" class="bg-card rounded-card border border-[#333] p-4 mb-8 hidden">
+                <div id="nw-last-week-wins" class="mb-8 hidden">
                     <span class="text-text font-bold text-sm block mb-3">Last Week's Wins</span>
-                    <div class="w-full h-px bg-[#333] mb-4"></div>
-
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-[#9CA3AF]">Total Habits Done:</span>
-                        <div class="text-right">
-                            <div class="text-text font-bold text-base" id="nw-habits-done">0 / 0 • 0%</div>
-                            <div id="nw-vs-last-week-1" class="text-sm mt-1"></div>
+                    <div class="nw-stats-grid">
+                        <div class="nw-stat-cell">
+                            <span class="nw-stat-value" id="nw-habits-done">0/0</span>
+                            <span class="nw-stat-label">Habits</span>
+                            <div id="nw-vs-last-week-1" class="text-xs text-[#9CA3AF] mt-1 hidden"></div>
                         </div>
-                    </div>
-
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-[#9CA3AF]">Goals Hit: <span class="text-text" id="nw-goals-hit">0 /
-                                0</span></span>
-                    </div>
-
-                    <div class="w-full h-px bg-[#333] mb-4"></div>
-
-                    <div class="grid grid-cols-2 divide-x divide-[#333]">
-                        <div class="pr-3">
-                            <span class="text-[#9CA3AF] text-sm block mb-1">Improvement:</span>
-                            <span id="nw-improvement" class="text-text font-medium block">None</span>
+                        <div class="nw-stat-cell">
+                            <span class="nw-stat-value" id="nw-goals-hit">0/0</span>
+                            <span class="nw-stat-label">Goals</span>
                         </div>
-                        <div class="pl-3">
-                            <span class="text-[#9CA3AF] text-sm block mb-1">Hardest Day:</span>
-                            <span id="nw-hardest-day" class="text-text font-medium block">None</span>
+                        <div class="nw-stat-cell highlight">
+                            <span class="nw-stat-value" id="nw-improvement">None</span>
+                            <span class="nw-stat-label">Growth</span>
+                        </div>
+                        <div class="col-span-3 nw-stat-cell mt-2"
+                            style="flex-direction:row; justify-content:space-between; display:none;">
+                            <span class="nw-stat-label">Hardest Day:</span>
+                            <span id="nw-hardest-day" class="text-text font-medium text-sm">None</span>
                         </div>
                     </div>
                 </div>
@@ -1911,9 +2437,9 @@
             <div class="px-5 pt-4 space-y-8">
                 <!-- SECTION 1: My Habits -->
                 <div>
-                    <h2 class="text-text font-bold text-lg mb-3">My Habits</h2>
+                    <h2 class="settings-section-label">My Habits</h2>
                     <div class="w-full h-px bg-[#333] mb-2"></div>
-                    <div id="settings-habits-list" class="space-y-0 text-sm">
+                    <div id="settings-habits-list" class="settings-group">
                         <!-- Populated by JS -->
                     </div>
                     <button type="button" id="btn-settings-add-habit"
@@ -1924,29 +2450,29 @@
 
                 <!-- SECTION 2: My Goals -->
                 <div>
-                    <h2 class="text-text font-bold text-lg mb-3">My Goals</h2>
+                    <h2 class="settings-section-label">My Goals</h2>
                     <div class="w-full h-px bg-[#333] mb-2"></div>
-                    <div id="settings-goals-list" class="space-y-0 text-sm border-b border-[#333]">
+                    <div id="settings-goals-list" class="settings-group border-b border-[#333]">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- SECTION 3: My Rewards -->
                 <div>
-                    <h2 class="text-text font-bold text-lg mb-3">My Rewards</h2>
+                    <h2 class="settings-section-label">My Rewards</h2>
                     <div class="w-full h-px bg-[#333] mb-2"></div>
-                    <div id="settings-rewards-list" class="space-y-0 text-sm border-b border-[#333]">
+                    <div id="settings-rewards-list" class="settings-group border-b border-[#333]">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- SECTION 4: Account -->
                 <div>
-                    <h2 class="text-text font-bold text-lg mb-3">Account</h2>
+                    <h2 class="settings-section-label">Account</h2>
                     <div class="w-full h-px bg-[#333] mb-2"></div>
-                    <div class="space-y-0 text-sm border-b border-[#333]">
+                    <div class="settings-group border-b border-[#333]">
 
-                        <div class="flex justify-between items-center py-4 border-b border-[#333] last:border-0">
+                        <div class="settings-row border-b border-[#333] last:border-0">
                             <span class="text-text">Username</span>
                             <div class="flex items-center space-x-2">
                                 <input type="text" id="settings-username-input"
@@ -1957,16 +2483,16 @@
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-center py-4 border-b border-[#333] last:border-0 cursor-pointer"
+                        <div class="settings-row border-b border-[#333] last:border-0 cursor-pointer"
                             id="btn-settings-export">
                             <span class="text-text">Export Data</span>
                             <span class="text-[#9CA3AF]">></span>
                         </div>
 
-                        <div class="flex justify-between items-center py-4 border-b border-[#333] last:border-0 cursor-pointer"
+                        <div class="settings-row border-b border-[#333] last:border-0 cursor-pointer settings-danger-btn"
                             id="btn-settings-reset">
                             <span class="text-amber-500 font-medium">Reset All Data</span>
-                            <div class="flex items-center space-x-2 text-amber-500">
+                            <div class="settings-icon-wrap text-amber-500">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
@@ -3883,9 +4409,8 @@
                     const icon = ICONS[category] || '🌟';
 
                     const card = document.createElement('div');
-                    card.className = 'bg-card rounded-card border border-[#333] p-4';
+                    card.className = 'mb-6';
 
-                    // Row 1 - Header
                     const header = document.createElement('div');
                     header.className = 'flex items-center space-x-2 pb-3 mb-3 border-b border-[#333]';
                     header.innerHTML = `
@@ -3894,53 +4419,44 @@
                     `;
                     card.appendChild(header);
 
-                    // Habits within Category
                     habits.forEach((habit, idx) => {
                         const habitBlock = document.createElement('div');
-                        if (idx > 0) habitBlock.className = 'mt-5 pt-5 border-t border-[#333]';
+                        habitBlock.className = 'review-habit-card';
 
-                        // Row 2 - Progress Label
-                        const labelHtml = `<p class="text-[#9CA3AF] text-xs font-medium mb-3">${habits.length > 1 ? habit.name + ' - ' : ''}How many days this week?</p>`;
-
-                        // Row 3 - Segmented Day Tracker
                         const target = habit.targetDays || 7;
-                        let boxesHtml = '';
-                        for (let i = 1; i <= target; i++) {
-                            if (i <= habit.weeklyDone) {
-                                boxesHtml += `
-                                    <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-background" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                                    </div>
-                                `;
-                            } else {
-                                boxesHtml += `
-                                    <div class="w-10 h-10 rounded-lg border-2 border-[#333] flex items-center justify-center text-[#6b7280] font-medium text-sm">
-                                        ${i}
-                                    </div>
-                                `;
-                            }
-                        }
+                        const progressPercent = Math.min(100, (habit.weeklyDone / target) * 100);
 
-                        const trackerHtml = `
-                            <div class="flex items-center space-x-2 mb-4">
-                                <div class="flex space-x-2 overflow-x-auto pb-1 hide-scrollbar">
-                                    ${boxesHtml}
-                                </div>
-                                <span class="text-text font-medium text-sm whitespace-nowrap ml-2">${habit.weeklyDone} of ${target} days</span>
+                        const labelHtml = `
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-text font-bold text-sm">${habit.name}</span>
+                                <span class="text-[#9CA3AF] text-xs font-medium">${habit.weeklyDone} of ${target} days</span>
                             </div>
                         `;
 
-                        // Row 4 - Reward Row
+                        const progressBarHtml = `
+                            <div class="review-progress-bar">
+                                <div class="review-progress-fill" style="width: ${progressPercent}%"></div>
+                            </div>
+                        `;
+
+                        let dayDotsHtml = '<div class="flex justify-between mt-3">';
+                        const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+                        for (let i = 0; i < 7; i++) {
+                            const isDone = i < habit.weeklyDone;
+                            dayDotsHtml += `<div class="review-day-dot ${isDone ? 'done' : ''}">${isDone ? '✓' : days[i]}</div>`;
+                        }
+                        dayDotsHtml += '</div>';
+
                         const rewardName = habit.weeklyReward || 'Mystery Reward';
                         const isMet = habit.weeklyDone >= target;
                         const rewardHtml = `
-                            <div class="flex items-center justify-between border border-[#333] rounded-lg p-3">
-                                <span class="text-[#9CA3AF] text-sm">Reward: ${rewardName}</span>
+                            <div class="flex items-center justify-between border border-[#333] rounded-lg p-3 mt-4 bg-background">
+                                <span class="text-[#9CA3AF] text-sm flex items-center gap-2"><span class="text-accent">🎁</span> ${rewardName}</span>
                                 ${isMet ? `<button class="text-accent font-bold text-sm tracking-wide" onclick="App.openRewardScreen('${habit.id}', '${App.getCurrentWeekStart()}')">Claim Reward</button>` : ''}
                             </div>
                         `;
 
-                        habitBlock.innerHTML = labelHtml + trackerHtml + rewardHtml;
+                        habitBlock.innerHTML = labelHtml + progressBarHtml + dayDotsHtml + rewardHtml;
                         card.appendChild(habitBlock);
                     });
 
@@ -4240,40 +4756,26 @@
                     };
 
                     const card = document.createElement('div');
-                    card.className = 'bg-card rounded-card border border-[#333] p-4';
+                    card.className = 'goals-habit-card';
 
-                    // Row 1
                     const header = `
-                        <div class="flex items-center space-x-2 pb-3 mb-3 border-b border-[#333]">
-                            <span class="text-xl">${icon}</span>
+                        <div class="flex items-center space-x-3 pb-3 mb-4 border-b border-[#333]">
+                            <div class="goals-habit-icon bg-[#1A1A1A]">${icon}</div>
                             <span class="text-text font-bold text-[15px] tracking-wide">${area}</span>
                         </div>
                     `;
 
-                    // Row 2
-                    let pills = '';
-                    [3, 4, 5, 6, 7].forEach(num => {
-                        const isSelected = num === defaultTarget;
-                        pills += `
-                            <button type="button" data-area="${area}" data-val="${num}" onclick="App.selectGoalTarget(this)" class="goal-target-btn w-11 h-11 rounded-lg text-sm transition-colors ${isSelected ? 'bg-accent text-[#0D0D0D] font-bold' : 'bg-background border border-[#333] text-[#9CA3AF]'}">
-                                ${num}
-                            </button>
-                        `;
-                    });
-
                     const targetRow = `
-                        <div class="mb-4">
-                            <p class="text-[#9CA3AF] text-xs font-medium mb-3">How many days this week?</p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex space-x-2">
-                                    ${pills}
-                                </div>
-
+                        <div class="mb-4 pt-2">
+                            <div class="flex justify-between items-center mb-3">
+                                <p class="text-[#9CA3AF] text-xs font-medium">How many days this week?</p>
+                                <div class="text-text font-bold text-sm"><span id="goal-val-${area.replace(/\s+/g, '-')}">${defaultTarget}</span> days</div>
                             </div>
+                            <input type="range" class="goals-range-track" min="1" max="7" value="${defaultTarget}" 
+                                oninput="document.getElementById('goal-val-${area.replace(/\s+/g, '-')}').textContent = this.value; App.tempWeeklyGoals['${area}'].targetDays = parseInt(this.value); App.validateGoalsForm();">
                         </div>
                     `;
 
-                    // Row 3
                     const rewardRow = `
                         <div>
                             <input type="text" id="goal-reward-${area.replace(/\s+/g, '-')}" value="${defaultReward}" class="w-full bg-background border border-[#333] rounded-lg px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent" placeholder="My reward if I hit it" oninput="App.updateGoalReward('${area}', this.value)">
@@ -5011,11 +5513,13 @@
 
                     this.tempNewWeekPlan[habit.id] = { target, originalTarget: (habit.targetDays || 7) };
 
-                    // Row
                     let rowHtml = `
-                        <div class="flex justify-between items-center py-3 border-t border-[#333]" id="nw-habit-row-${habit.id}">
-                            <div class="text-text font-medium text-sm">
-                                ${habit.name} <span class="text-[#9CA3AF]"> • <span id="nw-target-${habit.id}">${target}</span> days</span>
+                        <div class="nw-habit-card" id="nw-habit-row-${habit.id}">
+                            <div class="flex items-center gap-3">
+                                <div class="nw-habit-icon">⭐</div>
+                                <div class="text-text font-medium text-sm">
+                                    ${habit.name} <span class="text-[#9CA3AF]"> • <span id="nw-target-${habit.id}">${target}</span> days</span>
+                                </div>
                             </div>
                             <span class="text-accent underline text-sm cursor-pointer" onclick="App.openSetGoalsScreen()">change</span>
                         </div>
@@ -5040,9 +5544,12 @@
 
                 areas.forEach(area => {
                     rewardsList.innerHTML += `
-                        <div class="flex justify-between items-center py-3 border-b border-[#333]">
-                            <div class="text-[#9CA3AF] text-sm">
-                                Rewards: <span class="text-text">Same as last week</span>
+                        <div class="nw-reward-card mb-3 justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="nw-reward-icon">🎁</div>
+                                <div class="text-[#9CA3AF] text-sm">
+                                    Rewards: <span class="text-text">Same as last week</span>
+                                </div>
                             </div>
                             <span class="text-accent underline text-sm cursor-pointer" onclick="App.openSetGoalsScreen()">change</span>
                         </div>
@@ -5169,9 +5676,9 @@
 
                 activeHabits.forEach(habit => {
                     list.innerHTML += `
-                        <div class="flex justify-between items-center py-4 border-b border-[#333]">
+                        <div class="settings-row border-b border-[#333]">
                             <span class="text-text">${habit.name}</span>
-                            <div class="flex items-center space-x-3 text-[#9CA3AF]">
+                            <div class="settings-icon-wrap text-[#9CA3AF]">
                                 <svg class="w-4 h-4 cursor-pointer hover:text-red-500 transition-colors" onclick="App.promptDeleteHabit('${habit.id}', '${habit.name.replace(/'/g, "\\'")}')" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </div>
                         </div>
@@ -5217,9 +5724,9 @@
                     const toggleDot = isOn ? 'translate-x-[22px]' : 'translate-x-[2px]';
 
                     list.innerHTML += `
-                        <div class="flex justify-between items-center py-4 border-b border-[#333] last:border-0">
+                        <div class="settings-row border-b border-[#333] last:border-0">
                             <span class="text-text">${area}</span>
-                            <div class="w-12 h-6 rounded-full ${toggleBg} relative cursor-pointer transition-colors duration-200 settings-goal-toggle" data-area="${area}">
+                            <div class="w-12 h-6 rounded-full ${toggleBg} relative cursor-pointer transition-colors duration-200 settings-goal-toggle settings-toggle" data-area="${area}">
                                 <div class="w-5 h-5 bg-white rounded-full absolute top-[2px] transition-transform duration-200 ${toggleDot}"></div>
                             </div>
                         </div>
@@ -5270,12 +5777,12 @@
 
                 activeHabits.forEach(habit => {
                     list.innerHTML += `
-                        <div class="flex justify-between items-center py-4 border-b border-[#333] last:border-0">
+                        <div class="settings-row border-b border-[#333] last:border-0">
                             <div class="flex items-center space-x-3 w-[70%]">
                                 <span class="text-text text-sm truncate w-[40%]">${habit.name}</span>
                                 <input type="text" class="bg-transparent text-[#9CA3AF] text-sm focus:outline-none focus:border-b focus:border-accent w-[55%] truncate" value="${habit.weeklyReward.replace(/"/g, '&quot;')}" onblur="App.updateHabitRewardInline('${habit.id}', this.value)">
                             </div>
-                            <div class="flex items-center space-x-3 text-[#9CA3AF]">
+                            <div class="settings-icon-wrap text-[#9CA3AF]">
                                 <svg class="w-5 h-5 cursor-pointer hover:text-accent transition-colors" onclick="App.openRewardScreen('${habit.id}')" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 <svg class="w-4 h-4 cursor-pointer hover:text-text transition-colors" onclick="this.parentElement.previousElementSibling.querySelector('input').focus()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                             </div>
