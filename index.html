@@ -1366,14 +1366,21 @@
             margin-bottom: 16px;
         }
 
-        .hidden-on-splash {
-            .hidden-splash {
-                display: none !important;
-            }
+        .hidden-splash {
+            display: none !important;
+        }
 
-            #screen-splash~header {
-                display: flex !important;
-            }
+        #screen-splash~header {
+            display: flex !important;
+        }
+
+        .screen {
+            display: none !important;
+        }
+
+        .screen.active {
+            display: block !important;
+        }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -1417,7 +1424,8 @@
         </div>
 
         <!-- Header -->
-        <header class="hidden-splash" style="display:none !important;"
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b border-white/10 hidden-splash"
             style="background:rgba(5,22,20,0.8); backdrop-filter:blur(12px);">
             <h1 class="text-xl font-bold font-sans text-text logo" style="color:#00C9A7;">1% Daily</h1>
             <button
@@ -1541,7 +1549,7 @@
 
         <!-- Screen 2: Onboarding Step 1 (What do you want to improve?) -->
         <div id="screen-onboarding-1"
-            class="screen fixed inset-0 z-[9999] bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 flex flex-col p-8 pt-24 hidden">
+            class="screen overflow-y-auto min-h-screen bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 p-8 pt-24 pb-32">
             <!-- Progress Header -->
             <div class="px-5 pt-10 pb-2 relative">
                 <button
@@ -6226,10 +6234,12 @@
     </script>
     <script>
         function switchToOnboarding() {
-            document.getElementById('screen-splash').style.display = 'none';
-            document.getElementById('screen-onboarding-1').classList.remove('hidden');
-            document.querySelector('header').style.display = 'flex';
-            document.body.classList.remove('splash-active');
+            // Hide splash
+            document.getElementById('screen-splash').classList.remove('active');
+            // Show onboarding PROPERLY
+            document.getElementById('screen-onboarding-1').classList.add('active');
+            // Show header
+            document.querySelector('header').classList.remove('hidden-splash');
         }
     </script>
 </body>
