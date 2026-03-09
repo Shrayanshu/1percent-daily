@@ -4834,6 +4834,7 @@
 
             renderDashboard() {
                 this.updateGreeting();
+                document.getElementById('dashboardCharacter').src = getDashboardCharacter();
 
                 // FIX 3: Date indicator
                 const now = new Date();
@@ -5120,6 +5121,36 @@
         document.addEventListener('DOMContentLoaded', () => {
             App.init();
         });
+
+        function getDashboardCharacter() {
+            const habits = JSON.parse(
+                localStorage.getItem('1daily_habits') || '[]'
+            );
+            const counts = { career: 0, body: 0, mind: 0 };
+            habits.forEach(h => {
+                const areas = (h.identityAreas || [])
+                    .join(' ').toLowerCase();
+                const tags = (h.tags || []).join(' ').toLowerCase();
+                const cat = areas + ' ' + tags;
+                if (cat.includes('career') ||
+                    cat.includes('productivity') ||
+                    cat.includes('learning') ||
+                    cat.includes('finance'))
+                    counts.career++;
+                else if (cat.includes('health') ||
+                    cat.includes('fitness') ||
+                    cat.includes('body') ||
+                    cat.includes('strong body'))
+                    counts.body++;
+                else counts.mind++;
+            });
+            if (counts.career >= counts.body &&
+                counts.career >= counts.mind)
+                return './assets/career-builder-laptop.png';
+            if (counts.body >= counts.mind)
+                return './assets/strong-body-training.png';
+            return './assets/strong-mind-determined.png';
+        }
     </script>
 
     <!-- Service Worker Registration -->
