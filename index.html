@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -38,12 +38,24 @@
             --bg-secondary: #1A1A1A;
             --accent-teal: #00C9A7;
             --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #F5F5F5;
+            --text-secondary: #9CA3AF;
         }
 
-        html,
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #051510 100%);
+        .empty-title {
+            color: var(--text-primary);
+        }
+
+        .empty-subtitle {
+            color: var(--text-secondary);
+        }
+
+        .screen-title {
+            color: var(--text-primary);
+        }
+
+        .greeting-text {
+            color: var(--text-primary);
         }
 
         .bottom-nav {
@@ -69,12 +81,13 @@
         }
 
         .btn-primary {
-            background: var(--accent-teal);
-            color: var(--bg-primary);
-            border: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: 600;
+            background: var(--accent-teal) !important;
+            color: var(--bg-primary) !important;
+            border: none !important;
+            padding: 16px 24px !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
             width: 100%;
         }
 
@@ -230,7 +243,7 @@
     </style>
 </head>
 
-<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-100 min-h-screen">
     <div class="relative flex min-h-screen w-full flex-col midnight-emerald-gradient overflow-x-hidden pb-24">
         <!-- Header -->
         <header
@@ -275,9 +288,7 @@
                 <div class="empty-subtitle text-white/60 text-sm text-center font-medium leading-relaxed mb-8">
                     Build better habits, one day at a time.<br>Your consistency creates your identity.
                 </div>
-                <button
-                    class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 flex items-center gap-2"
-                    onclick="goToAddHabit()">
+                <button class="btn btn-primary flex items-center justify-center gap-2" onclick="goToAddHabit()">
                     Add Your First Habit <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
             </div>
