@@ -33,13 +33,20 @@
         }
     </script>
     <style>
-        :root {
-            --bg-primary: #0D0D0D;
-            --bg-secondary: #1A1A1A;
-            --accent-teal: #00C9A7;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --text-primary: #F5F5F5;
-            --text-secondary: #9CA3AF;
+        html,
+        body {
+            background: #0a1f1a !important;
+            background-color: #0a1f1a !important;
+            min-height: 100dvh;
+            color: #e0f2f1;
+        }
+
+        --bg-primary: #0D0D0D;
+        --bg-secondary: #1A1A1A;
+        --accent-teal: #00C9A7;
+        --border-color: rgba(255, 255, 255, 0.1);
+        --text-primary: #F5F5F5;
+        --text-secondary: #9CA3AF;
         }
 
         .empty-title {
@@ -93,6 +100,7 @@
 
         .midnight-emerald-gradient {
             background: radial-gradient(circle at top left, #0d2e24, #05140f);
+            min-height: 100dvh;
         }
 
         .glass-card {
@@ -623,7 +631,7 @@
     </style>
 </head>
 
-<body class="font-display bg-background-light dark:bg-background-dark text-slate-100 min-h-screen">
+<body class="font-display dark:bg-background-dark text-slate-100 min-h-screen">
     <div class="relative flex min-h-screen w-full flex-col midnight-emerald-gradient overflow-x-hidden pb-24">
         <!-- Header -->
         <header
