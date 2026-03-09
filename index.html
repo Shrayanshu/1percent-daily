@@ -524,843 +524,844 @@
             font-size: 12px;
             font-weight: 500;
             letter-spacing: 0.03em;
-
-            /* ── SUMMARY SCREEN ── */
-            #screen-summary {
-                background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
-            }
-
-            #screen-summary .summary-stats-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-                margin-bottom: 24px;
-            }
-
-            .summary-stat-card {
-                background: rgba(255, 255, 255, 0.08);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 12px;
-                padding: 20px 16px;
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            .summary-stat-label {
-                font-size: 10px;
-                font-weight: 600;
-                color: #9CA3AF;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-            }
-
-            .summary-stat-value {
-                font-size: 30px;
-                font-weight: 800;
-                color: #F5F5F5;
-                line-height: 1;
-            }
-
-            .summary-stat-sub {
-                font-size: 13px;
-                color: #9CA3AF;
-            }
-
-            .summary-stat-trend {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                font-size: 11px;
-                font-weight: 700;
-                color: #00C9A7;
-                margin-top: 6px;
-            }
-
-            .summary-section-title {
-                font-size: 17px;
-                font-weight: 600;
-                color: #F5F5F5;
-                margin-bottom: 12px;
-            }
-
-            .summary-logged-card {
-                background: rgba(255, 255, 255, 0.06);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 12px;
-                padding: 14px 16px;
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                margin-bottom: 10px;
-            }
-
-            .summary-logged-icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 10px;
-                background: rgba(0, 201, 167, 0.15);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #00C9A7;
-                font-size: 22px;
-                flex-shrink: 0;
-            }
-
-            .summary-streak-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 14px 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-
-            .summary-streak-row:last-child {
-                border-bottom: none;
-                padding-bottom: 0;
-            }
-
-            /* ── PLAN SCREEN ── */
-            #screen-plan {
-                background: linear-gradient(180deg, #064e3b 0%, #062d24 100%);
-            }
-
-            #plan-tab-today,
-            #plan-tab-tomorrow {
-                flex: 1;
-                padding: 8px;
-                font-size: 14px;
-                font-weight: 600;
-                border-radius: 8px;
-                transition: all 0.2s;
-                border: none;
-                cursor: pointer;
-            }
-
-            #plan-tab-today {
-                background: transparent;
-                color: rgba(255, 255, 255, 0.5);
-            }
-
-            #plan-tab-tomorrow {
-                background: rgba(255, 255, 255, 0.12);
-                color: #F5F5F5;
-            }
-
-            .plan-time-block-label {
-                font-size: 10px;
-                font-weight: 700;
-                color: rgba(20, 184, 166, 0.8);
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 12px;
-            }
-
-            .plan-time-block-label::after {
-                content: '';
-                flex: 1;
-                height: 1px;
-                background: rgba(20, 184, 166, 0.2);
-            }
-
-            .plan-habit-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 12px;
-                padding: 14px 16px;
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                margin-bottom: 10px;
-            }
-
-            .plan-habit-card.priority {
-                border-left: 4px solid #14b8a6;
-            }
-
-            .plan-habit-icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 10px;
-                background: rgba(20, 184, 166, 0.15);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #2dd4bf;
-                font-size: 20px;
-                flex-shrink: 0;
-            }
-
-            .plan-insight-card {
-                background: rgba(20, 184, 166, 0.1);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(20, 184, 166, 0.2);
-                border-radius: 12px;
-                padding: 16px;
-                display: flex;
-                align-items: flex-start;
-                gap: 12px;
-                margin-top: 16px;
-                margin-bottom: 20px;
-            }
-
-            #btn-plan-confirm {
-                background: #14b8a6 !important;
-                color: #022c22 !important;
-                border: none !important;
-                border-radius: 12px !important;
-                font-weight: 700 !important;
-            }
-
-            #btn-plan-confirm:hover {
-                background: #2dd4bf !important;
-                transform: translateY(-2px);
-                box-shadow: 0 8px 20px rgba(20, 184, 166, 0.35) !important;
-            }
-
-            /* ── REWARD SCREEN ── */
-            #screen-reward {
-                background: radial-gradient(circle at top right, #134e4a, #022c22, #051614);
-            }
-
-            .reward-confetti-overlay {
-                pointer-events: none;
-                position: absolute;
-                inset: 0;
-                background-image:
-                    radial-gradient(circle, #FBBF24 2px, transparent 2px),
-                    radial-gradient(circle, #00C9A7 2px, transparent 2px);
-                background-size: 40px 40px, 60px 60px;
-                background-position: 0 0, 20px 30px;
-                opacity: 0.25;
-                z-index: 0;
-            }
-
-            #reward-identity-badge {
-                background: rgba(0, 201, 167, 0.15) !important;
-                border-color: rgba(0, 201, 167, 0.4) !important;
-                color: #00C9A7 !important;
-                font-weight: 700 !important;
-                font-size: 11px !important;
-                letter-spacing: 0.1em !important;
-                text-transform: uppercase !important;
-            }
-
-            .reward-character-wrap {
-                position: relative;
-                width: 180px;
-                height: 180px;
-                margin: 0 auto 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .reward-character-glow {
-                position: absolute;
-                inset: 0;
-                background: rgba(0, 201, 167, 0.15);
-                border-radius: 50%;
-                filter: blur(40px);
-            }
-
-            .reward-win-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 12px;
-                padding: 14px 16px;
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                margin-bottom: 10px;
-            }
-
-            .reward-win-icon {
-                width: 40px;
-                height: 40px;
-                border-radius: 10px;
-                background: rgba(0, 201, 167, 0.15);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #00C9A7;
-                flex-shrink: 0;
-            }
-
-            .reward-card-glow-wrap {
-                position: relative;
-                margin-bottom: 32px;
-            }
-
-            .reward-card-glow-wrap::before {
-                content: '';
-                position: absolute;
-                inset: -2px;
-                background: linear-gradient(135deg, #00C9A7, #FBBF24);
-                border-radius: 18px;
-                filter: blur(8px);
-                opacity: 0.3;
-                z-index: 0;
-            }
-
-            .reward-inner-card {
-                position: relative;
-                z-index: 1;
-                background: rgba(255, 255, 255, 0.06);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(0, 201, 167, 0.25);
-                border-radius: 16px;
-                padding: 20px;
-                display: flex;
-                align-items: center;
-                gap: 16px;
-            }
-
-            .reward-emoji-box {
-                width: 60px;
-                height: 60px;
-                background: rgba(255, 255, 255, 0.08);
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 32px;
-                flex-shrink: 0;
-            }
-
-            #btn-claim-primary {
-                background: #00C9A7 !important;
-                color: #051614 !important;
-                border-radius: 50px !important;
-                font-weight: 700 !important;
-                box-shadow: 0 0 20px rgba(0, 201, 167, 0.35) !important;
-                border: none !important;
-            }
-
-            #btn-claim-later {
-                background: transparent !important;
-                border: 1px solid rgba(255, 255, 255, 0.2) !important;
-                color: #F5F5F5 !important;
-                border-radius: 50px !important;
-            }
-
-            /* ── SPLASH SCREEN ── */
-            #screen-splash {
-                background: linear-gradient(135deg, #064e3b 0%, #1e1b4b 100%) !important;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-                padding: 32px 24px 48px;
-            }
-
-            .splash-logo-box {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 24px;
-                padding: 32px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            }
-
-            .splash-logo-icon {
-                width: 120px;
-                height: 120px;
-                background: #00C9A7;
-                border-radius: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transform: rotate(3deg);
-                box-shadow: 0 8px 32px rgba(0, 201, 167, 0.4);
-                font-size: 64px;
-                font-weight: 900;
-                color: #051614;
-            }
-
-            .splash-divider {
-                width: 48px;
-                height: 4px;
-                background: #00C9A7;
-                border-radius: 2px;
-                margin: 4px auto;
-            }
-
-            .splash-glow-left {
-                position: absolute;
-                top: -80px;
-                left: -80px;
-                width: 240px;
-                height: 240px;
-                background: rgba(0, 201, 167, 0.08);
-                border-radius: 50%;
-                filter: blur(60px);
-                pointer-events: none;
-            }
-
-            .splash-glow-right {
-                position: absolute;
-                bottom: -80px;
-                right: -80px;
-                width: 240px;
-                height: 240px;
-                background: rgba(16, 185, 129, 0.08);
-                border-radius: 50%;
-                filter: blur(60px);
-                pointer-events: none;
-            }
-
-            #btn-splash-start {
-                background: #00C9A7 !important;
-                color: #051614 !important;
-                border-radius: 50px !important;
-                font-weight: 700 !important;
-                font-size: 15px !important;
-                letter-spacing: 0.1em !important;
-                text-transform: uppercase !important;
-                height: 60px !important;
-                box-shadow: 0 12px 32px rgba(0, 201, 167, 0.35) !important;
-                border: none !important;
-            }
-
-            /* ── NEW WEEK SCREEN ── */
-            #screen-new-week {
-                background: radial-gradient(circle at top center, #0a2e2a 0%, #061a1a 100%);
-            }
-
-            .nw-character-wrap {
-                position: relative;
-                width: 200px;
-                height: 200px;
-                margin: 0 auto 8px;
-            }
-
-            .nw-character-glow {
-                position: absolute;
-                inset: 0;
-                background: rgba(0, 201, 167, 0.18);
-                border-radius: 50%;
-                filter: blur(40px);
-            }
-
-            .nw-stats-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-                margin-top: 16px;
-            }
-
-            .nw-stat-cell {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 12px 8px;
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.06);
-                border-radius: 12px;
-            }
-
-            .nw-stat-cell.highlight {
-                background: rgba(0, 201, 167, 0.15);
-                border-color: rgba(0, 201, 167, 0.3);
-            }
-
-            .nw-stat-value {
-                font-size: 22px;
-                font-weight: 800;
-                color: #00C9A7;
-            }
-
-            .nw-stat-label {
-                font-size: 9px;
-                font-weight: 700;
-                color: #9CA3AF;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-                margin-top: 2px;
-            }
-
-            .nw-habit-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 12px;
-                padding: 14px 16px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
-
-            .nw-habit-icon {
-                width: 40px;
-                height: 40px;
-                background: rgba(6, 46, 36, 0.8);
-                border: 1px solid rgba(0, 201, 167, 0.2);
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #00C9A7;
-                flex-shrink: 0;
-            }
-
-            .nw-reward-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-left: 4px solid #00C9A7;
-                border-radius: 12px;
-                padding: 16px;
-                display: flex;
-                align-items: center;
-                gap: 16px;
-            }
-
-            .nw-reward-icon {
-                width: 48px;
-                height: 48px;
-                background: rgba(0, 201, 167, 0.1);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #00C9A7;
-                font-size: 24px;
-                flex-shrink: 0;
-            }
-
-            #btn-nw-start {
-                background: #00C9A7 !important;
-                color: #061a1a !important;
-                border-radius: 50px !important;
-                font-weight: 700 !important;
-                letter-spacing: 0.08em !important;
-                text-transform: uppercase !important;
-                box-shadow: 0 10px 30px rgba(0, 201, 167, 0.3) !important;
-                border: none !important;
-            }
-
-            /* ── THIS WEEK'S PROGRESS (screen-review) ── */
-            #screen-review {
-                background: radial-gradient(circle at top left, #0a2e28, #051512);
-            }
-
-            .review-hero-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 16px;
-                overflow: hidden;
-                margin-bottom: 24px;
-            }
-
-            .review-hero-image {
-                width: 100%;
-                aspect-ratio: 16/9;
-                object-fit: cover;
-                background: linear-gradient(135deg, #0a2e28, #134e4a);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .review-habit-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 14px;
-                padding: 16px;
-                margin-bottom: 14px;
-            }
-
-            .review-day-dot {
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 10px;
-                font-weight: 700;
-                border: 1px solid rgba(255, 255, 255, 0.15);
-                color: rgba(255, 255, 255, 0.4);
-            }
-
-            .review-day-dot.done {
-                background: #00C9A7;
-                border-color: #00C9A7;
-                color: #051512;
-                font-size: 13px;
-            }
-
-            .review-progress-bar {
-                height: 8px;
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 4px;
-                overflow: hidden;
-                margin: 12px 0 8px;
-            }
-
-            .review-progress-fill {
-                height: 100%;
-                background: linear-gradient(90deg, #00C9A7, #2dd4bf);
-                border-radius: 4px;
-                box-shadow: 0 0 8px rgba(0, 201, 167, 0.4);
-            }
-
-            .review-summary-stat {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 14px;
-                padding: 20px;
-                flex: 1;
-                min-width: 140px;
-            }
-
-            /* ── SET GOALS SCREEN (screen-goals) ── */
-            #screen-goals {
-                background: radial-gradient(circle at top left, #0a2e28, #051512);
-            }
-
-            #screen-goals .goals-section-header {
-                font-size: 10px;
-                font-weight: 700;
-                color: rgba(255, 255, 255, 0.5);
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-            }
-
-            .goals-habit-card {
-                background: rgba(255, 255, 255, 0.04);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 14px;
-                padding: 20px;
-                margin-bottom: 14px;
-            }
-
-            .goals-habit-icon {
-                width: 40px;
-                height: 40px;
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-            }
-
-            .goals-range-track {
-                -webkit-appearance: none;
-                appearance: none;
-                width: 100%;
-                height: 6px;
-                border-radius: 3px;
-                background: rgba(255, 255, 255, 0.12);
-                outline: none;
-                cursor: pointer;
-            }
-
-            .goals-range-track::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background: #00C9A7;
-                cursor: pointer;
-                box-shadow: 0 0 8px rgba(0, 201, 167, 0.5);
-            }
-
-            .goals-tip-card {
-                background: rgba(0, 201, 167, 0.06);
-                border: 1px solid rgba(0, 201, 167, 0.15);
-                border-radius: 12px;
-                padding: 16px;
-                display: flex;
-                align-items: flex-start;
-                gap: 12px;
-                margin: 20px 0;
-            }
-
-            #btn-wr-plan {
-                background: #00C9A7 !important;
-                color: #051512 !important;
-                border-radius: 14px !important;
-                font-weight: 700 !important;
-                border: none !important;
-            }
-
-            /* ── SETTINGS SCREEN ── */
-            #screen-settings {
-                background: radial-gradient(circle at top left, #061a14, #030d09);
-            }
-
-            .settings-section-label {
-                font-size: 10px;
-                font-weight: 700;
-                color: rgba(0, 201, 167, 0.7);
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-                padding: 0 4px;
-                margin-bottom: 10px;
-                margin-top: 4px;
-            }
-
-            .settings-group {
-                background: rgba(0, 201, 167, 0.03);
-                backdrop-filter: blur(12px);
-                border: 1px solid rgba(0, 201, 167, 0.08);
-                border-radius: 16px;
-                overflow: hidden;
-                margin-bottom: 24px;
-            }
-
-            .settings-row {
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                padding: 16px;
-                border-bottom: 1px solid rgba(0, 201, 167, 0.06);
-                transition: background 0.2s;
-                cursor: pointer;
-            }
-
-            .settings-row:last-child {
-                border-bottom: none;
-            }
-
-            .settings-row:hover {
-                background: rgba(0, 201, 167, 0.04);
-            }
-
-            .settings-icon-wrap {
-                width: 40px;
-                height: 40px;
-                background: rgba(0, 201, 167, 0.08);
-                border: 1px solid rgba(0, 201, 167, 0.12);
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #00C9A7;
-                flex-shrink: 0;
-            }
-
-            .settings-toggle {
-                width: 48px;
-                height: 28px;
-                background: rgba(0, 201, 167, 0.8);
-                border-radius: 14px;
-                position: relative;
-                cursor: pointer;
-                flex-shrink: 0;
-            }
-
-            .settings-toggle::after {
-                content: '';
-                position: absolute;
-                right: 3px;
-                top: 3px;
-                width: 22px;
-                height: 22px;
-                background: #fff;
-                border-radius: 50%;
-                box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-            }
-
-            .settings-danger-btn {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                padding: 16px;
-                border-radius: 14px;
-                border: 1px solid rgba(251, 146, 60, 0.3);
-                background: rgba(251, 146, 60, 0.08);
-                color: #fb923c;
-                font-weight: 700;
-                cursor: pointer;
-                transition: background 0.2s;
-            }
-
-            .settings-danger-btn:hover {
-                background: rgba(251, 146, 60, 0.15);
-            }
-
-            .settings-version {
-                text-align: center;
-                font-size: 10px;
-                color: rgba(255, 255, 255, 0.2);
-                text-transform: uppercase;
-                letter-spacing: 0.15em;
-                margin-top: 12px;
-            }
-
-            /* ── WEEKLY REVIEW SCREEN ── */
-            #screen-weekly-review {
-                background: radial-gradient(circle at top left, #0a2e28, #051512);
-            }
-
-            .wr-stat-card {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 14px;
-                padding: 20px;
-                text-align: center;
-            }
-
-            .wr-stat-value {
-                font-size: 30px;
-                font-weight: 800;
-                color: #00C9A7;
-                margin-bottom: 4px;
-            }
-
-            .wr-stat-label {
-                font-size: 10px;
-                font-weight: 700;
-                color: #9CA3AF;
-                text-transform: uppercase;
-                letter-spacing: 0.08em;
-            }
-
-            .wr-input {
-                width: 100%;
-                background: rgba(255, 255, 255, 0.05) !important;
-                border: 1px solid rgba(255, 255, 255, 0.12) !important;
-                border-radius: 12px !important;
-                padding: 14px 16px !important;
-                color: #F5F5F5 !important;
-                font-size: 14px !important;
-            }
-
-            .wr-input:focus {
-                border-color: #00C9A7 !important;
-                box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.12) !important;
-                outline: none !important;
-            }
-
-            .wr-character-wrap {
-                display: flex;
-                justify-content: center;
-                margin-bottom: 16px;
-            }
+        }
+
+        /* ── SUMMARY SCREEN ── */
+        #screen-summary {
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+        }
+
+        #screen-summary .summary-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .summary-stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .summary-stat-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .summary-stat-value {
+            font-size: 30px;
+            font-weight: 800;
+            color: #F5F5F5;
+            line-height: 1;
+        }
+
+        .summary-stat-sub {
+            font-size: 13px;
+            color: #9CA3AF;
+        }
+
+        .summary-stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #00C9A7;
+            margin-top: 6px;
+        }
+
+        .summary-section-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #F5F5F5;
+            margin-bottom: 12px;
+        }
+
+        .summary-logged-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .summary-logged-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(0, 201, 167, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00C9A7;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .summary-streak-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .summary-streak-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        /* ── PLAN SCREEN ── */
+        #screen-plan {
+            background: linear-gradient(180deg, #064e3b 0%, #062d24 100%);
+        }
+
+        #plan-tab-today,
+        #plan-tab-tomorrow {
+            flex: 1;
+            padding: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        #plan-tab-today {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        #plan-tab-tomorrow {
+            background: rgba(255, 255, 255, 0.12);
+            color: #F5F5F5;
+        }
+
+        .plan-time-block-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(20, 184, 166, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .plan-time-block-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(20, 184, 166, 0.2);
+        }
+
+        .plan-habit-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .plan-habit-card.priority {
+            border-left: 4px solid #14b8a6;
+        }
+
+        .plan-habit-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(20, 184, 166, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2dd4bf;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .plan-insight-card {
+            background: rgba(20, 184, 166, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 16px;
+            margin-bottom: 20px;
+        }
+
+        #btn-plan-confirm {
+            background: #14b8a6 !important;
+            color: #022c22 !important;
+            border: none !important;
+            border-radius: 12px !important;
+            font-weight: 700 !important;
+        }
+
+        #btn-plan-confirm:hover {
+            background: #2dd4bf !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(20, 184, 166, 0.35) !important;
+        }
+
+        /* ── REWARD SCREEN ── */
+        #screen-reward {
+            background: radial-gradient(circle at top right, #134e4a, #022c22, #051614);
+        }
+
+        .reward-confetti-overlay {
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle, #FBBF24 2px, transparent 2px),
+                radial-gradient(circle, #00C9A7 2px, transparent 2px);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 30px;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        #reward-identity-badge {
+            background: rgba(0, 201, 167, 0.15) !important;
+            border-color: rgba(0, 201, 167, 0.4) !important;
+            color: #00C9A7 !important;
+            font-weight: 700 !important;
+            font-size: 11px !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+        }
+
+        .reward-character-wrap {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reward-character-glow {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 201, 167, 0.15);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .reward-win-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .reward-win-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(0, 201, 167, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00C9A7;
+            flex-shrink: 0;
+        }
+
+        .reward-card-glow-wrap {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .reward-card-glow-wrap::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #00C9A7, #FBBF24);
+            border-radius: 18px;
+            filter: blur(8px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .reward-inner-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 201, 167, 0.25);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .reward-emoji-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        #btn-claim-primary {
+            background: #00C9A7 !important;
+            color: #051614 !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 0 20px rgba(0, 201, 167, 0.35) !important;
+            border: none !important;
+        }
+
+        #btn-claim-later {
+            background: transparent !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: #F5F5F5 !important;
+            border-radius: 50px !important;
+        }
+
+        /* ── SPLASH SCREEN ── */
+        #screen-splash {
+            background: linear-gradient(135deg, #064e3b 0%, #1e1b4b 100%) !important;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 32px 24px 48px;
+        }
+
+        .splash-logo-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .splash-logo-icon {
+            width: 120px;
+            height: 120px;
+            background: #00C9A7;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(3deg);
+            box-shadow: 0 8px 32px rgba(0, 201, 167, 0.4);
+            font-size: 64px;
+            font-weight: 900;
+            color: #051614;
+        }
+
+        .splash-divider {
+            width: 48px;
+            height: 4px;
+            background: #00C9A7;
+            border-radius: 2px;
+            margin: 4px auto;
+        }
+
+        .splash-glow-left {
+            position: absolute;
+            top: -80px;
+            left: -80px;
+            width: 240px;
+            height: 240px;
+            background: rgba(0, 201, 167, 0.08);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .splash-glow-right {
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 240px;
+            height: 240px;
+            background: rgba(16, 185, 129, 0.08);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        #btn-splash-start {
+            background: #00C9A7 !important;
+            color: #051614 !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            font-size: 15px !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            height: 60px !important;
+            box-shadow: 0 12px 32px rgba(0, 201, 167, 0.35) !important;
+            border: none !important;
+        }
+
+        /* ── NEW WEEK SCREEN ── */
+        #screen-new-week {
+            background: radial-gradient(circle at top center, #0a2e2a 0%, #061a1a 100%);
+        }
+
+        .nw-character-wrap {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 8px;
+        }
+
+        .nw-character-glow {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 201, 167, 0.18);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .nw-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .nw-stat-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+        }
+
+        .nw-stat-cell.highlight {
+            background: rgba(0, 201, 167, 0.15);
+            border-color: rgba(0, 201, 167, 0.3);
+        }
+
+        .nw-stat-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #00C9A7;
+        }
+
+        .nw-stat-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 2px;
+        }
+
+        .nw-habit-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .nw-habit-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(6, 46, 36, 0.8);
+            border: 1px solid rgba(0, 201, 167, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00C9A7;
+            flex-shrink: 0;
+        }
+
+        .nw-reward-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #00C9A7;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nw-reward-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 201, 167, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00C9A7;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        #btn-nw-start {
+            background: #00C9A7 !important;
+            color: #061a1a !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            box-shadow: 0 10px 30px rgba(0, 201, 167, 0.3) !important;
+            border: none !important;
+        }
+
+        /* ── THIS WEEK'S PROGRESS (screen-review) ── */
+        #screen-review {
+            background: radial-gradient(circle at top left, #0a2e28, #051512);
+        }
+
+        .review-hero-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .review-hero-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            background: linear-gradient(135deg, #0a2e28, #134e4a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .review-habit-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .review-day-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .review-day-dot.done {
+            background: #00C9A7;
+            border-color: #00C9A7;
+            color: #051512;
+            font-size: 13px;
+        }
+
+        .review-progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 12px 0 8px;
+        }
+
+        .review-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00C9A7, #2dd4bf);
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(0, 201, 167, 0.4);
+        }
+
+        .review-summary-stat {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        /* ── SET GOALS SCREEN (screen-goals) ── */
+        #screen-goals {
+            background: radial-gradient(circle at top left, #0a2e28, #051512);
+        }
+
+        #screen-goals .goals-section-header {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        .goals-habit-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+
+        .goals-habit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .goals-range-track {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.12);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .goals-range-track::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00C9A7;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 201, 167, 0.5);
+        }
+
+        .goals-tip-card {
+            background: rgba(0, 201, 167, 0.06);
+            border: 1px solid rgba(0, 201, 167, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        #btn-wr-plan {
+            background: #00C9A7 !important;
+            color: #051512 !important;
+            border-radius: 14px !important;
+            font-weight: 700 !important;
+            border: none !important;
+        }
+
+        /* ── SETTINGS SCREEN ── */
+        #screen-settings {
+            background: radial-gradient(circle at top left, #061a14, #030d09);
+        }
+
+        .settings-section-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: rgba(0, 201, 167, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            padding: 0 4px;
+            margin-bottom: 10px;
+            margin-top: 4px;
+        }
+
+        .settings-group {
+            background: rgba(0, 201, 167, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 201, 167, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .settings-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            border-bottom: 1px solid rgba(0, 201, 167, 0.06);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+
+        .settings-row:hover {
+            background: rgba(0, 201, 167, 0.04);
+        }
+
+        .settings-icon-wrap {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 201, 167, 0.08);
+            border: 1px solid rgba(0, 201, 167, 0.12);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00C9A7;
+            flex-shrink: 0;
+        }
+
+        .settings-toggle {
+            width: 48px;
+            height: 28px;
+            background: rgba(0, 201, 167, 0.8);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .settings-toggle::after {
+            content: '';
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            width: 22px;
+            height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .settings-danger-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(251, 146, 60, 0.3);
+            background: rgba(251, 146, 60, 0.08);
+            color: #fb923c;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .settings-danger-btn:hover {
+            background: rgba(251, 146, 60, 0.15);
+        }
+
+        .settings-version {
+            text-align: center;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-top: 12px;
+        }
+
+        /* ── WEEKLY REVIEW SCREEN ── */
+        #screen-weekly-review {
+            background: radial-gradient(circle at top left, #0a2e28, #051512);
+        }
+
+        .wr-stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .wr-stat-value {
+            font-size: 30px;
+            font-weight: 800;
+            color: #00C9A7;
+            margin-bottom: 4px;
+        }
+
+        .wr-stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .wr-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            border-radius: 12px !important;
+            padding: 14px 16px !important;
+            color: #F5F5F5 !important;
+            font-size: 14px !important;
+        }
+
+        .wr-input:focus {
+            border-color: #00C9A7 !important;
+            box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.12) !important;
+            outline: none !important;
+        }
+
+        .wr-character-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -1380,9 +1381,11 @@
 
             <div class="splash-glow-left"></div>
             <div class="splash-glow-right"></div>
-            <div class="flex flex-col items-center splash-logo-box">
+            <div class="flex flex-col items-center text-center">
                 <!-- Logo Box -->
-                <div class="splash-logo-icon">1</div>
+                <div class="splash-logo-box">
+                    <div class="splash-logo-icon">1</div>
+                </div>
 
                 <!-- App Name & Tagline -->
                 <h1 class="text-text font-bold text-[32px] animate-fade-in" style="animation-delay: 0.2s;">1% Daily</h1>
@@ -1415,20 +1418,22 @@
         <main class="flex-1 px-5 overflow-y-auto pb-24 hidden" id="main-content">
 
             <!-- Greeting -->
-            <div class="greeting-card">
+            <div class="greeting-card" style="position:relative; overflow:hidden;">
                 <div
                     style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:rgba(45,212,191,0.1);border-radius:50%;filter:blur(60px);pointer-events:none;">
                 </div>
                 <div style="display:flex;flex-direction:row;align-items:center;justify-content:space-between;">
                     <div style="flex:1;padding-right:16px;">
-                        <span class="greeting-label">WARRIOR</span>
-                        <h2 id="greeting-text" class="greeting-text">Good morning, Name</h2>
-                        <p class="greeting-subtitle">"Discipline equasls freedom."</p>
+                        <span
+                            class="inline-block px-3 py-1 mb-2 rounded-full bg-primary/20 text-primary text-[10px] font-bold tracking-[0.15em] uppercase"
+                            id="userIdentity">WARRIOR</span>
+                        <h2 id="greeting-text" class="text-2xl font-bold text-white mb-1">Good morning, Name</h2>
+                        <p class="italic text-teal-300 text-sm">"Discipline equals freedom."</p>
                         <p id="dashboard-date-indicator" class="text-xs text-muted mt-2"></p>
                     </div>
-                    <div style="width:80px;height:80px;flex-shrink:0;">
-                        <img id="dashboardCharacter" src="./assets/career-builder-victory.png" alt="Character"
-                            style="width:160px;height:160px;object-fit:contain;position:absolute;bottom:0;right:0;filter:drop-shadow(0 0 20px rgba(0,201,167,0.2));" />
+                    <div style="width:110px;height:110px;flex-shrink:0;position:relative;">
+                        <img id="dashboardCharacter" src="./assets/strong-mind-determined.png" alt="Identity character"
+                            style="width:110px;height:110px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,201,167,0.2));" />
                     </div>
                 </div>
             </div>
@@ -1540,12 +1545,12 @@
             </div>
 
             <!-- Title Section -->
-            <div style="padding:0 0 8px 0;" class="mt-4 px-5">
-                <h1 style="font-size:28px;font-weight:700;color:white;line-height:1.2;margin-bottom:8px;">
+            <div class="mt-4 px-5 pb-2">
+                <h1 class="text-3xl font-bold text-white leading-tight mb-2">
                     What do you want to
-                    <span style="color:#00C9A7;">improve?</span>
+                    <span class="text-accent">improve?</span>
                 </h1>
-                <p style="color:rgba(255,255,255,0.6);font-size:15px;">
+                <p class="text-white/60 text-[15px]">
                     Select the goals that resonate most with you.
                 </p>
             </div>
@@ -1575,7 +1580,7 @@
                     <div class="identity-card goal-card" data-value="Strong Body"
                         style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                            <span style="font-size:28px;">💪</span>
+                            <span class="identity-icon" style="font-size:28px;">💪</span>
                             <div class="identity-select-circle checkbox"
                                 style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
                                 <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
@@ -1591,7 +1596,7 @@
                     <div class="identity-card goal-card" data-value="Strong Mind"
                         style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                            <span style="font-size:28px;">🧠</span>
+                            <span class="identity-icon" style="font-size:28px;">🧠</span>
                             <div class="identity-select-circle checkbox"
                                 style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
                                 <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
@@ -1607,7 +1612,7 @@
                     <div class="identity-card goal-card" data-value="Strong Spirit"
                         style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                            <span style="font-size:28px;">🧘</span>
+                            <span class="identity-icon" style="font-size:28px;">🧘</span>
                             <div class="identity-select-circle checkbox"
                                 style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
                                 <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
@@ -1623,7 +1628,7 @@
                     <div class="identity-card goal-card" data-value="Career"
                         style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                            <span style="font-size:28px;">🚀</span>
+                            <span class="identity-icon" style="font-size:28px;">🚀</span>
                             <div class="identity-select-circle checkbox"
                                 style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
                                 <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
@@ -1639,7 +1644,7 @@
                     <div class="identity-card goal-card" data-value="Relationships"
                         style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                            <span style="font-size:28px;">🤝</span>
+                            <span class="identity-icon" style="font-size:28px;">🤝</span>
                             <div class="identity-select-circle checkbox"
                                 style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
                                 <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
@@ -1655,7 +1660,7 @@
                     <div class="identity-card goal-card" data-value="Finance"
                         style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
                         <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                            <span style="font-size:28px;">💰</span>
+                            <span class="identity-icon" style="font-size:28px;">💰</span>
                             <div class="identity-select-circle checkbox"
                                 style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
                                 <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
@@ -1857,7 +1862,10 @@
 
             <!-- Habit Title Section -->
             <div class="flex justify-center px-5 mt-4">
-                <div class="char-circle">🎯</div>
+                <div class="char-circle">
+                    <img id="checkin-character" src="./assets/strong-mind-determined.png" alt="Habit character"
+                        style="width:72px;height:72px;object-fit:contain;">
+                </div>
             </div>
             <div class="text-center px-5 mb-8 mt-2">
                 <h1 id="checkin-habit-name" class="text-2xl font-bold text-text mb-3 tracking-tight">Habit Name</h1>
@@ -1933,7 +1941,10 @@
         <div id="screen-celebration"
             class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
             <div class="flex-1 flex flex-col items-center justify-center px-5 py-10 mt-10">
-                <div class="char-circle ring-accent">🎉</div>
+                <div class="char-circle ring-accent">
+                    <img id="celebration-character" src="./assets/strong-mind-determined.png" alt="Habit character"
+                        style="width:72px;height:72px;object-fit:contain;">
+                </div>
                 <!-- Checkmark Circle -->
                 <div class="w-20 h-20 rounded-full border-[3px] border-accent flex items-center justify-center mb-6 scale-0 transition-transform duration-500 ease-out"
                     id="celeb-circle">
@@ -2016,7 +2027,7 @@
                         <span class="summary-stat-label">vs Yesterday</span>
                         <div id="summary-score-diff" class="summary-stat-trend hidden">+6%</div>
                         <div class="mt-2">
-                            <img src="./assets/strong-body-training.png"
+                            <img id="summary-character" src="./assets/strong-body-training.png"
                                 style="width:64px; height:64px; object-fit:contain; opacity:0.85;">
                         </div>
                     </div>
@@ -2124,7 +2135,7 @@
 
                 <div class="review-hero-card">
                     <div class="review-hero-image">
-                        <img src="./assets/strong-body-training.png"
+                        <img id="review-character" src="./assets/strong-body-training.png"
                             style="width:120px; height:120px; object-fit:contain; opacity:0.85;">
                     </div>
                 </div>
@@ -2213,7 +2224,7 @@
 
                 <div class="reward-character-wrap">
                     <div class="reward-character-glow"></div>
-                    <img src="./assets/career-builder-reflective.png" alt="Reward character"
+                    <img id="reward-character" src="./assets/career-builder-reflective.png" alt="Reward character"
                         style="width:140px; height:140px; object-fit:contain; position:relative; z-index:1;">
                 </div>
 
@@ -2277,7 +2288,8 @@
 
             <div class="px-5 pt-2 flex-1 flex flex-col">
                 <div class="wr-character-wrap">
-                    <img src="./assets/strong-spirit-calm.png" style="width:140px; height:140px; object-fit:contain;">
+                    <img id="weekly-review-character" src="./assets/strong-spirit-calm.png"
+                        style="width:140px; height:140px; object-fit:contain;">
                 </div>
                 <div id="weekly-review-date-badge" class="identity-pill mb-6 mx-auto">April
                     15 –
@@ -2371,7 +2383,7 @@
                     April 28</div>
                 <div class="nw-character-wrap">
                     <div class="nw-character-glow"></div>
-                    <img src="./assets/strong-mind-determined.png" alt="New week character"
+                    <img id="new-week-character" src="./assets/strong-mind-determined.png" alt="New week character"
                         style="width:180px; height:180px; object-fit:contain; position:relative; z-index:1;">
                 </div>
 
@@ -2434,11 +2446,10 @@
                 <h1 class="text-xl font-bold text-text">Settings</h1>
             </header>
 
-            <div class="px-5 pt-4 space-y-8">
+            <div class="px-5 pt-4 pb-8">
                 <!-- SECTION 1: My Habits -->
-                <div>
-                    <h2 class="settings-section-label">My Habits</h2>
-                    <div class="w-full h-px bg-[#333] mb-2"></div>
+                <div class="mb-6">
+                    <h2 class="settings-section-label mb-2">My Habits</h2>
                     <div id="settings-habits-list" class="settings-group">
                         <!-- Populated by JS -->
                     </div>
@@ -2448,29 +2459,28 @@
                     </button>
                 </div>
 
+                <div class="w-full h-px bg-[#333] mb-6 hidden"></div>
+
                 <!-- SECTION 2: My Goals -->
-                <div>
-                    <h2 class="settings-section-label">My Goals</h2>
-                    <div class="w-full h-px bg-[#333] mb-2"></div>
-                    <div id="settings-goals-list" class="settings-group border-b border-[#333]">
+                <div class="mb-6">
+                    <h2 class="settings-section-label mb-2">My Goals</h2>
+                    <div id="settings-goals-list" class="settings-group border-t border-[#333] border-b">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- SECTION 3: My Rewards -->
-                <div>
-                    <h2 class="settings-section-label">My Rewards</h2>
-                    <div class="w-full h-px bg-[#333] mb-2"></div>
-                    <div id="settings-rewards-list" class="settings-group border-b border-[#333]">
+                <div class="mb-6">
+                    <h2 class="settings-section-label mb-2">My Rewards</h2>
+                    <div id="settings-rewards-list" class="settings-group border-t border-[#333] border-b">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- SECTION 4: Account -->
-                <div>
-                    <h2 class="settings-section-label">Account</h2>
-                    <div class="w-full h-px bg-[#333] mb-2"></div>
-                    <div class="settings-group border-b border-[#333]">
+                <div class="mb-8">
+                    <h2 class="settings-section-label mb-2">Account</h2>
+                    <div class="settings-group border-t border-[#333] border-b">
 
                         <div class="settings-row border-b border-[#333] last:border-0">
                             <span class="text-text">Username</span>
@@ -2547,7 +2557,10 @@
             <div class="px-5 pt-2 flex-1 flex flex-col">
                 <!-- Overall Score -->
                 <div class="bg-card rounded-card border border-[#333] p-5 mb-6 text-center">
-                    <div class="char-circle mb-2">🏅</div>
+                    <div class="char-circle mb-2">
+                        <img id="week-stats-character" src="./assets/strong-mind-determined.png" alt="Habit character"
+                            style="width:72px;height:72px;object-fit:contain;">
+                    </div>
                     <p class="text-[#9CA3AF] text-xs uppercase tracking-wide mb-2">Overall Weekly Score</p>
                     <span id="ws-overall-score" class="text-4xl font-bold text-text">0%</span>
                 </div>
@@ -2651,6 +2664,58 @@
             currentDate: new Date(),
             currentCheckInHabitId: null,
 
+            getPrimaryIdentity() {
+                if (!this.data || !this.data.habits) return 'Strong Mind';
+                const activeHabits = this.data.habits.filter(h => h.isActive);
+                if (activeHabits.length === 0) return 'Strong Mind';
+
+                const counts = {};
+                activeHabits.forEach(h => {
+                    const cat = h.category || 'General';
+                    counts[cat] = (counts[cat] || 0) + 1;
+                });
+
+                let maxCat = 'Strong Mind';
+                let maxCount = 0;
+                for (const [cat, count] of Object.entries(counts)) {
+                    if (count > maxCount) {
+                        maxCount = count;
+                        maxCat = cat;
+                    }
+                }
+                return maxCat;
+            },
+
+            getCharacterForContext(context) {
+                const identity = this.getPrimaryIdentity();
+
+                if (identity === 'Strong Body' || identity === 'Health') {
+                    if (['dashboard', 'weeklyProgress', 'summary', 'weeklyReview', 'newWeek'].includes(context)) {
+                        return './assets/strong-body-training.png';
+                    }
+                    if (['celebration', 'reward', 'weekStats', 'checkin'].includes(context)) {
+                        return './assets/strong-body-victory.png';
+                    }
+                }
+
+                if (identity === 'Career' || identity === 'Finance') {
+                    if (['dashboard', 'weeklyProgress', 'summary'].includes(context)) {
+                        return './assets/career-builder-victory.png';
+                    }
+                    if (['celebration', 'reward', 'weekStats', 'weeklyReview', 'newWeek'].includes(context)) {
+                        return './assets/career-builder-reflective.png';
+                    }
+                    if (context === 'checkin') return './assets/career-builder-victory.png';
+                }
+
+                if (identity === 'Strong Spirit' || identity === 'Relationships') {
+                    return './assets/strong-spirit-calm.png';
+                }
+
+                // Default / Strong Mind / Creativity
+                return './assets/strong-mind-determined.png';
+            },
+
             init() {
                 this.loadData();
                 this.setupOnboardingEvents();
@@ -2671,13 +2736,6 @@
 
             // PWA Back Button Exit Guard
             setupBackButtonHandler() {
-                const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-                    || window.navigator.standalone === true;
-
-                console.log('DEBUG: isStandalone checked:', isStandalone);
-
-                if (!isStandalone) return;
-
                 // Push initial guard state
                 history.pushState({ exitGuard: true }, '');
 
@@ -3656,6 +3714,7 @@
 
             openHabitCheckIn(habitId) {
                 this.currentCheckInHabitId = habitId;
+                document.getElementById('checkin-character').src = this.getCharacterForContext('checkin');
                 this._doneNudgeShown = false;
                 const habit = this.data.habits.find(h => h.id === habitId);
                 if (!habit) return;
@@ -3871,6 +3930,7 @@
             },
 
             openHabitCelebration(habitId, loggedValue) {
+                document.getElementById('celebration-character').src = this.getCharacterForContext('celebration');
                 const habit = this.data.habits.find(h => h.id === habitId);
                 if (!habit) return;
 
@@ -3975,6 +4035,8 @@
             },
 
             openTodaySummary() {
+                const summaryChar = document.getElementById('summary-character');
+                if (summaryChar) summaryChar.src = this.getCharacterForContext('summary');
                 const todayStr = this.getTodayString();
                 const yesterdayStr = this.getYesterdayString();
                 const activeHabits = this.data.habits.filter(h => h.isActive);
@@ -4198,7 +4260,7 @@
                     // Add inline Edit link for Today
                     const todayEditRow = document.createElement('div');
                     todayEditRow.className = 'flex justify-between items-center mb-4';
-                    todayEditRow.innerHTML = `<span class="text-xs font-semibold text-muted tracking-wide uppercase">TODAY'S HABITS</span><button type="button" class="text-xs text-muted underline" id="btn-plan-edit-today">Edit</button>`;
+                    todayEditRow.innerHTML = `<span class="text-xs font-semibold text-muted tracking-wide uppercase">TODAY'S HABITS</span><button type="button" class="text-xs text-muted underline" id="btn-plan-edit-today" onclick="App.openPlanScreen('tomorrow')">Edit</button>`;
                     listContainer.appendChild(todayEditRow);
 
                     const todayStr = this.getTodayString();
@@ -4370,6 +4432,8 @@
             },
 
             openReviewScreen() {
+                const reviewChar = document.getElementById('review-character');
+                if (reviewChar) reviewChar.src = this.getCharacterForContext('weeklyProgress');
                 const activeHabits = this.data.habits.filter(h => h.isActive);
                 const categoriesMap = {};
 
@@ -4468,7 +4532,8 @@
                 }
 
                 // Summary calculations
-                document.getElementById('review-total-text').textContent = `Total this week: ${totalWeekCompletions} of ${totalWeekTargets} check-ins`;
+                const totalTextEl = document.getElementById('review-total-text');
+                if (totalTextEl) totalTextEl.textContent = `Total this week: ${totalWeekCompletions} of ${totalWeekTargets} check-ins`;
 
                 const percentage = totalWeekTargets === 0 ? 0 : (totalWeekCompletions / totalWeekTargets) * 100;
                 let motive = "Every day is a fresh start. 💪";
@@ -4476,7 +4541,8 @@
                 else if (percentage >= 71) motive = "Almost perfect! Incredible week. 🔥";
                 else if (percentage >= 41) motive = "Keep it up! You're well on your way.";
 
-                document.getElementById('review-motivational-text').textContent = motive;
+                const motiveEl = document.getElementById('review-motivational-text');
+                if (motiveEl) motiveEl.textContent = motive;
 
                 // Hide others, show review
                 document.getElementById('screen-summary').classList.add('hidden');
@@ -4522,6 +4588,8 @@
             },
 
             openWeeklyReviewScreen() {
+                const wrChar = document.getElementById('weekly-review-character');
+                if (wrChar) wrChar.src = this.getCharacterForContext('weeklyReview');
                 const weekStartStr = this.getCurrentWeekStart();
                 const weekStartDate = new Date(weekStartStr);
                 const weekEndDate = new Date(weekStartDate);
@@ -4772,13 +4840,13 @@
                                 <div class="text-text font-bold text-sm"><span id="goal-val-${area.replace(/\s+/g, '-')}">${defaultTarget}</span> days</div>
                             </div>
                             <input type="range" class="goals-range-track" min="1" max="7" value="${defaultTarget}" 
-                                oninput="document.getElementById('goal-val-${area.replace(/\s+/g, '-')}').textContent = this.value; App.tempWeeklyGoals['${area}'].targetDays = parseInt(this.value); App.validateGoalsForm();">
+                                oninput="document.getElementById('goal-val-${area.replace(/\s+/g, '-')}').textContent = this.value; App.tempWeeklyGoals['${area}'].targetDays = parseInt(this.value); App.enableSaveGoalsButton();">
                         </div>
                     `;
 
                     const rewardRow = `
                         <div>
-                            <input type="text" id="goal-reward-${area.replace(/\s+/g, '-')}" value="${defaultReward}" class="w-full bg-background border border-[#333] rounded-lg px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent" placeholder="My reward if I hit it" oninput="App.updateGoalReward('${area}', this.value)">
+                            <input type="text" id="goal-reward-${area.replace(/\s+/g, '-')}" value="${defaultReward}" class="w-full bg-background border border-[#333] rounded-lg px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent" placeholder="My reward if I hit it" oninput="App.updateGoalReward('${area}', this.value); App.enableSaveGoalsButton();">
                         </div>
                     `;
 
@@ -4786,7 +4854,7 @@
                     container.appendChild(card);
                 });
 
-                this.validateGoalsForm();
+                this.disableSaveGoalsButton();
 
                 document.getElementById('main-content').classList.add('hidden');
                 document.querySelector('header').classList.add('hidden');
@@ -4819,23 +4887,21 @@
                 btn.classList.add('bg-accent', 'text-[#0D0D0D]', 'font-bold');
                 btn.classList.remove('bg-background', 'border', 'border-[#333]', 'text-[#9CA3AF]');
 
-                this.validateGoalsForm();
+                this.enableSaveGoalsButton();
             },
 
             updateGoalReward(area, val) {
                 this.tempWeeklyGoals[area].reward = val.trim();
             },
 
-            validateGoalsForm() {
+            enableSaveGoalsButton() {
                 const btn = document.getElementById('btn-save-goals');
-                // Just need at least one targetDays set (which is guaranteed by defaults right now)
-                let isValid = Object.values(this.tempWeeklyGoals).some(g => g.targetDays > 0);
+                if (btn) btn.classList.remove('pointer-events-none', 'opacity-50');
+            },
 
-                if (isValid) {
-                    btn.classList.remove('pointer-events-none', 'opacity-50');
-                } else {
-                    btn.classList.add('pointer-events-none', 'opacity-50');
-                }
+            disableSaveGoalsButton() {
+                const btn = document.getElementById('btn-save-goals');
+                if (btn) btn.classList.add('pointer-events-none', 'opacity-50');
             },
 
             saveWeeklyGoals() {
@@ -4889,6 +4955,8 @@
             },
 
             openRewardScreen(habitId, weekStart) {
+                const rewardChar = document.getElementById('reward-character');
+                if (rewardChar) rewardChar.src = this.getCharacterForContext('reward');
                 const habit = habitId ? this.data.habits.find(h => h.id === habitId) : null;
                 const currentWeekStart = weekStart || this.getCurrentWeekStart();
                 const currentWeekGoals = this.data.weeklyGoals.find(g => g.weekStart === currentWeekStart);
@@ -5676,9 +5744,9 @@
 
                 activeHabits.forEach(habit => {
                     list.innerHTML += `
-                        <div class="settings-row border-b border-[#333]">
-                            <span class="text-text">${habit.name}</span>
-                            <div class="settings-icon-wrap text-[#9CA3AF]">
+                        <div class="settings-row flex items-center py-3 border-b border-[#333]">
+                            <span class="text-text flex-1 truncate pr-4">${habit.name}</span>
+                            <div class="settings-icon-wrap text-[#9CA3AF] ml-auto shrink-0 flex items-center justify-end">
                                 <svg class="w-4 h-4 cursor-pointer hover:text-red-500 transition-colors" onclick="App.promptDeleteHabit('${habit.id}', '${habit.name.replace(/'/g, "\\'")}')" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                             </div>
                         </div>
@@ -5841,7 +5909,7 @@
 
             renderDashboard() {
                 this.updateGreeting();
-                document.getElementById('dashboardCharacter').src = getDashboardCharacter();
+                document.getElementById('dashboardCharacter').src = this.getCharacterForContext('dashboard');
 
                 // FIX 3: Date indicator
                 const now = new Date();
@@ -5980,15 +6048,16 @@
                     let timeblock = habit.timeOfDay || 'Morning';
                     let tag = habit.goal || 'Custom';
 
-                    let checkMarkStyle = isCompleted ? 'background:#00C9A7; border-color:#00C9A7; color:#051614;' : 'color:rgba(255,255,255,0.2);';
+                    let checkStyles = isCompleted ? 'bg-accent border-accent text-[#051614]' : 'border-white/20 text-transparent';
+                    if (isSkipped) checkStyles = 'border-white/20 text-white/50';
 
                     row.innerHTML = `
-                        <div style="width:40px;height:40px;border-radius:10px;background:rgba(236,91,19,0.15);display:flex;align-items:center;justify-content:center;margin-right:12px;font-size:18px;">${leftIcon}</div>
-                        <div class="habit-item-info" style="flex:1;min-width:0;">
-                            <div class="habit-item-name ${nameClass}" style="font-weight:600;font-size:15px;truncate">${habit.name}</div>
-                            <div class="habit-item-details inline-block" style="font-size:12px;color:#9CA3AF;margin-top:2px;">${timeblock} • ${tag}</div>
+                        <div class="w-10 h-10 rounded-xl bg-[#ec5b13]/15 flex items-center justify-center text-lg mr-3 shrink-0">${leftIcon}</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="font-semibold text-[15px] truncate ${nameClass}">${habit.name}</div>
+                            <div class="text-xs text-[#9CA3AF] mt-0.5">${timeblock} • ${tag}</div>
                         </div>
-                        <div style="width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;${checkMarkStyle}">${isSkipped ? '—' : '✓'}</div>
+                        <div class="w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm transition-colors ${checkStyles}">${isSkipped ? '—' : '✓'}</div>
                     `;
                     return row;
                 };
@@ -6070,6 +6139,8 @@
             },
 
             openWeekStats() {
+                const wsChar = document.getElementById('week-stats-character');
+                if (wsChar) wsChar.src = this.getCharacterForContext('weekStats');
                 const activeHabits = this.data.habits.filter(h => h.isActive);
                 const listEl = document.getElementById('ws-habit-list');
                 listEl.innerHTML = '';
@@ -6128,36 +6199,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             App.init();
         });
-
-        function getDashboardCharacter() {
-            const habits = JSON.parse(
-                localStorage.getItem('1daily_habits') || '[]'
-            );
-            const counts = { career: 0, body: 0, mind: 0 };
-            habits.forEach(h => {
-                const areas = (h.identityAreas || [])
-                    .join(' ').toLowerCase();
-                const tags = (h.tags || []).join(' ').toLowerCase();
-                const cat = areas + ' ' + tags;
-                if (cat.includes('career') ||
-                    cat.includes('productivity') ||
-                    cat.includes('learning') ||
-                    cat.includes('finance'))
-                    counts.career++;
-                else if (cat.includes('health') ||
-                    cat.includes('fitness') ||
-                    cat.includes('body') ||
-                    cat.includes('strong body'))
-                    counts.body++;
-                else counts.mind++;
-            });
-            if (counts.career >= counts.body &&
-                counts.career >= counts.mind)
-                return './assets/career-builder-laptop.png';
-            if (counts.body >= counts.mind)
-                return './assets/strong-body-training.png';
-            return './assets/strong-mind-determined.png';
-        }
     </script>
 
     <!-- Service Worker Registration -->

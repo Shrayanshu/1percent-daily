@@ -1,0 +1,7 @@
+854:     </style>
+868:         <div id="screen-splash"
+1601:         <div id="screen-review" class="absolute inset-0 bg-background z-40 flex flex-col hidden overflow-y-auto pb-24">
+1634:         <div id="screen-goals" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+1734:         <div id="screen-weekly-review"
+1824:         <div id="screen-new-week"
+1899:         <div id="screen-settings"

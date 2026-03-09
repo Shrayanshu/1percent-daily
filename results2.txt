@@ -1,0 +1,4 @@
+528:     </style>
+1155:         <div id="screen-summary" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+1221:         <div id="screen-plan" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+1336:         <div id="screen-reward" class="absolute inset-0 bg-background z-[60] flex flex-col hidden overflow-y-auto">

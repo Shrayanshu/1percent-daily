@@ -1,0 +1,40 @@
+1378: <div id="screen-splash"
+1527: <div id="screen-onboarding-1"
+1686: <div id="screen-onboarding"
+1847: <div id="screen-checkin" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+1862: <div class="char-circle">🎯</div>
+1935: <div id="screen-celebration"
+1993: <div id="screen-summary" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+2061: <div id="screen-plan" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+2113: <div id="screen-review" class="absolute inset-0 bg-background z-40 flex flex-col hidden overflow-y-auto pb-24">
+2156: <div id="screen-goals" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+2197: <div id="screen-reward" class="absolute inset-0 bg-background z-[60] flex flex-col hidden overflow-y-auto">
+2266: <div id="screen-weekly-review"
+2357: <div id="screen-new-week"
+2427: <div id="screen-settings"
+2536: <div id="screen-week-stats"
+2832: this.openWeeklyReviewScreen();
+2834: this.openNewWeekScreen();
+3337: this.openRewardScreen(this.currentCheckInHabitId, this.getCurrentWeekStart());
+3348: this.openRewardScreen(this.currentCheckInHabitId, this.getCurrentWeekStart());
+3352: this.openRewardScreen(qualifyingHabit.id, this.getCurrentWeekStart());
+3415: this.openWeeklyReviewScreen();
+3417: this.openReviewScreen();
+3701: // Not used directly from card anymore, using openHabitCheckIn
+3704: openHabitCheckIn(habitId) {
+3920: openHabitCelebration(habitId, loggedValue) {
+4017: this.openTodaySummary();
+4024: openTodaySummary() {
+4279: row.onclick = () => this.openHabitCheckIn(habit.id);
+4419: openReviewScreen() {
+4502: ${isMet ? `<button class="text-accent font-bold text-sm tracking-wide" onclick="App.openRewardScreen('${habit.id}', '${App.getCurrentWeekStart()}')">Claim Reward</button>` : ''}
+4571: openWeeklyReviewScreen() {
+4753: this.openNewWeekScreen();
+4938: openRewardScreen(habitId, weekStart) {
+5404: this.openHabitCelebration(habitId, logValue);
+5421: openNewWeekScreen() {
+5833: <svg class="w-5 h-5 cursor-pointer hover:text-accent transition-colors" onclick="App.openRewardScreen('${habit.id}')" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+5941: weekBtnEl.querySelector('button').addEventListener('click', () => this.openWeekStats());
+6007: btnHtml.querySelector('button').addEventListener('click', () => this.openTodaySummary());
+6023: row.onclick = () => this.openHabitCheckIn(habit.id);
+6119: openWeekStats() {
