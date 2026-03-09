@@ -1367,13 +1367,13 @@
         }
 
         .hidden-on-splash {
-            display: none !important;
-        }
+            .hidden-splash {
+                display: none !important;
+            }
 
-        #screen-splash.active~header,
-        body:not(.splash-active) header {
-            display: flex !important;
-        }
+            #screen-splash~header {
+                display: flex !important;
+            }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -1389,35 +1389,35 @@
 
         <!-- Screen 1: Splash / Welcome Screen -->
         <div id="screen-splash"
-            class="absolute inset-0 bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 z-[200] flex flex-col items-center justify-between p-8 pb-24 pt-[20vh]">
+            class="screen active fixed inset-0 z-[10000] bg-gradient-to-br from-emerald-900 to-slate-900 flex flex-col items-center justify-center p-8 overflow-hidden">
+            <div class="splash-glow absolute -top-32 -left-32 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl"></div>
+            <div class="splash-glow absolute -bottom-32 -right-32 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"></div>
 
-            <div class="splash-glow-left"></div>
-            <div class="splash-glow-right"></div>
-            <div class="flex flex-col items-center text-center">
-                <!-- Logo Box -->
-                <div class="splash-logo-box">
-                    <div class="splash-logo-icon">1</div>
+            <div class="text-center max-w-md mx-auto">
+                <div
+                    class="splash-logo-box bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-12 shadow-2xl mb-8 inline-block">
+                    <div
+                        class="logo-icon w-32 h-32 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center shadow-2xl mb-6 mx-auto font-black text-5xl text-slate-900 rotate-3">
+                        1
+                    </div>
+                    <div
+                        class="splash-divider w-16 h-1 bg-gradient-to-r from-teal-400 to-teal-500 rounded-full mx-auto mb-6">
+                    </div>
+                    <h1 class="text-3xl font-black text-white tracking-tight mb-4">1% Daily</h1>
+                    <p class="text-teal-100 text-lg font-medium leading-relaxed">Build better habits, one day at a time
+                    </p>
                 </div>
 
-                <!-- App Name & Tagline -->
-                <h1 class="text-text font-bold text-[32px] animate-fade-in" style="animation-delay: 0.2s;">1% Daily</h1>
-                <div class="splash-divider"></div>
-                <p class="text-[#9CA3AF] text-base animate-fade-in" style="animation-delay: 0.4s; margin-top:8px;">Get
-                    1% better every
-                    day.</p>
+                <button id="btn-splash-start"
+                    class="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-slate-900 font-black text-xl py-6 px-8 rounded-3xl shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 z-[10001] relative block pointer-events-auto"
+                    onclick="switchToOnboarding()">
+                    Get Started →
+                </button>
             </div>
-
-            <!-- Get Started Button -->
-            <button id="btn-splash-start"
-                class="btn btn-primary w-full mt-8 px-8 py-4 text-lg font-bold tracking-wide uppercase z-[999] relative block pointer-events-auto"
-                onclick="App.handleSplashStart()">
-                Get Started →
-            </button>
         </div>
 
         <!-- Header -->
-        <header
-            class="sticky top-0 z-40 flex items-center justify-between px-6 py-4 border-b border-white/10 hidden-on-splash"
+        <header class="hidden-splash" style="display:none !important;"
             style="background:rgba(5,22,20,0.8); backdrop-filter:blur(12px);">
             <h1 class="text-xl font-bold font-sans text-text logo" style="color:#00C9A7;">1% Daily</h1>
             <button
@@ -1541,7 +1541,7 @@
 
         <!-- Screen 2: Onboarding Step 1 (What do you want to improve?) -->
         <div id="screen-onboarding-1"
-            class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
+            class="screen fixed inset-0 z-[9999] bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 flex flex-col p-8 pt-24 hidden">
             <!-- Progress Header -->
             <div class="px-5 pt-10 pb-2 relative">
                 <button
@@ -6222,6 +6222,14 @@
             navigator.serviceWorker.register('/sw.js')
                 .then(() => console.log('SW registered'))
                 .catch((err) => console.log('SW registration failed:', err));
+        }
+    </script>
+    <script>
+        function switchToOnboarding() {
+            document.getElementById('screen-splash').style.display = 'none';
+            document.getElementById('screen-onboarding-1').classList.remove('hidden');
+            document.querySelector('header').style.display = 'flex';
+            document.body.classList.remove('splash-active');
         }
     </script>
 </body>
