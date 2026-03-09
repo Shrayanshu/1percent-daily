@@ -203,6 +203,178 @@
             animation: exitDialogSlideUp 0.3s ease-out 0.1s forwards;
             opacity: 0;
         }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .form-label {
+            color: #5eead4;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: white;
+            padding: 14px 16px;
+            font-size: 15px;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #00C9A7;
+            background: rgba(0, 201, 167, 0.05);
+            outline: none;
+        }
+
+        .day-btn,
+        .goal-tag-btn,
+        .time-btn,
+        .target-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+            border-radius: 10px;
+            padding: 10px 0;
+            transition: all 0.2s;
+        }
+
+        .day-btn.bg-accent,
+        .goal-tag-btn.bg-accent,
+        .time-btn.bg-accent,
+        .target-btn.bg-accent {
+            background: #00C9A7 !important;
+            border-color: #00C9A7 !important;
+            color: #051614 !important;
+        }
+
+        .greeting-card {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .greeting-label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: rgba(236, 91, 19, 0.2);
+            color: #ec5b13;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .greeting-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+
+        .greeting-subtitle {
+            font-size: 14px;
+            color: rgba(94, 234, 212, 0.9);
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .score-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .score-header {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+        }
+
+        .score-value {
+            font-size: 36px;
+            font-weight: 900;
+            color: #ec5b13;
+        }
+
+        .section-title-simple {
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .habit-item-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 3px solid rgba(236, 91, 19, 0.6);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .habit-item-checkbox:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-left-color: #ec5b13;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 20px 20px;
+            background: rgba(5, 22, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 100;
+        }
+
+        .goal-card.border-accent {
+            border: 2px solid #00C9A7 !important;
+            background: rgba(0, 201, 167, 0.08) !important;
+        }
+
+        .goal-card.border-accent .identity-select-circle {
+            background: #00C9A7 !important;
+            border-color: #00C9A7 !important;
+        }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -243,16 +415,13 @@
         </div>
 
         <!-- Header -->
-        <header class="px-5 pt-10 pb-4 flex justify-between items-center bg-background sticky top-0 z-10 hidden">
-            <h1 class="text-xl font-bold font-sans text-text">1% Daily</h1>
-            <button onclick="App.openSettingsScreen()" class="text-text hover:text-accent transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                    </path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
+        <header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b border-white/10"
+            style="background:rgba(5,22,20,0.8); backdrop-filter:blur(12px);">
+            <h1 class="text-xl font-bold font-sans text-text logo" style="color:#00C9A7;">1% Daily</h1>
+            <button
+                style="width:40px;height:40px;border-radius:50%; display:flex;align-items:center;justify-content:center; background:transparent;border:none;cursor:pointer; color:white;"
+                onclick="App.openSettingsScreen()">
+                ⚙️
             </button>
         </header>
 
@@ -260,37 +429,52 @@
         <main class="flex-1 px-5 overflow-y-auto pb-24 hidden" id="main-content">
 
             <!-- Greeting -->
-            <div class="mb-2">
-                <h2 id="greeting-text" class="text-2xl font-bold text-text text-center">Good morning, Name</h2>
+            <div class="greeting-card">
+                <div
+                    style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:rgba(45,212,191,0.1);border-radius:50%;filter:blur(60px);pointer-events:none;">
+                </div>
+                <div style="display:flex;flex-direction:row;align-items:center;justify-content:space-between;">
+                    <div style="flex:1;padding-right:16px;">
+                        <span class="greeting-label">WARRIOR</span>
+                        <h2 id="greeting-text" class="greeting-text">Good morning, Name</h2>
+                        <p class="greeting-subtitle">"Discipline equasls freedom."</p>
+                        <p id="dashboard-date-indicator" class="text-xs text-muted mt-2"></p>
+                    </div>
+                    <div style="width:80px;height:80px;flex-shrink:0;">
+                        <img id="dashboardCharacter" src="./assets/career-builder-victory.png" alt="Character"
+                            style="width:100%; height:100%; object-fit:contain;" />
+                    </div>
+                </div>
             </div>
-            <p id="dashboard-date-indicator" class="text-xs text-muted text-center mb-4"></p>
 
             <!-- TODAY vs YESTERDAY Card -->
-            <div class="bg-card rounded-card border border-[#333] shadow-lg mb-8 overflow-hidden">
-                <div class="bg-[#222] px-4 py-2 border-b border-[#333]">
-                    <span class="text-xs font-semibold text-muted tracking-wide uppercase">TODAY vs YESTERDAY</span>
+            <div class="score-section">
+                <div class="score-header">TODAY vs YESTERDAY</div>
+                <div class="flex justify-between items-end mb-4 score-item">
+                    <span class="text-text font-medium text-lg">Daily Score:</span>
+                    <span id="daily-score" class="score-value">0%</span>
                 </div>
-                <div class="p-4">
-                    <div class="flex justify-between items-end mb-4">
-                        <span class="text-text font-medium text-lg">Daily Score:</span>
-                        <span id="daily-score" class="text-3xl font-bold text-text">0%</span>
+                <div
+                    style="height:10px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin-top:8px;">
+                    <div id="dailyScoreBar"
+                        style="height:100%;background:linear-gradient(90deg,#ec5b13,#fb923c);border-radius:999px;width:0%;transition:width 0.7s ease;box-shadow:0 0 15px rgba(236,91,19,0.5);">
                     </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-muted">Streak: <span id="current-streak-days"
-                                class="text-text font-medium">0 days</span></span>
-                        <div class="flex items-center space-x-3 w-1/2">
-                            <progress id="daily-progress-bar" value="0" max="5" class="w-full"></progress>
-                            <span id="daily-progress-text" class="text-xs text-muted font-medium whitespace-nowrap">0 /
-                                0</span>
-                        </div>
+                </div>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-sm text-muted">Streak: <span id="current-streak-days"
+                            class="text-text font-medium">0 days</span></span>
+                    <div class="flex items-center space-x-3 w-1/2">
+                        <progress id="daily-progress-bar" value="0" max="5" class="w-full"></progress>
+                        <span id="daily-progress-text" class="text-xs text-muted font-medium whitespace-nowrap">0 /
+                            0</span>
                     </div>
                 </div>
             </div>
 
             <!-- TODAY'S HABITS -->
-            <div class="mb-8">
-                <div class="border-b border-[#333] pb-2 mb-4">
-                    <span class="text-xs font-semibold text-muted tracking-wide uppercase">TODAY'S HABITS</span>
+            <div class="mb-8 habits-section">
+                <div class="pb-2 mb-4">
+                    <h3 class="section-title-simple">TODAY'S HABITS</h3>
                 </div>
 
                 <div id="habits-list" class="space-y-6">
@@ -312,8 +496,7 @@
         </main>
 
         <!-- Bottom Navigation -->
-        <nav
-            class="absolute bottom-0 w-full h-[64px] bg-[#1A1A1A] border-t border-[#333] flex justify-around items-center px-2 z-20 hidden">
+        <nav class="bottom-nav hidden">
             <button id="btn-nav-home" class="flex flex-col items-center justify-center w-16 h-full text-accent">
                 <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -371,9 +554,14 @@
             </div>
 
             <!-- Title Section -->
-            <div class="text-center mb-6 mt-4 px-5">
-                <h1 class="text-2xl font-bold text-text mb-2 tracking-tight">What do you want to improve?</h1>
-                <p class="text-[13px] text-muted">Pick one or more areas</p>
+            <div style="padding:0 0 8px 0;" class="mt-4 px-5">
+                <h1 style="font-size:28px;font-weight:700;color:white;line-height:1.2;margin-bottom:8px;">
+                    What do you want to
+                    <span style="color:#00C9A7;">improve?</span>
+                </h1>
+                <p style="color:rgba(255,255,255,0.6);font-size:15px;">
+                    Select the goals that resonate most with you.
+                </p>
             </div>
 
             <div class="px-5 space-y-4 flex-1">
@@ -396,118 +584,102 @@
                 </div>
 
                 <!-- Goal Area Cards -->
-                <div id="goal-cards-container" class="space-y-3">
-                    <!-- Strong Body -->
-                    <div class="goal-card flex items-center bg-card border border-[#333] rounded-md p-3 cursor-pointer transition-colors"
-                        data-value="Strong Body">
-                        <div
-                            class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">
-                            💪</div>
-                        <span class="flex-1 text-text font-bold text-[15px]">Strong Body</span>
-                        <div
-                            class="w-6 h-6 border-2 border-[#333] rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;"
+                    id="goal-cards-container">
+                    <div class="identity-card goal-card" data-value="Strong Body"
+                        style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <span style="font-size:28px;">💪</span>
+                            <div class="identity-select-circle checkbox"
+                                style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
+                                <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
                         </div>
+                        <div class="identity-title">Strong Body</div>
                     </div>
-                    <!-- Strong Mind -->
-                    <div class="goal-card flex items-center bg-card border border-[#333] rounded-md p-3 cursor-pointer transition-colors"
-                        data-value="Strong Mind">
-                        <div
-                            class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">
-                            🧠</div>
-                        <span class="flex-1 text-text font-bold text-[15px]">Strong Mind</span>
-                        <div
-                            class="w-6 h-6 border-2 border-[#333] rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+
+                    <div class="identity-card goal-card" data-value="Strong Mind"
+                        style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <span style="font-size:28px;">🧠</span>
+                            <div class="identity-select-circle checkbox"
+                                style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
+                                <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
                         </div>
+                        <div class="identity-title">Strong Mind</div>
                     </div>
-                    <!-- Strong Spirit -->
-                    <div class="goal-card flex items-center bg-card border border-[#333] rounded-md p-3 cursor-pointer transition-colors"
-                        data-value="Strong Spirit">
-                        <div
-                            class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">
-                            🙏</div>
-                        <span class="flex-1 text-text font-bold text-[15px]">Strong Spirit</span>
-                        <div
-                            class="w-6 h-6 border-2 border-[#333] rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+
+                    <div class="identity-card goal-card" data-value="Strong Spirit"
+                        style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <span style="font-size:28px;">🧘</span>
+                            <div class="identity-select-circle checkbox"
+                                style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
+                                <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
                         </div>
+                        <div class="identity-title">Strong Spirit</div>
                     </div>
-                    <!-- Career -->
-                    <div class="goal-card flex items-center bg-card border border-[#333] rounded-md p-3 cursor-pointer transition-colors"
-                        data-value="Career">
-                        <div
-                            class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">
-                            💼</div>
-                        <span class="flex-1 text-text font-bold text-[15px]">Career</span>
-                        <div
-                            class="w-6 h-6 border-2 border-[#333] rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+
+                    <div class="identity-card goal-card" data-value="Career"
+                        style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <span style="font-size:28px;">🚀</span>
+                            <div class="identity-select-circle checkbox"
+                                style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
+                                <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
                         </div>
+                        <div class="identity-title">Career</div>
                     </div>
-                    <!-- Relationships -->
-                    <div class="goal-card flex items-center bg-card border border-[#333] rounded-md p-3 cursor-pointer transition-colors"
-                        data-value="Relationships">
-                        <div
-                            class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">
-                            ❤️</div>
-                        <span class="flex-1 text-text font-bold text-[15px]">Relationships</span>
-                        <div
-                            class="w-6 h-6 border-2 border-[#333] rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+
+                    <div class="identity-card goal-card" data-value="Relationships"
+                        style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <span style="font-size:28px;">🤝</span>
+                            <div class="identity-select-circle checkbox"
+                                style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
+                                <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
                         </div>
+                        <div class="identity-title">Relationships</div>
                     </div>
-                    <!-- Creativity -->
-                    <div class="goal-card flex items-center bg-card border border-[#333] rounded-md p-3 cursor-pointer transition-colors"
-                        data-value="Creativity">
-                        <div
-                            class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">
-                            🎨</div>
-                        <span class="flex-1 text-text font-bold text-[15px]">Creativity</span>
-                        <div
-                            class="w-6 h-6 border-2 border-[#333] rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
+
+                    <div class="identity-card goal-card" data-value="Finance"
+                        style="aspect-ratio:1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;border-radius:16px;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <span style="font-size:28px;">💰</span>
+                            <div class="identity-select-circle checkbox"
+                                style="width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);">
+                                <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Finance -->
-                    <div class="goal-card flex items-center bg-card border border-[#333] rounded-md p-3 cursor-pointer transition-colors"
-                        data-value="Finance">
-                        <div
-                            class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">
-                            💰</div>
-                        <span class="flex-1 text-text font-bold text-[15px]">Finance</span>
-                        <div
-                            class="w-6 h-6 border-2 border-[#333] rounded checkbox flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4 text-background hidden check-mark" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </div>
+                        <div class="identity-title">Finance</div>
                     </div>
                 </div>
             </div>
@@ -515,7 +687,10 @@
             <!-- Bottom Action -->
             <div class="px-5 pt-6 mt-auto">
                 <button type="button" id="btn-continue-onboarding"
-                    class="w-full py-3.5 bg-[#333] text-text font-bold text-base rounded-btn transition-all pointer-events-none opacity-50 tracking-wide">Continue</button>
+                    class="btn btn-primary pointer-events-none opacity-50"
+                    style="background:#00C9A7;color:#051614;border-radius:999px;padding:18px;font-size:16px;font-weight:700;border:none;width:100%;cursor:pointer;box-shadow:0 0 20px rgba(0,201,167,0.3);display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;">
+                    Continue →
+                </button>
             </div>
         </div>
 
@@ -537,156 +712,145 @@
             </div>
 
             <!-- Title Section -->
-            <div class="text-center mb-6 mt-4 px-5">
-                <h1 class="text-2xl font-bold text-text mb-2 tracking-tight">Add Your First Habit</h1>
-                <p class="text-[13px] text-muted">Start small. Even 1 minute counts.</p>
+            <div style="padding:0 0 8px 0;" class="mt-4 px-5 mb-4">
+                <h1 style="font-size:28px;font-weight:700;color:white;line-height:1.2;margin-bottom:8px;">
+                    Add Your First <span style="color:#00C9A7;">Habit</span>
+                </h1>
+                <p style="color:rgba(255,255,255,0.6);font-size:15px;">
+                    What's one small thing you can do daily?
+                </p>
             </div>
 
             <!-- Form Fields -->
-            <form id="new-habit-form" class="px-5 space-y-5">
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Habit Name</label>
-                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Name the action, not the outcome. "Exercise" works. "Get
-                        fit" doesn't.</p>
-                    <input type="text" id="nh-name"
-                        class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                        placeholder="">
-                    <p id="nh-name-error" class="text-red-500 text-xs mt-1 hidden">Habit Name is required</p>
-                    <div id="nh-name-coach" class="text-sm text-[#FBBF24] mt-1"></div>
-                </div>
+            <form id="new-habit-form" class="px-5">
 
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Goal Tag</label>
-                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Optional — group your habit under a goal.</p>
-                    <div class="flex space-x-2" id="nh-goal-tags">
-                        <button type="button" data-goal="Career"
-                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">💼
-                            Career</button>
-                        <button type="button" data-goal="Health"
-                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">💪
-                            Health</button>
-                        <button type="button" data-goal="Mind"
-                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">🧠
-                            Mind</button>
-                        <button type="button" data-goal="Custom"
-                            class="goal-tag-btn flex-1 py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-full transition-colors">⭐
-                            Custom</button>
+                <!-- Glass Card 1: Habit Name, Goal Tag, Identity, Tiny Version -->
+                <div class="glass-card mb-6">
+                    <div class="form-group mb-4">
+                        <label class="form-label">HABIT NAME</label>
+                        <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Name the action, not the outcome. "Exercise" works.
+                            "Get fit" doesn't.</p>
+                        <input type="text" id="nh-name" class="form-input" placeholder="">
+                        <p id="nh-name-error" class="text-red-500 text-xs mt-1 hidden">Habit Name is required</p>
+                        <div id="nh-name-coach" class="text-sm text-[#FBBF24] mt-1"></div>
                     </div>
-                </div>
 
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Identity Area</label>
-                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Habits stick when they match who you're becoming, not
-                        just what you want to do.</p>
-                    <div class="relative">
-                        <select id="nh-identity"
-                            class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text text-sm appearance-none focus:outline-none focus:border-accent">
-                            <option value="" disabled selected class="text-muted">Select area</option>
-                            <option value="Strong Body">Strong Body</option>
-                            <option value="Strong Mind">Strong Mind</option>
-                            <option value="Strong Spirit">Strong Spirit</option>
-                            <option value="Career">Career</option>
-                            <option value="Relationships">Relationships</option>
-                            <option value="Creativity">Creativity</option>
-                            <option value="Finance">Finance</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-muted">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
+                    <div class="form-group mb-4">
+                        <label class="form-label">IDENTITY AREA</label>
+                        <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Habits stick when they match who you're becoming.
+                        </p>
+                        <div class="relative">
+                            <select id="nh-identity" class="form-input" style="color:#9CA3AF;">
+                                <option value="" disabled selected class="text-muted">Select area</option>
+                                <option value="Strong Body">Strong Body</option>
+                                <option value="Strong Mind">Strong Mind</option>
+                                <option value="Strong Spirit">Strong Spirit</option>
+                                <option value="Career">Career</option>
+                                <option value="Relationships">Relationships</option>
+                                <option value="Creativity">Creativity</option>
+                                <option value="Finance">Finance</option>
+                            </select>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-muted">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Tiny Version</label>
-                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 This is what you do on your worst day. 1-2 minutes max.
-                        Never skip twice.</p>
-                    <textarea id="nh-tiny" rows="2" style="resize: none;"
-                        class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                        placeholder=""></textarea>
-                    <div id="nh-tiny-coach" class="text-sm text-[#FBBF24] mt-1"></div>
-                </div>
-
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Anchor or Cue</label>
-                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Where you do it matters as much as when. Same location =
-                        stronger cue. Research shows this doubles follow-through.</p>
-                    <textarea id="nh-anchor" rows="2" style="resize: none;"
-                        class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                        placeholder=""></textarea>
-                    <div id="nh-anchor-coach" class="text-sm text-[#FBBF24] mt-1"></div>
-                </div>
-
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Days of Week</label>
-                    <div class="flex justify-between space-x-1" id="nh-days">
-                        <button type="button" data-day="Mon"
-                            class="day-btn flex-1 py-1.5 text-[11px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Mon</button>
-                        <button type="button" data-day="Tue"
-                            class="day-btn flex-1 py-1.5 text-[11px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Tue</button>
-                        <button type="button" data-day="Wed"
-                            class="day-btn flex-1 py-1.5 text-[11px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Wed</button>
-                        <button type="button" data-day="Thu"
-                            class="day-btn flex-1 py-1.5 text-[11px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Thu</button>
-                        <button type="button" data-day="Fri"
-                            class="day-btn flex-1 py-1.5 text-[11px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Fri</button>
-                        <button type="button" data-day="Sat"
-                            class="day-btn flex-1 py-1.5 text-[11px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Sat</button>
-                        <button type="button" data-day="Sun"
-                            class="day-btn flex-1 py-1.5 text-[11px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Sun</button>
-                    </div>
-                    <p id="nh-days-hint" class="text-xs text-[#9CA3AF] mt-1 text-center">No days selected = runs every
-                        day</p>
-                </div>
-
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Time Block</label>
-                    <div class="flex justify-between space-x-2" id="nh-time">
-                        <button type="button" data-time="Morning"
-                            class="time-btn w-full py-2 text-[12px] font-medium border border-accent bg-accent text-background rounded-md transition-colors">Morning</button>
-                        <button type="button" data-time="Afternoon"
-                            class="time-btn w-full py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Afternoon</button>
-                        <button type="button" data-time="Evening"
-                            class="time-btn w-full py-2 text-[12px] font-medium border border-[#333] bg-card text-text rounded-md transition-colors">Evening</button>
+                    <div class="form-group">
+                        <label class="form-label">TINY VERSION</label>
+                        <p class="text-sm text-[#9CA3AF] mb-1.5">💡 This is what you do on your worst day. 1-2 minutes
+                            max.</p>
+                        <textarea id="nh-tiny" rows="2" style="resize: none;" class="form-input"
+                            placeholder=""></textarea>
+                        <div id="nh-tiny-coach" class="text-sm text-[#FBBF24] mt-1"></div>
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <label class="block text-[13px] text-text font-medium">Weekly Target</label>
-                    <div class="flex space-x-2" id="nh-target">
-                        <button type="button" data-target="3"
-                            class="target-btn w-9 h-9 rounded-md border border-[#333] bg-card text-text text-[13px] flex items-center justify-center transition-colors">3</button>
-                        <button type="button" data-target="5"
-                            class="target-btn w-9 h-9 rounded-md border border-accent bg-accent text-background text-[13px] flex items-center justify-center transition-colors">5</button>
-                        <button type="button" data-target="6"
-                            class="target-btn w-9 h-9 rounded-md border border-[#333] bg-card text-text text-[13px] flex items-center justify-center transition-colors">6</button>
-                        <button type="button" id="nh-target-custom-btn"
-                            class="w-9 h-9 rounded-md border border-[#333] bg-card text-text text-[13px] flex items-center justify-center transition-colors">+</button>
-                        <input type="number" id="nh-target-custom-input"
-                            class="w-12 h-9 rounded-md border border-accent bg-background text-text text-sm text-center hidden focus:outline-none"
-                            min="1" max="7" value="7">
+                <!-- Glass Card 2: Time, Anchor, Frequency -->
+                <div class="glass-card mb-6">
+                    <div class="form-group mb-4">
+                        <label class="form-label">TIME BLOCK</label>
+                        <div class="flex justify-between space-x-2" id="nh-time">
+                            <button type="button" data-time="Morning" class="time-btn w-full">Morning</button>
+                            <button type="button" data-time="Afternoon" class="time-btn w-full">Afternoon</button>
+                            <button type="button" data-time="Evening" class="time-btn w-full">Evening</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="form-label">ANCHOR OR CUE</label>
+                        <p class="text-sm text-[#9CA3AF] mb-1.5">💡 Where you do it matters as much as when.</p>
+                        <textarea id="nh-anchor" rows="2" style="resize: none;" class="form-input"
+                            placeholder=""></textarea>
+                        <div id="nh-anchor-coach" class="text-sm text-[#FBBF24] mt-1"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">DAYS OF WEEK</label>
+                        <div class="flex justify-between space-x-1" id="nh-days">
+                            <button type="button" data-day="Mon" class="day-btn flex-1">Mon</button>
+                            <button type="button" data-day="Tue" class="day-btn flex-1">Tue</button>
+                            <button type="button" data-day="Wed" class="day-btn flex-1">Wed</button>
+                            <button type="button" data-day="Thu" class="day-btn flex-1">Thu</button>
+                            <button type="button" data-day="Fri" class="day-btn flex-1">Fri</button>
+                            <button type="button" data-day="Sat" class="day-btn flex-1">Sat</button>
+                            <button type="button" data-day="Sun" class="day-btn flex-1">Sun</button>
+                        </div>
+                        <p id="nh-days-hint" class="text-xs text-[#9CA3AF] mt-1 text-center">No days selected = runs
+                            every day</p>
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-[13px] text-text mb-1.5 font-medium">Weekly Reward</label>
-                    <p class="text-sm text-[#9CA3AF] mb-1.5">💡 You earn this when you hit your weekly target. Make it
-                        something you actually want.</p>
-                    <input type="text" id="nh-reward"
-                        class="w-full bg-background border border-[#333] rounded-md px-3 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
-                        placeholder="">
+                <!-- Glass Card 3: Goal Tag, Weekly Target, Weekly Reward -->
+                <div class="glass-card mb-6">
+                    <div class="form-group mb-4">
+                        <label class="form-label">GOAL TAG</label>
+                        <div class="flex space-x-2" id="nh-goal-tags">
+                            <button type="button" data-goal="Career" class="goal-tag-btn flex-1">💼 Career</button>
+                            <button type="button" data-goal="Health" class="goal-tag-btn flex-1">💪 Health</button>
+                            <button type="button" data-goal="Mind" class="goal-tag-btn flex-1">🧠 Mind</button>
+                            <button type="button" data-goal="Custom" class="goal-tag-btn flex-1">⭐ Custom</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4 flex items-center justify-between">
+                        <label class="form-label mb-0">WEEKLY TARGET</label>
+                        <div class="flex space-x-2" id="nh-target">
+                            <button type="button" data-target="3"
+                                class="target-btn w-9 h-9 flex items-center justify-center">3</button>
+                            <button type="button" data-target="5"
+                                class="target-btn bg-accent text-[#051614] border-accent w-9 h-9 flex items-center justify-center">5</button>
+                            <button type="button" data-target="6"
+                                class="target-btn w-9 h-9 flex items-center justify-center">6</button>
+                            <button type="button" id="nh-target-custom-btn"
+                                class="w-9 h-9 border-[#333] text-text rounded-md flex items-center justify-center">+</button>
+                            <input type="number" id="nh-target-custom-input"
+                                class="w-12 h-9 border-accent bg-background text-text text-sm text-center hidden focus:outline-none rounded-md"
+                                min="1" max="7" value="7">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">WEEKLY REWARD</label>
+                        <p class="text-sm text-[#9CA3AF] mb-1.5">💡 You earn this when you hit your weekly target.</p>
+                        <input type="text" id="nh-reward" class="form-input" placeholder="">
+                    </div>
                 </div>
 
                 <!-- Buttons -->
-                <div class="pt-5 pb-4 flex flex-col items-center space-y-4">
-                    <button type="button" id="nh-save-btn"
-                        class="w-full py-3.5 bg-accent text-[#0D0D0D] font-bold text-base rounded-btn hover:opacity-90 transition-opacity tracking-wide">Save
-                        Habit</button>
+                <div class="pt-2 pb-6 flex flex-col items-center space-y-4">
+                    <button type="button" id="nh-save-btn" class="btn btn-primary"
+                        style="background:#00C9A7;color:#051614;border-radius:999px;padding:18px;font-size:16px;font-weight:700;border:none;width:100%;cursor:pointer;box-shadow:0 0 20px rgba(0,201,167,0.3);display:flex;align-items:center;justify-content:center;transition:all 0.2s;">
+                        Save Habit
+                    </button>
                     <button type="button" id="nh-add-another-btn"
-                        class="text-[13px] text-[#9CA3AF] underline hover:text-text transition-colors">+ Add Another
-                        Habit</button>
+                        class="text-[13px] text-[#9CA3AF] underline hover:text-white transition-colors">
+                        + Add Another Habit
+                    </button>
                 </div>
             </form>
         </div>
@@ -4800,44 +4964,23 @@
                     const isCompleted = this.isHabitCompletedToday(habit.id);
                     const isSkipped = this.isHabitSkippedToday(habit.id);
                     const row = document.createElement('div');
-                    row.className = `flex items-center justify-between py-2 cursor-pointer group hover:bg-[#1A1A1A] px-1 rounded transition-colors${isSkipped ? ' opacity-60' : ''}`;
+                    row.className = `habit-item-checkbox${isSkipped ? ' opacity-60' : ''}`;
                     row.onclick = () => this.openHabitCheckIn(habit.id);
 
-                    let leftIcon = '';
-                    if (isCompleted) {
-                        leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 flex items-center justify-center transition-colors bg-text border-text text-background"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>`;
-                    } else if (isSkipped) {
-                        leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-[#FBBF24] flex items-center justify-center transition-colors"><span class="text-[#FBBF24] font-bold text-sm leading-none">—</span></div>`;
-                    } else {
-                        leftIcon = `<div class="w-6 h-6 rounded flex-shrink-0 border-2 border-muted flex items-center justify-center transition-colors text-transparent"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div>`;
-                    }
+                    let leftIcon = habit.icon || '🔥';
+                    let nameClass = isCompleted ? 'text-muted line-through decoration-[#9CA3AF]' : (isSkipped ? 'text-[#9CA3AF]' : 'text-text');
+                    let timeblock = habit.timeOfDay || 'Morning';
+                    let tag = habit.goal || 'Custom';
 
-                    const nameClass = isCompleted ? 'text-muted line-through decoration-[#9CA3AF]' : (isSkipped ? 'text-[#9CA3AF]' : 'text-text');
-
-                    let rightContent = '';
-                    if (isSkipped) {
-                        rightContent = `<div class="flex items-center space-x-2 ml-4"><span class="text-[10px] font-bold text-[#FBBF24] bg-[#FBBF24]/15 px-2 py-0.5 rounded-full whitespace-nowrap">Skipped</span></div>`;
-                    } else {
-                        rightContent = `<span class="text-xs ${isCompleted ? 'text-muted' : 'text-text'} whitespace-nowrap ml-4">${habit.streakCurrent}-day streak</span>`;
-                    }
-
-                    let detailLines = '';
-                    if (habit.tinyVersion && habit.tinyVersion.trim()) {
-                        detailLines += `<div class="text-xs bg-yellow-500/20 text-yellow-400 rounded-full px-2 py-0.5 inline-block mt-1">💡 ${habit.tinyVersion}</div>`;
-                    }
-                    if (habit.anchor && habit.anchor.trim()) {
-                        detailLines += `<div class="text-xs bg-blue-500/10 text-blue-400 rounded-full px-2 py-0.5 inline-block mt-1">📍 ${habit.anchor}</div>`;
-                    }
+                    let checkMarkStyle = isCompleted ? 'background:#00C9A7; border-color:#00C9A7; color:#051614;' : 'color:rgba(255,255,255,0.2);';
 
                     row.innerHTML = `
-                        <div class="flex items-start space-x-3 flex-1 min-w-0">
-                            ${leftIcon}
-                            <div class="flex flex-col gap-1 min-w-0">
-                                <span class="text-base truncate ${nameClass}">${habit.name}</span>
-                                ${detailLines}
-                            </div>
+                        <div style="width:40px;height:40px;border-radius:10px;background:rgba(236,91,19,0.15);display:flex;align-items:center;justify-content:center;margin-right:12px;font-size:18px;">${leftIcon}</div>
+                        <div class="habit-item-info" style="flex:1;min-width:0;">
+                            <div class="habit-item-name ${nameClass}" style="font-weight:600;font-size:15px;truncate">${habit.name}</div>
+                            <div class="habit-item-details inline-block" style="font-size:12px;color:#9CA3AF;margin-top:2px;">${timeblock} • ${tag}</div>
                         </div>
-                        <div class="flex-shrink-0 self-start">${rightContent}</div>
+                        <div style="width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;${checkMarkStyle}">${isSkipped ? '—' : '✓'}</div>
                     `;
                     return row;
                 };
