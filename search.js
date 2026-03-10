@@ -1,8 +1,14 @@
 const fs = require('fs');
-const lines = fs.readFileSync('index.html', 'utf8').split('\n');
-const screens = ['screen-splash', 'screen-new-week', 'screen-review', 'screen-goals', 'screen-settings', 'screen-weekly-review'];
-lines.forEach((line, i) => {
-    if (screens.some(s => line.includes(`id="${s}"`))) {
-        console.log(`${i + 1}: ${line.trim()}`);
+const content = fs.readFileSync('index.html', 'utf8');
+const lines = content.split(/\r?\n/);
+
+const functions = ['renderDashboard', 'navigate', 'renderTodayPlan', 'renderTomorrowPlan', 'saveNewHabit', 'renderGreatWork', 'renderWeeklyScreen', 'openEditTodayHabits', 'openEditTomorrowHabits', 'saveHabit', 'getPrimaryIdentity', 'renderCharacter'];
+
+functions.forEach(fn => {
+  lines.forEach((line, i) => {
+    const regex = new RegExp(`^\\s*(?:async\\s+)?${fn}\\s*\\(`, 'i');
+    if (regex.test(line)) {
+      console.log(`FOUND ${fn} at line ${i+1}`);
     }
+  });
 });
