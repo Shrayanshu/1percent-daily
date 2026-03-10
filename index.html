@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tailwind Config for Design System -->
@@ -1564,7 +1565,7 @@
             <div class="px-5 space-y-4 flex-1">
                 <!-- Add Goal Button -->
                 <button type="button" id="btn-add-custom-goal"
-                    class="w-full py-3 border border-[#333] text-text rounded-md flex items-center justify-center space-x-2 hover:bg-card transition-colors">
+                    class="w-full py-3 border border-[#333] text-text rounded-2xl flex items-center justify-center space-x-2 hover:bg-card transition-colors">
                     <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
@@ -1574,10 +1575,10 @@
                 <!-- Hidden Custom Goal Input -->
                 <div id="custom-goal-input-container" class="hidden flex space-x-2">
                     <input type="text" id="custom-goal-input"
-                        class="flex-1 bg-background border border-accent rounded-md px-3 py-2 text-text placeholder-[#6b7280] text-sm focus:outline-none"
+                        class="flex-1 bg-background border border-accent rounded-2xl px-3 py-2 text-text placeholder-[#6b7280] text-sm focus:outline-none"
                         placeholder="Enter goal name...">
                     <button type="button" id="btn-save-custom-goal"
-                        class="px-4 bg-accent text-background rounded-md text-sm font-medium">Add</button>
+                        class="px-4 bg-accent text-background rounded-2xl text-sm font-medium">Add</button>
                 </div>
 
                 <!-- Goal Area Cards -->
@@ -1824,9 +1825,9 @@
                             <button type="button" data-target="6"
                                 class="target-btn w-9 h-9 flex items-center justify-center">6</button>
                             <button type="button" id="nh-target-custom-btn"
-                                class="w-9 h-9 border-[#333] text-text rounded-md flex items-center justify-center">+</button>
+                                class="w-9 h-9 border-[#333] text-text rounded-2xl flex items-center justify-center">+</button>
                             <input type="number" id="nh-target-custom-input"
-                                class="w-12 h-9 border-accent bg-background text-text text-sm text-center hidden focus:outline-none rounded-md"
+                                class="w-12 h-9 border-accent bg-background text-text text-sm text-center hidden focus:outline-none rounded-2xl"
                                 min="1" max="7" value="7">
                         </div>
                     </div>
@@ -1881,7 +1882,7 @@
 
             <!-- Tiny Version Reminder Card (above Done/Skip) -->
             <div id="checkin-tiny-card" class="px-5 mb-3 hidden">
-                <div class="bg-card border-l-4 border-[#FBBF24] rounded-md px-4 py-3">
+                <div class="bg-card border-l-4 border-[#FBBF24] rounded-2xl px-4 py-3">
                     <span id="checkin-tiny-version"
                         class="text-xs bg-yellow-500/20 text-yellow-400 rounded-full px-2 py-0.5 inline-block">💡 Tiny
                         version</span>
@@ -1890,15 +1891,15 @@
 
             <!-- Cue Reminder (below Tiny Version) -->
             <div id="checkin-cue-card" class="px-5 mb-3 hidden">
-                <div class="bg-card border-l-4 border-blue-500 rounded-md px-4 py-3">
+                <div class="bg-card border-l-4 border-blue-500 rounded-2xl px-4 py-3">
                     <span id="checkin-cue-value"
-                        class="text-xs bg-blue-500/10 text-blue-400 rounded-full px-2 py-0.5 inline-block">📍 Cue</span>
+                        class="text-xs bg-emerald-500 hover:bg-emerald-400 active:scale-[0.98]/10 text-blue-400 rounded-full px-2 py-0.5 inline-block">📍 Cue</span>
                 </div>
             </div>
 
             <!-- Weekly Reward (below Cue) -->
             <div id="checkin-reward-card" class="px-5 mb-5 hidden">
-                <div class="bg-card border-l-4 border-green-500 rounded-md px-4 py-3">
+                <div class="bg-card border-l-4 border-green-500 rounded-2xl px-4 py-3">
                     <p class="text-xs text-[#9CA3AF] mb-1">🎁 Your reward:</p>
                     <span id="checkin-reward-value"
                         class="text-xs bg-green-500/10 text-green-400 rounded-full px-2 py-0.5 inline-block">Reward</span>
@@ -1936,7 +1937,7 @@
             <div class="px-5 mb-3">
                 <label class="block text-[13px] text-text mb-2 font-medium">Log today's number (optional)</label>
                 <input type="text" id="checkin-log-value"
-                    class="w-full bg-card border border-[#333] rounded-md px-4 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
+                    class="w-full bg-card border border-[#333] rounded-2xl px-4 py-3 text-text placeholder-[#6b7280] text-sm focus:outline-none focus:border-accent"
                     placeholder="">
                 <div id="checkin-log-coach" class="text-sm text-[#FBBF24] mt-1"></div>
             </div>
@@ -3068,7 +3069,7 @@
                         // Create new card
                         const container = document.getElementById('goal-cards-container');
                         const card = document.createElement('div');
-                        card.className = 'goal-card flex items-center bg-card border border-accent rounded-md p-3 cursor-pointer transition-colors';
+                        card.className = 'goal-card flex items-center bg-card border border-accent rounded-2xl p-3 cursor-pointer transition-colors';
                         card.dataset.value = val;
                         card.innerHTML = `
                             <div class="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-xl mr-4 bg-background">🎯</div>
@@ -4635,7 +4636,7 @@
                     breakdownList.innerHTML += `
                         <div class="flex items-center justify-between p-3 border-b border-[#333] last:border-0 bg-background">
                             <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 rounded-md bg-[#1A1A1A] flex items-center justify-center text-lg shadow-emerald-500/10">
+                                <div class="w-8 h-8 rounded-2xl bg-[#1A1A1A] flex items-center justify-center text-lg shadow-emerald-500/10">
                                     ${habit.icon || ICONS[habit.category] || '🌟'}
                                 </div>
                                 <span class="text-text font-medium text-sm">${habit.name}</span>
@@ -4992,7 +4993,7 @@
                 if (habit && habit.streakCurrent > 0) {
                     winsList.innerHTML += `
                         <div class="flex items-center space-x-3 w-full">
-                            <div class="w-10 h-10 bg-card rounded-md flex items-center justify-center text-xl">🔥</div>
+                            <div class="w-10 h-10 bg-card rounded-2xl flex items-center justify-center text-xl">🔥</div>
                             <span class="text-text">${habit.streakCurrent}-day streak</span>
                         </div>
                         <div class="w-full h-px bg-[#333] mb-4"></div>
@@ -5005,7 +5006,7 @@
                     if (recentCompletions.length > 0) {
                         winsList.innerHTML += `
                             <div class="flex items-center space-x-3 w-full">
-                                <div class="w-10 h-10 bg-card rounded-md flex items-center justify-center text-xl">📈</div>
+                                <div class="w-10 h-10 bg-card rounded-2xl flex items-center justify-center text-xl">📈</div>
                                 <span class="text-text">Consistent improvement vs last week average</span>
                             </div>
                             <div class="w-full h-px bg-[#333] mb-4"></div>
@@ -5019,7 +5020,7 @@
                 const areaIcon = ICONS[category] || '🌟';
                 winsList.innerHTML += `
                     <div class="flex items-center space-x-3 w-full">
-                        <div class="w-10 h-10 bg-card rounded-md flex items-center justify-center text-xl">${areaIcon}</div>
+                        <div class="w-10 h-10 bg-card rounded-2xl flex items-center justify-center text-xl">${areaIcon}</div>
                         <span class="text-text">${category} progress</span>
                     </div>
                 `;
