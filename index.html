@@ -1381,6 +1381,22 @@
         .screen.active {
             display: block !important;
         }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0D0D0D">
@@ -1402,7 +1418,7 @@
 
             <div class="text-center max-w-md mx-auto">
                 <div
-                    class="splash-logo-box bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-12 shadow-2xl mb-8 inline-block">
+                    class="splash-logo-box bg-gray-900/80 backdrop-blur-sm/5 backdrop-blur-xl border border-white/10 rounded-3xl p-12 shadow-2xl mb-8 inline-block">
                     <div
                         class="logo-icon w-32 h-32 bg-gradient-to-br from-teal-400 to-teal-600 rounded-2xl flex items-center justify-center shadow-2xl mb-6 mx-auto font-black text-5xl text-slate-900 rotate-3">
                         1
@@ -1436,76 +1452,45 @@
         </header>
 
         <!-- Main Content (Screen 4: Home Dashboard) -->
-        <main class="flex-1 px-5 overflow-y-auto pb-24 hidden" id="main-content">
+        <div id="screen-dashboard"
+            class="screen active flex flex-col h-screen overflow-hidden bg-gradient-to-br from-gray-950 via-emerald-950 to-gray-950">
 
-            <!-- Greeting -->
-            <div class="greeting-card" style="position:relative; overflow:hidden;">
-                <div
-                    style="position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:rgba(45,212,191,0.1);border-radius:50%;filter:blur(60px);pointer-events:none;">
+            <!-- TOP BAR -->
+            <div class="flex items-center justify-between px-5 pt-6 pb-2 shrink-0">
+                <div>
+                    <p class="text-emerald-400 text-xs font-medium tracking-widest uppercase">Today</p>
+                    <h1 class="text-white text-2xl font-bold" id="dash-greeting">Good morning 👋</h1>
                 </div>
-                <div style="display:flex;flex-direction:row;align-items:center;justify-content:space-between;">
-                    <div style="flex:1;padding-right:16px;">
-                        <span
-                            class="inline-block px-3 py-1 mb-2 rounded-full bg-primary/20 text-primary text-[10px] font-bold tracking-[0.15em] uppercase"
-                            id="userIdentity">WARRIOR</span>
-                        <h2 id="greeting-text" class="text-2xl font-bold text-white mb-1">Good morning, Name</h2>
-                        <p class="italic text-teal-300 text-sm">"Discipline equals freedom."</p>
-                        <p id="dashboard-date-indicator" class="text-xs text-muted mt-2"></p>
-                    </div>
-                    <div style="width:110px;height:110px;flex-shrink:0;position:relative;">
-                        <img id="dashboardCharacter" src="./assets/strong-mind-determined.png" alt="Identity character"
-                            style="width:110px;height:110px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(0,201,167,0.2));" />
-                    </div>
+                <div id="dash-character-container" class="w-16 h-16"></div>
+            </div>
+
+            <!-- STREAK BAR -->
+            <div
+                class="mx-5 mb-3 shrink-0 bg-emerald-900/30 border border-emerald-500/20 rounded-2xl px-4 py-3 flex items-center justify-between">
+                <div>
+                    <p class="text-emerald-400 text-xs uppercase tracking-wider">Current Streak</p>
+                    <p class="text-white text-3xl font-black" id="dash-streak">0 🔥</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-gray-400 text-xs">Weekly goal</p>
+                    <p class="text-emerald-300 text-sm font-semibold" id="dash-weekly-progress">0/7</p>
                 </div>
             </div>
 
-            <!-- TODAY vs YESTERDAY Card -->
-            <div class="score-section">
-                <div class="score-header">TODAY vs YESTERDAY</div>
-                <div class="flex justify-between items-end mb-4 score-item">
-                    <span class="text-text font-medium text-lg">Daily Score:</span>
-                    <span id="daily-score" class="score-value">0%</span>
-                </div>
-                <div
-                    style="height:10px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin-top:8px;">
-                    <div id="dailyScoreBar"
-                        style="height:100%;background:linear-gradient(90deg,#ec5b13,#fb923c);border-radius:999px;width:0%;transition:width 0.7s ease;box-shadow:0 0 15px rgba(236,91,19,0.5);">
-                    </div>
-                </div>
-                <div class="flex items-center justify-between mt-4">
-                    <span class="text-sm text-muted">Streak: <span id="current-streak-days"
-                            class="text-text font-medium">0 days</span></span>
-                    <div class="flex items-center space-x-3 w-1/2">
-                        <progress id="daily-progress-bar" value="0" max="5" class="w-full"></progress>
-                        <span id="daily-progress-text" class="text-xs text-muted font-medium whitespace-nowrap">0 /
-                            0</span>
-                    </div>
-                </div>
+            <!-- HABIT LIST (scrollable) -->
+            <div class="flex-1 overflow-y-auto px-5 pb-4 space-y-3" id="dash-habit-list">
+                <!-- habits rendered here by JS -->
             </div>
 
-            <!-- TODAY'S HABITS -->
-            <div class="mb-8 habits-section">
-                <div class="pb-2 mb-4">
-                    <h3 class="section-title-simple">TODAY'S HABITS</h3>
-                </div>
-
-                <div id="habits-list" class="space-y-6">
-                    <!-- Populated by JS -->
-                </div>
+            <!-- BOTTOM CTA (sticky) -->
+            <div class="px-5 pb-6 pt-2 shrink-0">
+                <button onclick="App.navigate('today-plan')"
+                    class="w-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold py-4 rounded-2xl text-base transition-all active:scale-95 shadow-lg shadow-emerald-500/30">
+                    📋 View Today's Plan
+                </button>
             </div>
 
-            <!-- THIS WEEK'S PROGRESS -->
-            <div class="mb-6">
-                <div class="border-b border-[#333] pb-2 mb-4">
-                    <span class="text-xs font-semibold text-muted tracking-wide uppercase">THIS WEEK'S PROGRESS</span>
-                </div>
-
-                <div id="categories-progress" class="space-y-4">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-        </main>
+        </div>
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav hidden">
@@ -1958,65 +1943,23 @@
 
         </div>
 
-        <!-- Screen 6: Habit Celebration -->
-        <div id="screen-celebration"
-            class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
-            <div class="flex-1 flex flex-col items-center justify-center px-5 py-10 mt-10">
-                <div class="char-circle ring-accent">
-                    <img id="celebration-character" src="./assets/strong-mind-determined.png" alt="Habit character"
-                        style="width:72px;height:72px;object-fit:contain;">
-                </div>
-                <!-- Checkmark Circle -->
-                <div class="w-20 h-20 rounded-full border-[3px] border-accent flex items-center justify-center mb-6 scale-0 transition-transform duration-500 ease-out"
-                    id="celeb-circle">
-                    <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                </div>
-
-                <!-- Title -->
-                <h1 class="text-3xl font-bold text-text mb-8 tracking-tight">Great work!</h1>
-
-                <!-- Divider -->
-                <div class="w-full h-px bg-[#333] mb-6"></div>
-
-                <!-- Streak Row -->
-                <div class="w-full flex items-center space-x-3 mb-6">
-                    <span class="text-xl">🔥</span>
-                    <span id="celeb-streak-text" class="text-text font-bold text-lg tracking-wide">Streak: 8 days</span>
-                </div>
-
-                <!-- Divider -->
-                <div class="w-full h-px bg-[#333] mb-6"></div>
-
-                <!-- Progress Row (Logged Number) - Optional -->
-                <div id="celeb-log-row" class="w-full mb-8 hidden">
-                    <p id="celeb-log-text" class="text-text text-[15px] font-medium mb-3 tracking-wide">Habit: X today
-                    </p>
-                    <div id="celeb-log-segments" class="flex space-x-1 h-2 w-full">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Weekly Goal Row -->
-                <div class="w-full mb-10">
-                    <p id="celeb-weekly-text" class="text-text text-[15px] font-medium mb-3 tracking-wide">Habit this
-                        week: X / Y</p>
-                    <div id="celeb-weekly-segments" class="flex space-x-1 h-2 w-full">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
-                <!-- Buttons -->
-                <div class="w-full space-y-4 mt-auto pt-8">
-                    <button type="button" id="btn-celeb-back"
-                        class="w-full py-3.5 bg-accent text-[#0D0D0D] font-bold text-base rounded-btn hover:opacity-90 transition-opacity tracking-wide">Back
-                        to Today</button>
-                    <button type="button" id="btn-celeb-reward"
-                        class="w-full py-3.5 border border-accent text-accent font-bold text-base rounded-btn hover:bg-card transition-colors tracking-wide hidden">Claim
-                        Reward now</button>
-                </div>
+        <!-- Screen 6: Habit Celebration / Great Work -->
+        <div id="screen-great-work"
+            class="screen flex flex-col items-center justify-center h-screen bg-gradient-to-br from-gray-950 via-emerald-950 to-gray-950 px-6 text-center">
+            <div id="greatwork-character-container" class="mb-4"></div>
+            <div class="text-6xl mb-3">🏆</div>
+            <h1 class="text-white text-3xl font-black mb-2">Great Work!</h1>
+            <p class="text-emerald-300 text-base mb-1" id="greatwork-identity-text">You showed up as your best self
+                today.</p>
+            <p class="text-gray-400 text-sm mb-6" id="greatwork-streak-text">Streak: 0 🔥</p>
+            <div class="bg-emerald-900/30 border border-emerald-400/30 rounded-2xl px-6 py-4 w-full max-w-xs mb-6">
+                <p class="text-emerald-400 text-xs uppercase tracking-widest mb-1">Identity confirmed</p>
+                <p class="text-white text-lg font-bold" id="greatwork-identity-badge">—</p>
             </div>
+            <button onclick="App.navigate('dashboard')"
+                class="w-full max-w-xs bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold py-4 rounded-2xl text-base transition-all active:scale-95 shadow-lg shadow-emerald-500/30">
+                Back to Dashboard
+            </button>
         </div>
 
         <!-- Screen 7: Today's Summary -->
@@ -2087,55 +2030,95 @@
             </div>
         </div>
 
-        <!-- Screen 8: Tomorrow's Plan -->
-        <div id="screen-plan" class="absolute inset-0 bg-background z-50 flex flex-col hidden overflow-y-auto pb-6">
-            <div class="px-5 pt-10 pb-6 flex-1 relative">
-                <button onclick="App.closePlanTomorrow()"
-                    class="text-text hover:text-accent transition-colors absolute left-5 top-11">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                </button>
-                <!-- Title -->
-                <h1 id="plan-title" class="text-3xl font-bold text-text mb-2 text-center tracking-tight mt-2 pl-10">
-                    Tomorrow's Plan</h1>
-                <p id="plan-subtitle" class="text-[#9CA3AF] text-center mb-4">Your habits are pre-loaded. <span
-                        class="font-bold text-[#F5F5F5]">Confirm or adjust.</span></p>
-
-                <!-- Today/Tomorrow Tab Toggle (UAT-03) -->
-                <div class="flex bg-white/8 rounded-xl p-1 mb-6 backdrop-blur-sm border border-white/10">
-                    <button id="plan-tab-today" onclick="App.openPlanScreen('today')"
-                        class="flex-1 py-2 text-sm font-medium rounded-md text-muted transition-colors">Today</button>
-                    <button id="plan-tab-tomorrow" onclick="App.openPlanScreen('tomorrow')"
-                        class="flex-1 py-2 text-sm font-medium rounded-md bg-accent text-background transition-colors">Tomorrow</button>
+        <!-- Screen 8: Today / Tomorrow Plan -->
+        <div id="screen-today-plan"
+            class="screen flex flex-col h-screen overflow-hidden bg-gradient-to-br from-gray-950 via-emerald-950 to-gray-950">
+            <div class="flex items-center justify-between px-5 pt-6 pb-3 shrink-0">
+                <div>
+                    <p class="text-emerald-400 text-xs uppercase tracking-widest">Today's Plan</p>
+                    <h2 class="text-white text-xl font-bold" id="today-plan-date">Monday, 10 Mar</h2>
                 </div>
-
-                <!-- Divider -->
-                <div class="w-full h-px bg-[#333] mb-6"></div>
-
-                <!-- Habits List Container -->
-                <div id="plan-habits-list" class="space-y-6">
-                    <!-- Populated by JS -->
-                </div>
-
-                <!-- Insight Card -->
-                <div class="plan-insight-card">
-                    <span class="text-amber-400 text-xl mt-0.5">💡</span>
-                    <p class="text-sm" style="color:rgba(255,255,255,0.75);">
-                        You are <span class="font-bold text-white">2x more likely to do it</span> because you planned.
-                    </p>
-                </div>
+                <div id="today-character-container" class="w-14 h-14"></div>
             </div>
+            <div class="flex-1 overflow-y-auto px-5 pb-4 space-y-4">
+                <div class="bg-emerald-900/20 border border-emerald-500/20 rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-emerald-300 text-sm font-semibold uppercase tracking-wider">Today's Habits</h3>
+                        <button id="btn-today-plan-edit" onclick="App.openEditTodayHabits()"
+                            class="text-xs text-emerald-400 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full hover:bg-emerald-800/50 transition-all">
+                            ✏️ Edit
+                        </button>
+                    </div>
+                    <div id="today-plan-habit-list" class="space-y-2">
+                        <!-- rendered by JS -->
+                    </div>
+                </div>
+                <div class="bg-gray-900/60 border border-emerald-500/20 rounded-2xl p-4">
+                    <h3 class="text-emerald-300 text-sm font-semibold uppercase tracking-wider mb-3">➕ Add a Habit</h3>
+                    <button onclick="App.navigate('add-habit')"
+                        class="w-full border-2 border-dashed border-emerald-500/40 text-emerald-400 rounded-xl py-3 text-sm hover:border-emerald-400 hover:bg-emerald-900/20 transition-all">
+                        + Add New Habit
+                    </button>
+                </div>
+                <div class="bg-emerald-900/30 border border-emerald-400/30 rounded-2xl p-4">
+                    <h3 class="text-emerald-300 text-sm font-semibold uppercase tracking-wider mb-1">✅ Confirm Your Plan
+                    </h3>
+                    <p class="text-gray-400 text-xs mb-3">Locking in your plan increases follow-through by 2x.</p>
+                    <button onclick="App.confirmTodayPlan()" id="btn-confirm-today-plan"
+                        class="w-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold py-3 rounded-xl text-sm transition-all active:scale-95 shadow-md shadow-emerald-500/30">
+                        🔒 Confirm Today's Plan
+                    </button>
+                </div>
+                <button onclick="App.navigate('tomorrow-plan')"
+                    class="w-full text-center py-2 mt-4 text-emerald-500 text-sm hover:underline">
+                    View Tomorrow's Plan →
+                </button>
+            </div>
+        </div>
 
-            <!-- Buttons -->
-            <div class="px-5 mt-auto pb-4 space-y-4">
-                <button type="button" id="btn-plan-confirm"
-                    class="w-full py-3.5 bg-accent text-[#0D0D0D] font-bold text-base rounded-btn hover:opacity-90 transition-opacity tracking-wide">Confirm
-                    Plan</button>
-                <button type="button" id="btn-plan-adjust"
-                    class="w-full py-3.5 border border-[#333] text-[#9CA3AF] font-bold text-base rounded-btn hover:bg-[#1A1A1A] transition-colors tracking-wide">Edit
-                    Plan</button>
+        <div id="screen-tomorrow-plan"
+            class="screen flex flex-col h-screen overflow-hidden bg-gradient-to-br from-gray-950 via-emerald-950 to-gray-950">
+            <div class="flex items-center justify-between px-5 pt-6 pb-3 shrink-0">
+                <div>
+                    <p class="text-emerald-400 text-xs uppercase tracking-widest">Tomorrow's Plan</p>
+                    <h2 class="text-white text-xl font-bold" id="tomorrow-plan-date">Tuesday, 11 Mar</h2>
+                </div>
+                <div id="tomorrow-character-container" class="w-14 h-14"></div>
+            </div>
+            <div class="flex-1 overflow-y-auto px-5 pb-4 space-y-4">
+                <div class="bg-emerald-900/20 border border-emerald-500/20 rounded-2xl p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-emerald-300 text-sm font-semibold uppercase tracking-wider">Tomorrow's Habits
+                        </h3>
+                        <button id="btn-tomorrow-plan-edit" onclick="App.openEditTomorrowHabits()"
+                            class="text-xs text-emerald-400 bg-emerald-900/40 border border-emerald-500/30 px-3 py-1 rounded-full hover:bg-emerald-800/50 transition-all">
+                            ✏️ Edit
+                        </button>
+                    </div>
+                    <div id="tomorrow-plan-habit-list" class="space-y-2">
+                        <!-- rendered by JS -->
+                    </div>
+                </div>
+                <div class="bg-gray-900/60 border border-emerald-500/20 rounded-2xl p-4">
+                    <h3 class="text-emerald-300 text-sm font-semibold uppercase tracking-wider mb-3">➕ Add a Habit</h3>
+                    <button onclick="App.navigate('add-habit')"
+                        class="w-full border-2 border-dashed border-emerald-500/40 text-emerald-400 rounded-xl py-3 text-sm hover:border-emerald-400 hover:bg-emerald-900/20 transition-all">
+                        + Add New Habit
+                    </button>
+                </div>
+                <div class="bg-emerald-900/30 border border-emerald-400/30 rounded-2xl p-4">
+                    <h3 class="text-emerald-300 text-sm font-semibold uppercase tracking-wider mb-1">✅ Confirm Your Plan
+                    </h3>
+                    <p class="text-gray-400 text-xs mb-3">Locking in your plan increases follow-through by 2x.</p>
+                    <button onclick="App.confirmTomorrowPlan()" id="btn-confirm-tomorrow-plan"
+                        class="w-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-bold py-3 rounded-xl text-sm transition-all active:scale-95 shadow-md shadow-emerald-500/30">
+                        🔒 Confirm Tomorrow's Plan
+                    </button>
+                </div>
+                <button onclick="App.navigate('today-plan')"
+                    class="w-full text-center py-2 mt-4 text-emerald-500 text-sm hover:underline">
+                    ← Back to Today
+                </button>
             </div>
         </div>
 
@@ -2294,9 +2277,9 @@
 
         <!-- Screen 12: Weekly Review -->
         <div id="screen-weekly-review"
-            class="absolute inset-0 bg-background z-[55] flex flex-col hidden overflow-y-auto pb-24">
+            class="screen flex flex-col h-screen overflow-hidden bg-gradient-to-br from-gray-950 via-emerald-950 to-gray-950">
             <header
-                class="px-5 pt-10 pb-4 flex items-center bg-background sticky top-0 z-10 w-full relative justify-center">
+                class="px-5 pt-10 pb-4 flex items-center bg-transparent sticky top-0 z-10 w-full relative justify-center">
                 <button id="btn-weekly-review-back"
                     class="text-text hover:text-accent transition-colors absolute left-5">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2308,10 +2291,7 @@
             </header>
 
             <div class="px-5 pt-2 flex-1 flex flex-col">
-                <div class="wr-character-wrap">
-                    <img id="weekly-review-character" src="./assets/strong-spirit-calm.png"
-                        style="width:140px; height:140px; object-fit:contain;">
-                </div>
+                <div id="weekly-character-container" class="flex justify-center mb-2"></div>
                 <div id="weekly-review-date-badge" class="identity-pill mb-6 mx-auto">April
                     15 –
                     April 21</div>
@@ -2320,9 +2300,9 @@
                 <div class="mb-6">
                     <span class="text-[#9CA3AF] text-sm mb-3 block">Overview</span>
                     <div class="grid grid-cols-1 gap-3 mb-3">
-                        <div class="wr-stat-card">
+                        <div class="bg-emerald-900/20 border border-emerald-500/20 rounded-2xl p-5 text-center">
                             <span class="wr-stat-label">Habits Completed</span>
-                            <div class="text-right">
+                            <div class="text-center mt-2">
                                 <div class="wr-stat-value text-lg" id="wr-habits-completed">0 / 0 • 0%</div>
                                 <div id="wr-vs-last-week" class="text-sm mt-1 hidden"></div>
                             </div>
@@ -2330,11 +2310,13 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
-                        <div class="wr-stat-card flex-col items-start gap-1">
+                        <div
+                            class="bg-emerald-900/20 border border-emerald-500/20 rounded-2xl p-5 flex flex-col items-start gap-1">
                             <span class="wr-stat-label">Best Day:</span>
                             <span id="wr-best-day" class="wr-stat-value text-base">None</span>
                         </div>
-                        <div class="wr-stat-card flex-col items-start gap-1">
+                        <div
+                            class="bg-emerald-900/20 border border-emerald-500/20 rounded-2xl p-5 flex flex-col items-start gap-1">
                             <span class="wr-stat-label">Hardest Day:</span>
                             <span id="wr-hardest-day" class="wr-stat-value text-base">None</span>
                         </div>
@@ -2345,7 +2327,7 @@
                 <h2 class="text-text font-bold text-lg mb-3">Habit Breakdown</h2>
                 <div class="w-full h-px bg-[#333] mb-3"></div>
                 <div id="wr-breakdown-list"
-                    class="space-y-0 mb-6 border border-[#333] rounded-card overflow-hidden bg-card">
+                    class="space-y-0 mb-6 border border-emerald-500/20 rounded-2xl overflow-hidden bg-emerald-900/20">
                     <!-- Populated by JS -->
                 </div>
 
@@ -2692,56 +2674,48 @@
             currentCheckInHabitId: null,
 
             getPrimaryIdentity() {
-                if (!this.data || !this.data.habits) return 'Strong Mind';
-                const activeHabits = this.data.habits.filter(h => h.isActive);
-                if (activeHabits.length === 0) return 'Strong Mind';
-
-                const counts = {};
-                activeHabits.forEach(h => {
-                    const cat = h.category || 'General';
-                    counts[cat] = (counts[cat] || 0) + 1;
-                });
-
-                let maxCat = 'Strong Mind';
-                let maxCount = 0;
-                for (const [cat, count] of Object.entries(counts)) {
-                    if (count > maxCount) {
-                        maxCount = count;
-                        maxCat = cat;
-                    }
-                }
-                return maxCat;
+                const habits = this.getHabits();
+                if (!habits || habits.length === 0) return null;
+                const primary = habits.find(h => h.identity) || habits[0];
+                return primary ? primary.identity : null;
             },
 
-            getCharacterForContext(context) {
+            getCharacterForIdentity(identity) {
+                if (!identity) return null;
+                const map = {
+                    'runner': 'https://api.dicebear.com/7.x/adventurer/svg?seed=runner&backgroundColor=transparent',
+                    'reader': 'https://api.dicebear.com/7.x/adventurer/svg?seed=reader&backgroundColor=transparent',
+                    'meditator': 'https://api.dicebear.com/7.x/adventurer/svg?seed=zen&backgroundColor=transparent',
+                    'athlete': 'https://api.dicebear.com/7.x/adventurer/svg?seed=athlete&backgroundColor=transparent',
+                    'writer': 'https://api.dicebear.com/7.x/adventurer/svg?seed=writer&backgroundColor=transparent',
+                    'learner': 'https://api.dicebear.com/7.x/adventurer/svg?seed=learner&backgroundColor=transparent',
+                    'creator': 'https://api.dicebear.com/7.x/adventurer/svg?seed=creator&backgroundColor=transparent',
+                };
+                const key = identity.toLowerCase().trim();
+                for (const [k, v] of Object.entries(map)) {
+                    if (key.includes(k)) return v;
+                }
+                // fallback: generate avatar from identity string itself
+                return `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(identity)}&backgroundColor=transparent`;
+            },
+
+            renderCharacter(containerId, size = '96px') {
                 const identity = this.getPrimaryIdentity();
-
-                if (identity === 'Strong Body' || identity === 'Health') {
-                    if (['dashboard', 'weeklyProgress', 'summary', 'weeklyReview', 'newWeek'].includes(context)) {
-                        return './assets/strong-body-training.png';
-                    }
-                    if (['celebration', 'reward', 'weekStats', 'checkin'].includes(context)) {
-                        return './assets/strong-body-victory.png';
-                    }
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                if (!identity) {
+                    container.innerHTML = `<div class="w-24 h-24 rounded-full bg-emerald-900/40 border-2 border-emerald-400/30 flex items-center justify-center text-4xl">🌱</div>`;
+                    return;
                 }
-
-                if (identity === 'Career' || identity === 'Finance') {
-                    if (['dashboard', 'weeklyProgress', 'summary'].includes(context)) {
-                        return './assets/career-builder-victory.png';
-                    }
-                    if (['celebration', 'reward', 'weekStats', 'weeklyReview', 'newWeek'].includes(context)) {
-                        return './assets/career-builder-reflective.png';
-                    }
-                    if (context === 'checkin') return './assets/career-builder-victory.png';
-                }
-
-                if (identity === 'Strong Spirit' || identity === 'Relationships') {
-                    return './assets/strong-spirit-calm.png';
-                }
-
-                // Default / Strong Mind / Creativity
-                return './assets/strong-mind-determined.png';
+                const src = this.getCharacterForIdentity(identity);
+                container.innerHTML = `
+                <div class="character-wrapper animate-float" style="width:${size};height:${size};">
+                  <img src="${src}" alt="${identity} character"
+                    style="width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 16px rgba(52,211,153,0.5));"
+                    onerror="this.parentElement.innerHTML='<span style=font-size:3rem>🏃</span>'" />
+                </div>`;
             },
+
 
             init() {
                 this.loadData();
@@ -4670,7 +4644,7 @@
                     breakdownList.innerHTML += `
                         <div class="flex items-center justify-between p-3 border-b border-[#333] last:border-0 bg-background">
                             <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 rounded-md bg-[#1A1A1A] flex items-center justify-center text-lg shadow-sm">
+                                <div class="w-8 h-8 rounded-md bg-[#1A1A1A] flex items-center justify-center text-lg shadow-emerald-500/10">
                                     ${habit.icon || ICONS[habit.category] || '🌟'}
                                 </div>
                                 <span class="text-text font-medium text-sm">${habit.name}</span>
@@ -5816,7 +5790,7 @@
                         <div class="settings-row border-b border-[#333] last:border-0">
                             <span class="text-text">${area}</span>
                             <div class="w-12 h-6 rounded-full ${toggleBg} relative cursor-pointer transition-colors duration-200 settings-goal-toggle settings-toggle" data-area="${area}">
-                                <div class="w-5 h-5 bg-white rounded-full absolute top-[2px] transition-transform duration-200 ${toggleDot}"></div>
+                                <div class="w-5 h-5 bg-gray-900/80 backdrop-blur-sm rounded-full absolute top-[2px] transition-transform duration-200 ${toggleDot}"></div>
                             </div>
                         </div>
                     `;
@@ -6213,6 +6187,80 @@
                 document.querySelector('header').classList.remove('hidden');
                 document.querySelector('nav').classList.remove('hidden');
                 this.renderDashboard();
+            },
+
+            openEditTodayHabits() {
+                const listEl = document.getElementById('today-plan-habit-list');
+                if (!listEl) return;
+                const habits = this.getHabits ? this.getHabits() : (this.data ? this.data.habits : []);
+                if (!habits || !habits.length) { listEl.innerHTML = '<p class="text-gray-500 text-sm">No habits yet. Add one above.</p>'; return; }
+                listEl.innerHTML = habits.map((h, i) => `
+                <div class="flex items-center justify-between bg-gray-800/50 rounded-xl px-3 py-2">
+                  <span class="text-white text-sm">${h.name || h.identity}</span>
+                  <div class="flex gap-2">
+                    <button onclick="App.navigate('edit-habit-${i}')" class="text-xs text-emerald-400 bg-emerald-900/30 px-2 py-1 rounded-lg">Edit</button>
+                    <!-- <button onclick="App.toggleHabitToday(${i})" class="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded-lg">Toggle</button> -->
+                  </div>
+                </div>`).join('');
+            },
+
+            confirmTodayPlan() {
+                const today = new Date().toDateString();
+                localStorage.setItem('1daily_plan_confirmed_' + today, 'true');
+                const btn = document.getElementById('btn-confirm-today-plan');
+                if (btn) {
+                    btn.textContent = '✅ Plan Confirmed!';
+                    btn.disabled = true;
+                    btn.classList.replace('bg-emerald-500', 'bg-emerald-700');
+                }
+            },
+
+            openEditTomorrowHabits() {
+                const listEl = document.getElementById('tomorrow-plan-habit-list');
+                if (!listEl) return;
+                const habits = this.getHabits ? this.getHabits() : (this.data ? this.data.habits : []);
+                if (!habits || !habits.length) { listEl.innerHTML = '<p class="text-gray-500 text-sm">No habits yet.</p>'; return; }
+                listEl.innerHTML = habits.map((h, i) => `
+                <div class="flex items-center justify-between bg-gray-800/50 rounded-xl px-3 py-2">
+                  <span class="text-white text-sm">${h.name || h.identity}</span>
+                  <button onclick="App.navigate('edit-habit-${i}')" class="text-xs text-emerald-400 bg-emerald-900/30 px-2 py-1 rounded-lg">Edit</button>
+                </div>`).join('');
+            },
+
+            confirmTomorrowPlan() {
+                const tomorrow = new Date(Date.now() + 86400000).toDateString();
+                localStorage.setItem('1daily_plan_confirmed_' + tomorrow, 'true');
+                const btn = document.getElementById('btn-confirm-tomorrow-plan');
+                if (btn) {
+                    btn.textContent = '✅ Plan Set for Tomorrow!';
+                    btn.disabled = true;
+                    btn.classList.replace('bg-emerald-500', 'bg-emerald-700');
+                }
+            },
+
+            renderGreatWork() {
+                const identity = this.getPrimaryIdentity();
+                const streak = this.getStreak ? this.getStreak() : (localStorage.getItem('1daily_streak') || 0);
+                const badge = document.getElementById('greatwork-identity-badge');
+                const text = document.getElementById('greatwork-identity-text');
+                const streakEl = document.getElementById('greatwork-streak-text');
+                if (badge) badge.textContent = identity ? `I am a ${identity}` : 'Habit builder';
+                if (text) text.textContent = identity ? `You showed up as a ${identity} today.` : 'You showed up. That matters.';
+                if (streakEl) streakEl.textContent = `Streak: ${streak} 🔥`;
+                this.renderCharacter('greatwork-character-container', '120px');
+            },
+
+            navigate(screenId) {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                const target = document.getElementById('screen-' + screenId);
+                if (target) {
+                    target.classList.add('active');
+                    if (screenId === 'dashboard') { if (this.renderDashboard) this.renderDashboard(); this.renderCharacter('dash-character-container', '64px'); }
+                    if (screenId === 'today-plan') { if (this.renderTodayPlan) this.renderTodayPlan(); this.renderCharacter('today-character-container', '56px'); }
+                    if (screenId === 'tomorrow-plan') { if (this.renderTomorrowPlan) this.renderTomorrowPlan(); this.renderCharacter('tomorrow-character-container', '56px'); }
+                    if (screenId === 'weekly') { if (this.renderWeeklyScreen) this.renderWeeklyScreen(); this.renderCharacter('weekly-character-container', '80px'); }
+                    if (screenId === 'great-work') this.renderGreatWork();
+                }
             }
         };
 
